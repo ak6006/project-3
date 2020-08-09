@@ -1,0 +1,219 @@
+﻿@model project_3.Models.TransVehicleViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="page-container">
+    @if (TempData["Msg"] != null)
+    {
+
+
+        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+
+
+    }
+
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            اضافة عربيه جديدة
+        </h1>
+    </div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                <input required type="text" class="form-control" name="اسم_السائق" id="" />
+
+                <span class="col-md-4 text-light">
+                    اسم_السائق
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input required type="text" class="form-control" name="رقم_العربية" id="" />
+                <span class="col-md-4 text-light">
+                    رقم العربية
+                </span>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                <input type="text" class="form-control" name="الموديل" id="" />
+
+                <span class="col-md-4 text-light">
+                    الموديل
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input type="text" required class="form-control" name="سريال_العربية" id="" />
+                <span class="col-md-4 text-light">
+                    سريال العربية
+                </span>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                <input type="text" class="form-control" name="هاتف" id="" />
+
+                <span class="col-md-4 text-light">
+                    هاتف
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input type="text" class="form-control" name="العنوان" id="" />
+                <span class="col-md-4 text-light">
+                    العنوان
+                </span>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                @Html.DropDownListFor(m => m.رقم_الوكيل, ViewBag.customers_Customers_id as IEnumerable<SelectListItem> , htmlAttributes: new { @class = "form-control" })
+
+                <span class="col-md-4 text-light">
+                    الوكيل
+                </span>
+            </div>
+            
+            <div class="col-md-4"></div>
+        </div>
+        <div class="d-flex flex-row-reverse col-md-11">
+            <div class="col-md-2">
+
+            </div>
+
+            <div class=" col-md-2">
+                <input type="submit" value="اضافه" class="text-light btn-success btn form-control">
+
+
+            </div>
+
+
+
+            <div class="col-md-2 ">
+                <input type="reset" value="الغاء" class="text-light btn-danger btn form-control">
+
+            </div>
+            <div class="col-md-2 ">
+                @Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "text-light btn-primary btn form-control" })
+            </div>
+
+
+        </div>
+
+    }
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+</script>
+
+
+
+
+
+
+
+@*<h2>Create</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>transvehcile</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.customers_Customers_id, "customers_Customers_id", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("customers_Customers_id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.customers_Customers_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.transVehcile_driver_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.transVehcile_driver_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.transVehcile_driver_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.transVehcile_num, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.transVehcile_num, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.transVehcile_num, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.transVehcile_model, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.transVehcile_model, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.transVehcile_model, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.transVehcile_serial, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.transVehcile_serial, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.transVehcile_serial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.transVehcile_phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.transVehcile_phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.transVehcile_phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.transVehcile_add, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.transVehcile_add, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.transVehcile_add, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

@@ -1,0 +1,42 @@
+﻿* {
+    font-family: "BeInNormal"
+}
+
+body {
+    background-color:#020202;
+    color: white;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.page-container {
+    background-image: url("/Content/imgs/Main.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 49rem;
+}
+
+@font-face {
+    font-family: 'BeInNormal';
+    src: url('fonts/beIN Normal.ttf');
+}
+
+.classname {
+    font-family: 'BeInNormal';
+}

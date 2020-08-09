@@ -1,0 +1,100 @@
+﻿@model IEnumerable<project_3.SP_TRANS_VIN_Search_Result>
+
+@{
+    ViewBag.Title = "index";
+}
+
+@if (TempData["Msg"] != null)
+{
+    <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+        <div class="col-md-3">
+
+        </div>
+        <h3>
+            @TempData["Msg"]
+        </h3>
+    </div>
+}
+
+
+
+@using (Html.BeginForm("Search", "transvehciles", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container mb-5">
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 class="text-light">
+                بيانات عربيات النقل
+            </h1>
+        </div>
+        <div class="d-flex flex-row-reverse mr-2">
+            <h1 class="text-light">
+                بحث
+            </h1>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="Key" value="@TempData["SearchKey"]" />
+            </div>
+            <div>
+                <input type="submit" value="<<" class="bg-primary text-dark form-control">
+
+            </div>
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("اضافة عربيه جديدة ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+            </div>
+        </div>
+
+
+
+        <table class="table table-hover border-bottom border-light border-5">
+            <tr class=" text-light">
+                <th>حذف</th>
+                <th>تعديل</th>
+                <th>اسم الوكيل</th>
+                <th>رقم الوكيل</th>
+                <th>العنوان</th>
+                <th>الهاتف</th>
+                <th>سريال العربيه</th>
+                <th>الموديل</th>
+                <th>رقم العربيه</th>
+                <th>اسم السائق</th>
+                <th>الرقم</th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+        <tr class=" text-light">
+            <td>
+                @Html.ActionLink("حذف", "Delete", new { id = @item.الرقم }, new { @class = "text-light btn-danger btn form-control" })
+            </td>
+            <td>
+                @Html.ActionLink("تعديل", "Edit", new { id = @item.الرقم }, new { @class = "text-light btn-warning btn form-control" })
+            </td>
+            <td>  @item.اسم_الوكيل</td>
+            <td>  @item.رقم_الوكيل</td>
+            <td>  @item.العنوان</td>
+            <td>  @item.هاتف</td>
+            <td>  @item.سريال_العربية</td>
+            <td>  @item.الموديل</td>
+            <td>  @item.رقم_العربية</td>
+            <td>  @item.اسم_السائق</td>
+            <td>  @item.الرقم</td>
+
+        </tr>
+            }
+        </table>
+
+
+
+
+
+    </div>
+}
+
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+</script>

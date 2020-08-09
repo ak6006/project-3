@@ -1,0 +1,74 @@
+﻿@model project_3.transvehcile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>transvehcile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.transVehcile_driver_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transVehcile_driver_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transVehcile_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transVehcile_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transVehcile_model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transVehcile_model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transVehcile_serial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transVehcile_serial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transVehcile_phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transVehcile_phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transVehcile_add)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transVehcile_add)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer.Customers_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer.Customers_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
