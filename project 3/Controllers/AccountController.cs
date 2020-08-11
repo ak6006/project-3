@@ -19,7 +19,7 @@ namespace project_3.Controllers
 {
     public class AccountController : Controller
     {
-        private Entities11 db = new Entities11();
+        private Entities db = new Entities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 

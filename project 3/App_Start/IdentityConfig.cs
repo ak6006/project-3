@@ -20,11 +20,11 @@ namespace project_3
     {
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext(() => new Entities11());
+            app.CreatePerOwinContext(() => new Entities());
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<RoleManager<AppRole>>((options, context) =>
                 new RoleManager<AppRole>(
-                    new RoleStore<AppRole>(context.Get<Entities11>())));
+                    new RoleStore<AppRole>(context.Get<Entities>())));
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -61,7 +61,7 @@ namespace project_3
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<Entities11>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<Entities>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

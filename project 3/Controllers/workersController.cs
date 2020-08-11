@@ -12,65 +12,66 @@ using System.Data.Entity.Core.Objects;
 
 namespace project_3.Controllers
 {
-    public class shiftadminsController : Controller
+    public class workersController : Controller
     {
         private Entities db = new Entities();
 
-        // GET: shiftadmins
+        // GET: workers
         public ActionResult Index()
         {
-            var shiftadmins = db.SP_Shift_Admin_To_DataGrid();
-            return View(shiftadmins);
+            var workers = db.SP_Workers_To_DataGrid();
+            return View(workers);
         }
 
         public ActionResult Search(string Key)
         {
             if (Key != null)
             {
-                var shiftadmins = db.SP_Shift_Admin_SEARCH(Key).ToList();
+                var worker = db.SP_Worker_SEARCH(Key).ToList();
                 //TempData["SearchKey"] = Key;
-                return View(shiftadmins);
+                return View(worker);
             }
             else
             {
                 return RedirectToAction("Index");
             }
         }
-        // GET: shiftadmins/Details/5
+
+        // GET: workers/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            shiftadmin shiftadmin = await db.shiftadmins.FindAsync(id);
-            if (shiftadmin == null)
+            worker worker = await db.workers.FindAsync(id);
+            if (worker == null)
             {
                 return HttpNotFound();
             }
-            return View(shiftadmin);
+            return View(worker);
         }
 
-        // GET: shiftadmins/Create
+        // GET: workers/Create
         public ActionResult Create()
         {
             ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName");
             return View();
         }
 
-        // POST: shiftadmins/Create
+        // POST: workers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(SP_Shift_Admin_To_DataGrid_Result shiftadmin)
+        public async Task<ActionResult> Create(SP_Workers_To_DataGrid_Result worker)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Admin_Add_New(shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة, shiftadmin.المدينة,
-                    shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان, NewIdentity, RecFound).ToList();
+                db.SP_Worker_Add_New(worker.الاسم, worker.دولة, worker.المحافظة, worker.المدينة,
+                    worker.تلفون, worker.فاكس, worker.بريد_الكتروني, worker.عنوان, NewIdentity, RecFound).ToList();
 
 
                 if ((int)RecFound.Value == 0)
@@ -87,11 +88,11 @@ namespace project_3.Controllers
 
             }
             await db.SaveChangesAsync();
-            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", shiftadmin.معرف);
-            return View(shiftadmin);
+            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", worker.معرف);
+            return View(worker);
         }
 
-        // GET: shiftadmins/Edit/5
+        // GET: workers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,13 +100,13 @@ namespace project_3.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //var customer = await db.customers.FindAsync(id);
-            var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).FirstOrDefault();
-            if (shiftadmin == null)
+            var worker = db.SP_Worker_ID(id).FirstOrDefault();
+            if (worker == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", shiftadmin.معرف);
-            return View(shiftadmin);
+            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", worker.معرف);
+            return View(worker);
         }
 
         // POST: customers/Edit/5
@@ -113,22 +114,22 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(SP_Shift_Admin_To_DataGrid_Result shiftadmin)
+        public async Task<ActionResult> Edit(SP_Workers_To_DataGrid_Result worker)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Admin_Update(shiftadmin.معرف, shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة,
-                    shiftadmin.المدينة, shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
+                db.SP_Worker_Update(worker.معرف, worker.الاسم, worker.دولة, worker.المحافظة,
+                    worker.المدينة, worker.تلفون, worker.فاكس, worker.بريد_الكتروني, worker.عنوان,
                     NewIdentity, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", shiftadmin.معرف);
-            return View(shiftadmin);
+            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", worker.معرف);
+            return View(worker);
         }
-        // GET: shiftadmins/Delete/5
+        // GET: workers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,12 +137,12 @@ namespace project_3.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).FirstOrDefault();
-            if (shiftadmin == null)
+            var worker = db.SP_Worker_ID(id).FirstOrDefault();
+            if (worker == null)
             {
                 return HttpNotFound();
             }
-            return View(shiftadmin);
+            return View(worker);
         }
 
         // POST: customers/Delete/5
@@ -150,10 +151,10 @@ namespace project_3.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
 
-            var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).FirstOrDefault();
+            var worker = db.SP_Worker_ID(id).FirstOrDefault();
             try
             {
-                db.SP_Shift_Admin_DELETE(shiftadmin.رقم_المدير, shiftadmin.معرف);
+                db.SP_Worker_DELETE(worker.رقم_العامل, worker.معرف);
                 await db.SaveChangesAsync();
             }
             catch
@@ -163,6 +164,7 @@ namespace project_3.Controllers
             }
             return RedirectToAction("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

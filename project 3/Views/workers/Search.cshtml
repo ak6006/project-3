@@ -1,7 +1,7 @@
-﻿@model IEnumerable<project_3.SP_Shift_Admin_To_DataGrid_Result>
+﻿@model IEnumerable<project_3.SP_Worker_SEARCH_Result>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "index";
 }
 
 
@@ -19,13 +19,13 @@
 
 
 
-@using (Html.BeginForm("Search", "shiftadmins", FormMethod.Post))
+@using (Html.BeginForm("Search", "workers", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="page-container mb-5">
         <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
-            <h1 style='font-family:"BeInNormal"' class="text-light ">
-                بيانات مديري الورديات
+            <h1 class="text-light">
+                بيانات العمال
             </h1>
         </div>
         <div class="d-flex flex-row-reverse mr-2">
@@ -33,7 +33,7 @@
                 بحث
             </h1>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="Key" />
+                <input type="text" class="form-control" name="Key" value="@TempData["SearchKey"]" />
             </div>
             <div>
                 <input type="submit" value="<<" class="bg-primary text-dark form-control">
@@ -43,7 +43,7 @@
 
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("اضافة مدير ورديه جديد ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+                @Html.ActionLink("اضافة عامل جديد ", "Create", null, new { @class = "text-light btn-success btn form-control" })
             </div>
         </div>
 
@@ -70,10 +70,10 @@
             {
                 <tr class=" text-light">
                     <td>
-                        @Html.ActionLink("حذف", "Delete", new { id = @item.رقم_المدير, add_id = @item.معرف }, new { @class = "text-light btn-danger btn form-control" })
+                        @Html.ActionLink("حذف", "Delete", new { id = @item.رقم_العامل, add_id = @item.معرف }, new { @class = "text-light btn-danger btn form-control" })
                     </td>
                     <td>
-                        @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_المدير, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })
+                        @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_العامل, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })
                     </td>
                     <td>  @item.فاكس</td>
                     <td>  @item.هاتف</td>
@@ -85,7 +85,7 @@
                     <td>  @item.دولة</td>
                     <td>  @item.الاسم</td>
                     <td>  @item.معرف</td>
-                    <td>  @item.رقم_المدير</td>
+                    <td>  @item.رقم_العامل</td>
 
                 </tr>
             }

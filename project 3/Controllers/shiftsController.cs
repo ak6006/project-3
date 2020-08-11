@@ -12,67 +12,68 @@ using System.Data.Entity.Core.Objects;
 
 namespace project_3.Controllers
 {
-    public class shiftadminsController : Controller
+    public class shiftsController : Controller
     {
         private Entities db = new Entities();
 
-        // GET: shiftadmins
+        // GET: shifts
         public ActionResult Index()
         {
-            var shiftadmins = db.SP_Shift_Admin_To_DataGrid();
-            return View(shiftadmins);
+            var shifts = db.SP_Shift_Main_To_DataGrid();
+            return View(shifts);
         }
 
         public ActionResult Search(string Key)
         {
             if (Key != null)
             {
-                var shiftadmins = db.SP_Shift_Admin_SEARCH(Key).ToList();
+                var shifts = db.SP_Shift_Main_Search(Key).ToList();
                 //TempData["SearchKey"] = Key;
-                return View(shiftadmins);
+                return View(shifts);
             }
             else
             {
                 return RedirectToAction("Index");
             }
+
+
         }
-        // GET: shiftadmins/Details/5
+        // GET: shifts/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            shiftadmin shiftadmin = await db.shiftadmins.FindAsync(id);
-            if (shiftadmin == null)
+            shift shift = await db.shifts.FindAsync(id);
+            if (shift == null)
             {
                 return HttpNotFound();
             }
-            return View(shiftadmin);
+            return View(shift);
         }
 
-        // GET: shiftadmins/Create
+        // GET: shifts/Create
         public ActionResult Create()
         {
-            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName");
+            var admins = db.SP_Shift_Admin_To_ComboBox();
+            ViewBag.shift_admin_id = new SelectList(admins, "shiftAdmin_id", "firstName");
             return View();
         }
 
-        // POST: shiftadmins/Create
+        // POST: transvehciles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(SP_Shift_Admin_To_DataGrid_Result shiftadmin)
+        public async Task<ActionResult> Create(SP_Shift_Main_To_DataGrid_Result shift)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Admin_Add_New(shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة, shiftadmin.المدينة,
-                    shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان, NewIdentity, RecFound).ToList();
-
-
+                db.SP_Shift_Main_Add_New( shift.اسم_الوردية, shift.رقم_مدير_الوردية,
+                    NewIdentity, RecFound).ToList();
                 if ((int)RecFound.Value == 0)
                 {
                     TempData["Msg"] = "تمت الاضافه بنجاح";
@@ -87,73 +88,74 @@ namespace project_3.Controllers
 
             }
             await db.SaveChangesAsync();
-            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", shiftadmin.معرف);
-            return View(shiftadmin);
+
+            var admins = db.SP_Shift_Admin_To_ComboBox();
+            ViewBag.shift_admin_id = new SelectList(admins, "shiftAdmin_id", "firstName");
+            return View(shift);
         }
 
-        // GET: shiftadmins/Edit/5
+        // GET: shifts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //var customer = await db.customers.FindAsync(id);
-            var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).FirstOrDefault();
-            if (shiftadmin == null)
+            var shift = db.SP_Shift_Main_ID(id.ToString()).FirstOrDefault();
+            if (shift == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", shiftadmin.معرف);
-            return View(shiftadmin);
+            var admins = db.SP_Shift_Admin_To_ComboBox();
+            ViewBag.shift_admin_id = new SelectList(admins, "shiftAdmin_id", "firstName");
+            return View(shift);
         }
 
-        // POST: customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: transvehciles/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(SP_Shift_Admin_To_DataGrid_Result shiftadmin)
+        public async Task<ActionResult> Edit(SP_Shift_Main_To_DataGrid_Result shift)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-                ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Admin_Update(shiftadmin.معرف, shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة,
-                    shiftadmin.المدينة, shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
-                    NewIdentity, RecFound);
+                db.SP_Shift_Main_Update(shift.رقم_الوردية,shift.رقم_مدير_الوردية,shift.اسم_الوردية, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.address_add_id = new SelectList(db.addresses, "add_id", "firstName", shiftadmin.معرف);
-            return View(shiftadmin);
+            var admins = db.SP_Shift_Admin_To_ComboBox();
+            ViewBag.shift_admin_id = new SelectList(admins, "shiftAdmin_id", "firstName");
+            return View(shift);
         }
-        // GET: shiftadmins/Delete/5
+
+
+        // GET: shifts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).FirstOrDefault();
-            if (shiftadmin == null)
+            var shift = db.SP_Shift_Main_ID(id.ToString()).FirstOrDefault();
+            if (shift == null)
             {
                 return HttpNotFound();
             }
-            return View(shiftadmin);
+            return View(shift);
         }
 
-        // POST: customers/Delete/5
+        // POST: transvehciles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
-            var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).FirstOrDefault();
+            var shift = db.SP_Shift_Main_ID(id.ToString()).FirstOrDefault();
+            //db.transvehciles.Remove(transvehcile);
             try
             {
-                db.SP_Shift_Admin_DELETE(shiftadmin.رقم_المدير, shiftadmin.معرف);
+                db.SP_Shift_Main_DELETE(shift.رقم_الوردية);
                 await db.SaveChangesAsync();
             }
             catch
@@ -163,6 +165,7 @@ namespace project_3.Controllers
             }
             return RedirectToAction("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

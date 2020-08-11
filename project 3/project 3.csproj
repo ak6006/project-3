@@ -213,7 +213,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\measurementsController.cs" />
     <Compile Include="Controllers\shiftadminsController.cs" />
+    <Compile Include="Controllers\shiftsController.cs" />
     <Compile Include="Controllers\storesController.cs" />
+    <Compile Include="Controllers\workersController.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -333,6 +335,9 @@
     <Compile Include="SP_Shift_Admin_To_DataGrid_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_Shift_Main_ID_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_Shift_Main_Search_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -382,6 +387,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_Workers_To_DataGrid_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_Worker_ID_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_Worker_SEARCH_Result.cs">
@@ -621,6 +629,19 @@
     <Content Include="Views\shiftadmins\Details.cshtml" />
     <Content Include="Views\shiftadmins\Edit.cshtml" />
     <Content Include="Views\shiftadmins\Index.cshtml" />
+    <Content Include="Views\shiftadmins\Search.cshtml" />
+    <Content Include="Views\workers\Create.cshtml" />
+    <Content Include="Views\workers\Delete.cshtml" />
+    <Content Include="Views\workers\Details.cshtml" />
+    <Content Include="Views\workers\Edit.cshtml" />
+    <Content Include="Views\workers\Index.cshtml" />
+    <Content Include="Views\workers\Search.cshtml" />
+    <Content Include="Views\shifts\Create.cshtml" />
+    <Content Include="Views\shifts\Delete.cshtml" />
+    <Content Include="Views\shifts\Details.cshtml" />
+    <Content Include="Views\shifts\Edit.cshtml" />
+    <Content Include="Views\shifts\Index.cshtml" />
+    <Content Include="Views\shifts\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

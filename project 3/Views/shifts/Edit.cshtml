@@ -1,0 +1,70 @@
+﻿@model project_3.SP_Shift_Main_ID_Result
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="page-container">
+
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            تعديل وردية
+        </h1>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.رقم_الوردية)
+
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                @Html.EditorFor(model => model.اسم_الوردية, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.اسم_الوردية, "", new { @class = "text-danger" })
+
+                <span class="col-md-4 text-light">
+                    اسم السائق
+                </span>
+            </div>
+            
+            <div class="col-md-4"></div>
+        </div>
+       
+        
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                @Html.DropDownListFor(m => m.رقم_مدير_الوردية, ViewBag.shift_admin_id as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.رقم_مدير_الوردية, "", new { @class = "text-danger" })
+                <span class="col-md-4 text-light">
+                    مدير الوردية
+                </span>
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+        <div class="d-flex flex-row-reverse col-md-11">
+            <div class="col-md-5">
+
+            </div>
+
+            <div class=" col-md-2">
+                <input type="submit" value="حفظ" class="text-light btn-success btn form-control">
+            </div>
+
+
+
+            <div class="col-md-2 ">
+                @Html.ActionLink("رجوع", "Index", null, new { @class = "text-light btn-danger btn form-control" })
+
+            </div>
+
+
+        </div>
+    }
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

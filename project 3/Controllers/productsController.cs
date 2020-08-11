@@ -15,7 +15,7 @@ namespace project_3.Controllers
 {
     public class productsController : Controller
     {
-        private Entities11 db = new Entities11();
+        private Entities db = new Entities();
 
         // GET: products
         public ActionResult Index()

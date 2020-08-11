@@ -15,15 +15,16 @@ namespace project_3
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Entities11 : DbContext
+    public partial class Entities : DbContext
     {
-        public Entities11()
-            : base("name=Entities11")
+        public Entities()
+            : base("name=Entities")
         {
         }
-        public static Entities11 Create()
+
+        public static Entities Create()
         {
-            return new Entities11();
+            return new Entities();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -1190,6 +1191,24 @@ namespace project_3
         public virtual ObjectResult<SP_Workers_To_DataGrid_Result> SP_Workers_To_DataGrid()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Workers_To_DataGrid_Result>("SP_Workers_To_DataGrid");
+        }
+    
+        public virtual ObjectResult<SP_Worker_ID_Result> SP_Worker_ID(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Worker_ID_Result>("SP_Worker_ID", iDParameter);
+        }
+    
+        public virtual ObjectResult<SP_Shift_Main_ID_Result> SP_Shift_Main_ID(string iD)
+        {
+            var iDParameter = iD != null ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Main_ID_Result>("SP_Shift_Main_ID", iDParameter);
         }
     }
 }

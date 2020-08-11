@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -760,6 +760,9 @@
         <Function Name="SP_Shift_Main_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ShiftId" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Shift_Main_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="SP_Shift_Main_Search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SEARCH" Type="nvarchar" Mode="In" />
         </Function>
@@ -897,6 +900,9 @@
         <Function Name="SP_Worker_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="WorkerID" Type="int" Mode="In" />
           <Parameter Name="ADD_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Worker_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_Worker_SEARCH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SEARCH" Type="nvarchar" Mode="In" />
@@ -1053,8 +1059,7 @@
             <End Role="workers" EntitySet="workers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1544,7 +1549,7 @@
           <End Role="roles" Type="Self.role" Multiplicity="*" />
           <End Role="users" Type="Self.user" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="addresses" EntityType="Self.address" />
           <EntitySet Name="addresstypes" EntityType="Self.addresstype" />
@@ -1677,10 +1682,10 @@
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_ID" ReturnType="Collection(Model.SP_Customer_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_Search" ReturnType="Collection(Model.SP_Customer_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_To_ComboBox" ReturnType="Collection(Model.SP_Customer_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Customer_To_DataGrid" ReturnType="Collection(Model.SP_Customer_To_DataGrid_Result)" />
@@ -1715,13 +1720,13 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_DELETE">
-            <Parameter Name="MeasurementId" Mode="In" Type="Int32" />
+          <Parameter Name="MeasurementId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_ID" ReturnType="Collection(Model.SP_Measurement_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_Search" ReturnType="Collection(Model.SP_Measurement_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_To_ComboBox" ReturnType="Collection(Model.SP_Measurement_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Measurement_To_DataGrid" ReturnType="Collection(Model.SP_Measurement_To_DataGrid_Result)" />
@@ -1737,7 +1742,7 @@
             <Parameter Name="OrderNote" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_DELETE">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_Add_New">
             <Parameter Name="OrderId" Mode="In" Type="Int32" />
@@ -1753,7 +1758,7 @@
             <Parameter Name="weightId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_To_DataGrid" ReturnType="Collection(Model.SP_Order_Items_To_DataGrid_Result)">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_Update">
             <Parameter Name="OrderId" Mode="In" Type="Int32" />
@@ -1766,7 +1771,7 @@
             <Parameter Name="NewQuantity" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Search" ReturnType="Collection(Model.SP_Order_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_To_DataGrid" ReturnType="Collection(Model.SP_Order_To_DataGrid_Result)" />
           <FunctionImport Name="SP_Order_Trans_Vin_Add_New">
@@ -1778,7 +1783,7 @@
             <Parameter Name="TransId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Trans_Vin_To_DataGrid" ReturnType="Collection(Model.SP_Order_Trans_Vin_To_DataGrid_Result)">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Trans_Vin_Update">
             <Parameter Name="OrderId" Mode="In" Type="Int32" />
@@ -1799,13 +1804,13 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_DELETE">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_ID" ReturnType="Collection(Model.SP_Product_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_Search" ReturnType="Collection(Model.SP_Product_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_To_ComboBox" ReturnType="Collection(Model.SP_Product_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Product_To_DataGrid" ReturnType="Collection(Model.SP_Product_To_DataGrid_Result)" />
@@ -1836,10 +1841,10 @@
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_ID" ReturnType="Collection(Model.SP_Shift_Admin_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="String" />
+          <Parameter Name="ID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_SEARCH" ReturnType="Collection(Model.SP_Shift_Admin_SEARCH_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_To_ComboBox" ReturnType="Collection(Model.SP_Shift_Admin_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Shift_Admin_To_DataGrid" ReturnType="Collection(Model.SP_Shift_Admin_To_DataGrid_Result)" />
@@ -1863,10 +1868,10 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_DELETE">
-            <Parameter Name="ShiftId" Mode="In" Type="Int32" />
+          <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_Search" ReturnType="Collection(Model.SP_Shift_Main_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_To_ComboBox" ReturnType="Collection(Model.SP_Shift_Main_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Shift_Main_To_DataGrid" ReturnType="Collection(Model.SP_Shift_Main_To_DataGrid_Result)" />
@@ -1891,7 +1896,7 @@
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Worker_To_DataGrid" ReturnType="Collection(Model.SP_Shift_Worker_To_DataGrid_Result)">
-            <Parameter Name="ShiftId" Mode="In" Type="Int32" />
+          <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Worker_Update">
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
@@ -1907,10 +1912,10 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Delete">
-            <Parameter Name="Store_ID" Mode="In" Type="Int32" />
+          <Parameter Name="Store_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_ID" ReturnType="Collection(Model.SP_Store_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Product_Add_New">
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
@@ -1923,7 +1928,7 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Search" ReturnType="Collection(Model.SP_Store_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_To_ComboBox" ReturnType="Collection(Model.SP_Store_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Store_To_DataGrid" ReturnType="Collection(Model.SP_Store_To_DataGrid_Result)" />
@@ -1947,16 +1952,16 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_DELETE">
-            <Parameter Name="VinNo" Mode="In" Type="Int32" />
+          <Parameter Name="VinNo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_ID" ReturnType="Collection(Model.SP_Trans_Vin_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_TRANS_VIN_Search" ReturnType="Collection(Model.SP_TRANS_VIN_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_To_ComboBox" ReturnType="Collection(Model.SP_Trans_Vin_To_ComboBox_Result)">
-            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_To_DataGrid" ReturnType="Collection(Model.SP_Trans_Vin_To_DataGrid_Result)" />
           <FunctionImport Name="SP_Trans_vin_Update">
@@ -2004,7 +2009,7 @@
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_SEARCH" ReturnType="Collection(Model.SP_Worker_SEARCH_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_To_ComboBox" ReturnType="Collection(Model.SP_Worker_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Worker_Update">
@@ -2021,6 +2026,12 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Workers_To_DataGrid" ReturnType="Collection(Model.SP_Workers_To_DataGrid_Result)" />
+          <FunctionImport Name="SP_Worker_ID" ReturnType="Collection(Model.SP_Worker_ID_Result)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Shift_Main_ID" ReturnType="Collection(Model.SP_Shift_Main_ID_Result)">
+            <Parameter Name="ID" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_Customer_ID_Result">
           <Property Type="Int32" Name="رقم_الوكيل" Nullable="false" />
@@ -2327,12 +2338,31 @@
           <Property Type="String" Name="هاتف" Nullable="true" MaxLength="45" />
           <Property Type="String" Name="فاكس" Nullable="true" MaxLength="45" />
         </ComplexType>
+        <ComplexType Name="SP_Worker_ID_Result">
+          <Property Type="Int32" Name="رقم_العامل" Nullable="false" />
+          <Property Type="Int32" Name="معرف" Nullable="false" />
+          <Property Type="String" Name="الاسم" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="دولة" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="المحافظة" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="المدينة" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="بريد_الكتروني" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="عنوان" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="تلفون" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="هاتف" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="فاكس" Nullable="true" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="SP_Shift_Main_ID_Result">
+          <Property Type="Int32" Name="رقم_الوردية" Nullable="false" />
+          <Property Type="String" Name="اسم_الوردية" Nullable="true" MaxLength="45" />
+          <Property Type="Int32" Name="رقم_مدير_الوردية" Nullable="false" />
+          <Property Type="String" Name="اسم_مدير_الوردية" Nullable="true" MaxLength="45" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Model.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -3063,6 +3093,33 @@
                 <ScalarProperty Name="تلفون" ColumnName="تلفون" />
                 <ScalarProperty Name="هاتف" ColumnName="هاتف" />
                 <ScalarProperty Name="فاكس" ColumnName="فاكس" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Worker_ID" FunctionName="Model.Store.SP_Worker_ID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SP_Worker_ID_Result">
+                <ScalarProperty Name="رقم_العامل" ColumnName="رقم العامل" />
+                <ScalarProperty Name="معرف" ColumnName="معرف" />
+                <ScalarProperty Name="الاسم" ColumnName="الاسم" />
+                <ScalarProperty Name="دولة" ColumnName="دولة" />
+                <ScalarProperty Name="المحافظة" ColumnName="المحافظة" />
+                <ScalarProperty Name="المدينة" ColumnName="المدينة" />
+                <ScalarProperty Name="بريد_الكتروني" ColumnName="بريد الكتروني" />
+                <ScalarProperty Name="عنوان" ColumnName="عنوان" />
+                <ScalarProperty Name="تلفون" ColumnName="تلفون" />
+                <ScalarProperty Name="هاتف" ColumnName="هاتف" />
+                <ScalarProperty Name="فاكس" ColumnName="فاكس" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Shift_Main_ID" FunctionName="Model.Store.SP_Shift_Main_ID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SP_Shift_Main_ID_Result">
+                <ScalarProperty Name="رقم_الوردية" ColumnName="رقم الوردية" />
+                <ScalarProperty Name="اسم_الوردية" ColumnName="اسم الوردية" />
+                <ScalarProperty Name="رقم_مدير_الوردية" ColumnName="رقم مدير الوردية" />
+                <ScalarProperty Name="اسم_مدير_الوردية" ColumnName="اسم مدير الوردية" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

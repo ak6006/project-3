@@ -15,7 +15,7 @@ namespace project_3.Controllers
 {
     public class measurementsController : Controller
     {
-        private Entities11 db = new Entities11();
+        private Entities db = new Entities();
 
         // GET: measurements
         public ActionResult Index()

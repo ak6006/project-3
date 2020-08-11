@@ -15,7 +15,7 @@ namespace project_3.Controllers
 {
     public class CustomersController : Controller
     {
-        private Entities11 db = new Entities11();
+        private Entities db = new Entities();
 
         // GET: customers
         public async Task<ActionResult> Index()
