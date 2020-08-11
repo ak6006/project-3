@@ -15,7 +15,7 @@ namespace project_3.Controllers
 {
     public class CustomersController : Controller
     {
-        private Entities db = new Entities();
+        private Entities11 db = new Entities11();
 
         // GET: customers
         public async Task<ActionResult> Index()
@@ -159,7 +159,7 @@ namespace project_3.Controllers
                 db.SP_Customer_Delete(customer.رقم_الوكيل, customer.معرف);
                 await db.SaveChangesAsync();
             }
-            catch(Exception e)
+            catch
             {
                 TempData["Msg"] = "لا يمكن الحذف لارتباطه بسجلات اخرى";
                 return RedirectToAction("Index");

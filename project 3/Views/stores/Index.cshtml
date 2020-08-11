@@ -1,0 +1,102 @@
+﻿@model IEnumerable<project_3.SP_Store_Search_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (TempData["Msg"] != null)
+{
+    <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+        <div class="col-md-3">
+
+        </div>
+        <h3>
+            @TempData["Msg"]
+        </h3>
+    </div>
+}
+
+
+
+@using (Html.BeginForm("Search", "stores", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container mb-5">
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 style='font-family:"BeInNormal"' class="text-light ">
+                بيانات المتاجر
+            </h1>
+        </div>
+        <div class="d-flex flex-row-reverse mr-2">
+            <h1 class="text-light">
+                بحث
+            </h1>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="Key" />
+            </div>
+            <div>
+                <input type="submit" value="<<" class="bg-primary text-dark form-control">
+
+            </div>
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("اضافة متجر جديد ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+            </div>
+        </div>
+
+
+
+        <table class="table table-hover border-bottom border-light border-5">
+            <tr class=" text-light">
+                <th>حذف</th>
+                <th>تعديل</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>مكان المتجر</th>
+                <th>اسم مدير المتجر</th>
+                <th>اسم المتجر</th>
+                <th>رقم المتجر</th>
+
+
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class=" text-light">
+                    <td>
+                        @Html.ActionLink("حذف", "Delete", new { id = @item.store_id }, new { @class = "text-light btn-danger btn form-control" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("تعديل", "Edit", new { id = @item.store_id }, new { @class = "text-light btn-warning btn form-control" })
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>@item.storeLocation</td>
+                    <td>@item.storeAdminName</td>
+                    <td>  @item.storeName</td>
+                    <td>  @item.store_id</td>
+
+
+                </tr>
+            }
+        </table>
+
+
+
+
+
+    </div>
+}
+
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+</script>

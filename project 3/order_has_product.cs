@@ -16,9 +16,9 @@ namespace project_3
     {
         public int order_order_id { get; set; }
         public int product_product_id { get; set; }
-        public string Quantity { get; set; }
         public int measurement_measure_id { get; set; }
         public int weight_weight_id { get; set; }
+        public string Quantity { get; set; }
     
         public virtual measurement measurement { get; set; }
         public virtual order order { get; set; }

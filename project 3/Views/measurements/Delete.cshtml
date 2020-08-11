@@ -1,0 +1,52 @@
+﻿@model  project_3.SP_Measurement_ID_Result
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="page-container">
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            حذف وحدة قياس
+        </h1>
+    </div>
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h3 class="text-light">
+            هل انت متأكد انك تريد الحذف نهائيا
+        </h3>
+    </div>
+
+    <div class=" mb-5 mt-2 mr-2 text-light">
+
+        <hr />
+
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.اسم_وحدة_القياس)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.اسم_وحدة_القياس)
+            </div>
+        </div>
+
+
+
+
+
+        <br />
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color d-flex flex-row-reverse">
+                <input type="submit" value="حذف" class="col-md-2 btn btn-danger" /> &nbsp; | &nbsp;
+                @Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "col-md-2 btn btn-primary" })
+            </div>
+        }
+    </div>
+
+</div>

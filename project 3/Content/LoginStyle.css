@@ -1,0 +1,21 @@
+﻿* {
+    font-family: 'beIN Normal';
+}
+body {
+    background-image: url("/Content/imgs/01.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+   color:white
+}
+.textBox-border {
+    border-top: outset 2px chocolate;
+    border-right: outset 2px chocolate;
+    border-left: outset 2px chocolate;
+}
+
+.btns
+{
+    text-align:center;
+    color:white;
+    background-color: chocolate;
+}

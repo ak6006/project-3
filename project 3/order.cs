@@ -28,6 +28,7 @@ namespace project_3
         public Nullable<System.DateTime> date { get; set; }
         public string notic { get; set; }
         public int store_store_id { get; set; }
+        public Nullable<int> order_state { get; set; }
     
         public virtual customer customer { get; set; }
         public virtual store store { get; set; }

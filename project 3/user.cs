@@ -18,6 +18,7 @@ namespace project_3
         public user()
         {
             this.orders = new HashSet<order>();
+            this.roles = new HashSet<role>();
         }
     
         public int user_id { get; set; }
@@ -28,5 +29,7 @@ namespace project_3
         public virtual address address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<role> roles { get; set; }
     }
 }

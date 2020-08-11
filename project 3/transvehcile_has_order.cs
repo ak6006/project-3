@@ -16,7 +16,7 @@ namespace project_3
     {
         public int transVehcile_v_id { get; set; }
         public int order_order_id { get; set; }
-        public Nullable<short> transVehcile_has_order_state { get; set; }
+        public Nullable<int> transVehcile_has_order_state { get; set; }
     
         public virtual order order { get; set; }
     }

@@ -18,12 +18,14 @@ namespace project_3
         public int product_product_id { get; set; }
         public int shift_shift_id { get; set; }
         public string barcode_serialNumber { get; set; }
-        public Nullable<int> store_has_product_Weight { get; set; }
+        public int weight_weight_id { get; set; }
         public Nullable<System.DateTime> store_has_productDate { get; set; }
+        public Nullable<int> store_has_product_state { get; set; }
     
         public virtual barcode barcode { get; set; }
         public virtual product product { get; set; }
         public virtual shift shift { get; set; }
         public virtual store store { get; set; }
+        public virtual weight weight { get; set; }
     }
 }

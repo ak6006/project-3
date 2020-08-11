@@ -15,7 +15,7 @@ namespace project_3.Controllers
 {
     public class transvehcilesController : Controller
     {
-        private Entities db = new Entities();
+        private Entities11 db = new Entities11();
 
         // GET: transvehciles
         public async Task<ActionResult> Index()
@@ -161,7 +161,7 @@ namespace project_3.Controllers
                 db.SP_Trans_Vin_DELETE(transvehcile.الرقم);
                 await db.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch
             {
                 TempData["Msg"] = "لا يمكن الحذف لارتباطه بسجلات اخرى";
                 return RedirectToAction("Index");

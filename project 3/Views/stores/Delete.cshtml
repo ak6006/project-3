@@ -1,0 +1,72 @@
+﻿@model  project_3.SP_Store_ID_Result
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="page-container">
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            حذف متجر
+        </h1>
+    </div>
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h3 class="text-light">
+            هل انت متأكد انك تريد الحذف نهائيا
+        </h3>
+    </div>
+
+    <div class=" mb-5 mt-2 mr-2 text-light">
+
+        <hr />
+
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.storeName)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.storeName)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.storeAdminName)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.storeAdminName)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.storeLocation)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.storeLocation)
+            </div>
+        </div>
+
+
+
+
+
+        <br />
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color d-flex flex-row-reverse">
+                <input type="submit" value="حذف" class="col-md-2 btn btn-danger" /> &nbsp; | &nbsp;
+                @Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "col-md-2 btn btn-primary" })
+            </div>
+        }
+    </div>
+
+</div>

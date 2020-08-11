@@ -1,0 +1,26 @@
+﻿@model project_3.measurement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>measurement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.measre_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.measre_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.measure_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
