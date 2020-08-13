@@ -21,7 +21,6 @@ namespace project_3
             : base("name=Entities")
         {
         }
-
         public static Entities Create()
         {
             return new Entities();
@@ -726,11 +725,11 @@ namespace project_3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Main_Update", shiftIdParameter, shiftAdminIdParameter, shiftNameParameter, rec_found);
         }
     
-        public virtual ObjectResult<Nullable<int>> SP_Shift_Worker_Add_New(string shiftId, Nullable<int> workerId, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<Nullable<int>> SP_Shift_Worker_Add_New(Nullable<int> shiftId, Nullable<int> workerId, ObjectParameter new_identity, ObjectParameter rec_found)
         {
-            var shiftIdParameter = shiftId != null ?
+            var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
-                new ObjectParameter("ShiftId", typeof(string));
+                new ObjectParameter("ShiftId", typeof(int));
     
             var workerIdParameter = workerId.HasValue ?
                 new ObjectParameter("WorkerId", workerId) :
@@ -1209,6 +1208,33 @@ namespace project_3
                 new ObjectParameter("ID", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Main_ID_Result>("SP_Shift_Main_ID", iDParameter);
+        }
+    
+        public virtual ObjectResult<SP_Shift_Worker_ID_Result> SP_Shift_Worker_ID(Nullable<int> shiftId, Nullable<int> workerId)
+        {
+            var shiftIdParameter = shiftId.HasValue ?
+                new ObjectParameter("ShiftId", shiftId) :
+                new ObjectParameter("ShiftId", typeof(int));
+    
+            var workerIdParameter = workerId.HasValue ?
+                new ObjectParameter("WorkerId", workerId) :
+                new ObjectParameter("WorkerId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Worker_ID_Result>("SP_Shift_Worker_ID", shiftIdParameter, workerIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Shift_Worker_To_DataGrid_All_Result> SP_Shift_Worker_To_DataGrid_All()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Worker_To_DataGrid_All_Result>("SP_Shift_Worker_To_DataGrid_All");
+        }
+    
+        public virtual ObjectResult<SP_Order_ID_Result> SP_Order_ID(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Order_ID_Result>("SP_Order_ID", iDParameter);
         }
     }
 }

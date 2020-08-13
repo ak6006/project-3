@@ -1,0 +1,91 @@
+﻿@model IEnumerable<project_3.SP_Shift_Worker_To_DataGrid_All_Result>
+
+
+@using (Html.BeginForm("Create1","ShiftWorker",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container mb-5">
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 class="text-light">
+                عمال الورديات
+            </h1>
+        </div>
+        <div class="d-flex flex-row-reverse mr-2">
+            <h1 class="text-light">
+                الورديات
+            </h1>
+            <div class="col-md-2">
+                @Html.DropDownListFor(m => m.ToList().First().رقم_الوردية, ViewBag.shift_id as IEnumerable<SelectListItem>, htmlAttributes: new { onchange = "updateWorkers();", @class = "form-control",@id= "shift_id", Name = "shift_id" })
+            </div>
+            <div>
+                <input type="submit" value="اضافة عامل جديد للوردية" class = "text-light btn-success btn form-control"/>
+            </div>
+            <div class="col-md-7">
+
+            </div>
+            
+        </div>
+        <table id="dataTable"  class="table table-hover border-bottom border-light border-5">
+            <thead class=" text-light">
+                <th>حذف</th>
+                @*<th>تعديل</th>*@
+                <th> </th>
+                <th> </th>
+                <th></th>
+                <th></th>
+                <th> </th>
+                <th>  اسم العامل</th>
+                <th>رقم العامل</th>
+                <th>رقم الوردية</th>
+
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr hidden class=" text-light">
+                    <td>
+                        @Html.ActionLink("حذف", "Delete", new { shift_id = @item.رقم_الوردية , worker_id= item.رقم_العامل}, new { @class = "text-light btn-danger btn form-control" })
+                    </td>
+                    @*<td>
+                        @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوردية }, new { @class = "text-light btn-warning btn form-control" })
+                    </td>*@
+                    <td>  </td>
+                    <td> </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  @item.اسم_العامل</td>
+                    <td>  @item.رقم_العامل</td>
+                    <td>@item.رقم_الوردية</td>
+
+
+                </tr>
+            }
+        </table>
+
+    </div>
+}
+
+<script>
+    window.onload = function () {
+        var targetTDs = document.querySelectorAll('tr > td:last-child');
+        for (var i = 0; i < targetTDs.length; i++) {
+            var td = targetTDs[i];
+            if (td.textContent == $("#shift_id").val()) {
+                td.closest('tr').removeAttribute("hidden");
+            }
+        }
+    }
+
+    function updateWorkers() {
+        var targetTDs = document.querySelectorAll('tr > td:last-child');
+        for (var i = 0; i < targetTDs.length; i++) {
+            var td = targetTDs[i];
+            if (td.textContent == $("#shift_id").val()) {
+                td.closest('tr').removeAttribute("hidden");
+            }
+            else {
+                td.closest('tr').setAttribute("hidden", "hidden");
+            }
+        }
+    }
+</script>

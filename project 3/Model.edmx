@@ -634,6 +634,9 @@
         <Function Name="SP_Order_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OrderId" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Order_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_Order_Items_Add_New" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OrderId" Type="int" Mode="In" />
           <Parameter Name="ProductId" Type="int" Mode="In" />
@@ -775,12 +778,16 @@
           <Parameter Name="rec_found" Type="int" Mode="InOut" />
         </Function>
         <Function Name="SP_Shift_Worker_Add_New" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ShiftId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ShiftId" Type="int" Mode="In" />
           <Parameter Name="WorkerId" Type="int" Mode="In" />
           <Parameter Name="new_identity" Type="int" Mode="InOut" />
           <Parameter Name="rec_found" Type="int" Mode="InOut" />
         </Function>
         <Function Name="SP_Shift_Worker_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ShiftId" Type="int" Mode="In" />
+          <Parameter Name="WorkerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Shift_Worker_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ShiftId" Type="int" Mode="In" />
           <Parameter Name="WorkerId" Type="int" Mode="In" />
         </Function>
@@ -791,6 +798,7 @@
         <Function Name="SP_Shift_Worker_To_DataGrid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ShiftId" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Shift_Worker_To_DataGrid_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Shift_Worker_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ShiftId" Type="int" Mode="In" />
           <Parameter Name="WorkerId" Type="int" Mode="In" />
@@ -1882,7 +1890,7 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Worker_Add_New" ReturnType="Collection(Int32)">
-            <Parameter Name="ShiftId" Mode="In" Type="String" />
+            <Parameter Name="ShiftId" Mode="In" Type="Int32" />
             <Parameter Name="WorkerId" Mode="In" Type="Int32" />
             <Parameter Name="new_identity" Mode="InOut" Type="Int32" />
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
@@ -2030,7 +2038,15 @@
           <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_ID" ReturnType="Collection(Model.SP_Shift_Main_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="String" />
+          <Parameter Name="ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Shift_Worker_ID" ReturnType="Collection(Model.SP_Shift_Worker_ID_Result)">
+            <Parameter Name="ShiftId" Mode="In" Type="Int32" />
+            <Parameter Name="WorkerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Shift_Worker_To_DataGrid_All" ReturnType="Collection(Model.SP_Shift_Worker_To_DataGrid_All_Result)" />
+          <FunctionImport Name="SP_Order_ID" ReturnType="Collection(Model.SP_Order_ID_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_Customer_ID_Result">
@@ -2356,6 +2372,25 @@
           <Property Type="String" Name="اسم_الوردية" Nullable="true" MaxLength="45" />
           <Property Type="Int32" Name="رقم_مدير_الوردية" Nullable="false" />
           <Property Type="String" Name="اسم_مدير_الوردية" Nullable="true" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="SP_Shift_Worker_ID_Result">
+          <Property Type="Int32" Name="shift_shift_id" Nullable="false" />
+          <Property Type="Int32" Name="workers_worker_id" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="SP_Shift_Worker_To_DataGrid_All_Result">
+          <Property Type="Int32" Name="رقم_الوردية" Nullable="false" />
+          <Property Type="Int32" Name="رقم_العامل" Nullable="false" />
+          <Property Type="String" Name="اسم_العامل" Nullable="true" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="SP_Order_ID_Result">
+          <Property Type="Int32" Name="order_id" Nullable="false" />
+          <Property Type="Int32" Name="Customers_id" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="45" />
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="store_id" Nullable="false" />
+          <Property Type="String" Name="storeName" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="notic" Nullable="true" MaxLength="45" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3120,6 +3155,37 @@
                 <ScalarProperty Name="اسم_الوردية" ColumnName="اسم الوردية" />
                 <ScalarProperty Name="رقم_مدير_الوردية" ColumnName="رقم مدير الوردية" />
                 <ScalarProperty Name="اسم_مدير_الوردية" ColumnName="اسم مدير الوردية" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Shift_Worker_ID" FunctionName="Model.Store.SP_Shift_Worker_ID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SP_Shift_Worker_ID_Result">
+                <ScalarProperty Name="shift_shift_id" ColumnName="shift_shift_id" />
+                <ScalarProperty Name="workers_worker_id" ColumnName="workers_worker_id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Shift_Worker_To_DataGrid_All" FunctionName="Model.Store.SP_Shift_Worker_To_DataGrid_All">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SP_Shift_Worker_To_DataGrid_All_Result">
+                <ScalarProperty Name="رقم_الوردية" ColumnName="رقم الوردية" />
+                <ScalarProperty Name="رقم_العامل" ColumnName="رقم العامل" />
+                <ScalarProperty Name="اسم_العامل" ColumnName="اسم العامل" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Order_ID" FunctionName="Model.Store.SP_Order_ID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SP_Order_ID_Result">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="Customers_id" ColumnName="Customers_id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="storeName" ColumnName="storeName" />
+                <ScalarProperty Name="notic" ColumnName="notic" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

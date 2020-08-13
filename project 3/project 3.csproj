@@ -212,8 +212,10 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\measurementsController.cs" />
+    <Compile Include="Controllers\ordersController.cs" />
     <Compile Include="Controllers\shiftadminsController.cs" />
     <Compile Include="Controllers\shiftsController.cs" />
+    <Compile Include="Controllers\ShiftWorker.cs" />
     <Compile Include="Controllers\storesController.cs" />
     <Compile Include="Controllers\workersController.cs" />
     <Compile Include="customer.cs">
@@ -299,6 +301,9 @@
     <Compile Include="SP_Measurement_To_DataGrid_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_Order_ID_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_Order_Items_To_DataGrid_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -347,7 +352,13 @@
     <Compile Include="SP_Shift_Main_To_DataGrid_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_Shift_Worker_ID_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_Shift_Worker_Search_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_Shift_Worker_To_DataGrid_All_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_Shift_Worker_To_DataGrid_Result.cs">
@@ -642,6 +653,16 @@
     <Content Include="Views\shifts\Edit.cshtml" />
     <Content Include="Views\shifts\Index.cshtml" />
     <Content Include="Views\shifts\Search.cshtml" />
+    <Content Include="Views\ShiftWorker\Index.cshtml" />
+    <Content Include="Views\ShiftWorker\IndexUpdate.cshtml" />
+    <Content Include="Views\ShiftWorker\Create.cshtml" />
+    <Content Include="Views\ShiftWorker\Delete.cshtml" />
+    <Content Include="Views\orders\Create.cshtml" />
+    <Content Include="Views\orders\Delete.cshtml" />
+    <Content Include="Views\orders\Details.cshtml" />
+    <Content Include="Views\orders\Edit.cshtml" />
+    <Content Include="Views\orders\Index.cshtml" />
+    <Content Include="Views\orders\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
