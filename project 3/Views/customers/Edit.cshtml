@@ -85,27 +85,24 @@
                 </div>
                 <div class="col-md-4"></div>
             </div>
-            <div class="d-flex flex-row-reverse col-md-11">
-                <div class="col-md-5">
-
+            <div class="d-flex flex-row-reverse ">
+                <div class=" col-md-4 ">
+                    <button type="submit" class="col-md-8 text-light btn-success btn form-control">
+                        <i class="fas fa-user-times"></i>
+                        &nbsp;&nbsp;&nbsp;
+                        تعديل
+                    </button>
                 </div>
-
-                <div class=" col-md-2">
-                    <input type="submit" value="حفظ" class="text-light btn-success btn form-control">
+                    <div class="col-md-4">
+                        <a href="@Url.Action("Index","Customers")" class="col-md-8 text-light btn-primary btn form-control">
+                            <i class="fas fa-undo"></i>
+                            &nbsp;&nbsp;&nbsp;
+                            رجوع للقائمه
+                        </a>
+                    </div>
                 </div>
-
-
-
-                <div class="col-md-2 ">
-                    @Html.ActionLink("رجوع", "Index", null, new { @class = "text-light btn-danger btn form-control" })
-
-                </div>
-
-
+                }
             </div>
-        }
-    </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

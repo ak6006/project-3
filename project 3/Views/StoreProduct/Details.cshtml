@@ -1,0 +1,74 @@
+﻿@model project_3.store_has_product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>store_has_product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.store_has_productDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.store_has_productDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.store_has_product_state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.store_has_product_state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.barcode.serialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.barcode.serialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.productName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.productName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shift.shiftName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shift.shiftName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.store.storeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.store.storeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weight.weight_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weight.weight_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

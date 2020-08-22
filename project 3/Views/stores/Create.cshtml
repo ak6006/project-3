@@ -32,61 +32,63 @@
             @Html.AntiForgeryToken()
 
             <div class="d-flex flex-row-reverse mb-2">
-                <div class="d-flex col-md-4">
-                    <input required type="text" class="form-control" name="storeName" id="" />
+                <div class="d-flex col-md-5">
+                    <input required type="text" class="col-md-9 form-control" name="storeName" id="" />
 
-                    <span class="col-md-4 text-light">
+                    <span class="col-md-3 text-light">
                         اسم المتجر
                     </span>
                 </div>
 
             </div>
             <div class="d-flex flex-row-reverse mb-2">
-                <div class="d-flex col-md-4">
-                    <input required type="text" class="form-control" name="storeAdminName" id="" />
+                <div class="d-flex col-md-5">
+                    <input required type="text" class="col-md-9 form-control" name="storeAdminName" id="" />
 
-                    <span class="col-md-4 text-light">
+                    <span class="col-md-3 text-light">
                         اسم مدير المتجر
                     </span>
                 </div>
 
             </div>
             <div class="d-flex flex-row-reverse mb-2">
-                <div class="d-flex col-md-4">
-                    <input required type="text" class="form-control" name="storeLocation" id="" />
+                <div class="d-flex col-md-5">
+                    <input required type="text" class="col-md-9 form-control" name="storeLocation" id="" />
 
-                    <span class="col-md-4 text-light">
+                    <span class="col-md-3 text-light">
                         مكان المتجر
                     </span>
                 </div>
 
             </div>
 
+            <div class="d-flex flex-row-reverse ml-0">
 
-
-            <div class="d-flex flex-row-reverse col-md-11">
-                <div class="col-md-2">
-
+                <div class=" col-md-1">
                 </div>
-
                 <div class=" col-md-2">
-                    <input type="submit" value="اضافه" class="text-light btn-success btn form-control">
-
-
+                    <button type="submit" class="col-md-11 text-light btn-success btn form-control">
+                        <span><i class="fas fa-user-plus fa-lg"></i></span>
+                        &nbsp;&nbsp;&nbsp;
+                        اضافه
+                    </button>
                 </div>
 
 
+                <div class="col-md-2">
+                    <a href="@Url.Action("Index","stores")" class="col-md-11 text-light btn-primary btn form-control">
+                        <i class="fas fa-undo"></i>
+                        &nbsp;&nbsp;&nbsp;
+                        رجوع للقائمه
+                    </a>
 
-                <div class="col-md-2 ">
-                    <input type="reset" value="الغاء" class="text-light btn-danger btn form-control">
-
-                </div>
-                <div class="col-md-2 ">
-                    @Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "text-light btn-primary btn form-control" })
+                    @*@Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "text-light btn-primary btn form-control" })*@
                 </div>
 
 
             </div>
+
+
 
         }
 

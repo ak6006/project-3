@@ -25,7 +25,7 @@ namespace project_3.Controllers
 
         public ActionResult Search(string Key)
         {
-            if (Key != null)
+            if (Key != null || Key !="")
             {
                 var shiftadmins = db.SP_Shift_Admin_SEARCH(Key).ToList();
                 //TempData["SearchKey"] = Key;

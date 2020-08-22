@@ -18,7 +18,11 @@
                 @Html.DropDownListFor(m => m.ToList().First().رقم_الوردية, ViewBag.shift_id as IEnumerable<SelectListItem>, htmlAttributes: new { onchange = "updateWorkers();", @class = "form-control",@id= "shift_id", Name = "shift_id" })
             </div>
             <div>
-                <input type="submit" value="اضافة عامل جديد للوردية" class = "text-light btn-success btn form-control"/>
+                <button type="submit" class="text-light btn-success btn form-control">
+                    <i class="fas fa-user-plus fa-lg"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    اضافة عامل جديد للوردية
+                </button>
             </div>
             <div class="col-md-7">
 
@@ -43,7 +47,12 @@
             {
                 <tr hidden class=" text-light">
                     <td>
-                        @Html.ActionLink("حذف", "Delete", new { shift_id = @item.رقم_الوردية , worker_id= item.رقم_العامل}, new { @class = "text-light btn-danger btn form-control" })
+                        <a class="col-md-5 text-light btn-danger btn form-control" href="@Url.Action("Delete", "ShiftWorker",new {shift_id = @item.رقم_الوردية , worker_id= item.رقم_العامل})">
+                            <span>
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            حذف
+                        </a>
                     </td>
                     @*<td>
                         @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوردية }, new { @class = "text-light btn-warning btn form-control" })

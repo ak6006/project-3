@@ -15,5 +15,6 @@ namespace project_3
     {
         public int رقم_الوحدة { get; set; }
         public string اسم_وحدة_القياس { get; set; }
+        public int measurement_Count_per_unit { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace project_3
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 ExpireTimeSpan = TimeSpan.FromDays(1),
-                LoginPath = new PathString("~/Account/Login"),
+                LoginPath = new PathString("~/OrderProducts/Index"),
             }) ;
         }
     }

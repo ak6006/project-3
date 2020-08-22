@@ -43,7 +43,11 @@
 
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("اضافة عامل جديد ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+                <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "workers")">
+                    <span><i class="fas fa-user-plus fa-lg"></i></span>
+                    &nbsp;&nbsp;&nbsp;
+                    اضافة عامل جديد
+                </a>
             </div>
         </div>
 
@@ -68,26 +72,36 @@
             </tr>
             @foreach (var item in Model)
             {
-                <tr class=" text-light">
-                    <td>
-                        @Html.ActionLink("حذف", "Delete", new { id = @item.رقم_العامل, add_id = @item.معرف }, new { @class = "text-light btn-danger btn form-control" })
-                    </td>
-                    <td>
-                        @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_العامل, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })
-                    </td>
-                    <td>  @item.فاكس</td>
-                    <td>  @item.هاتف</td>
-                    <td>  @item.تلفون</td>
-                    <td>  @item.عنوان</td>
-                    <td>  @item.بريد_الكتروني</td>
-                    <td>  @item.المدينة</td>
-                    <td>  @item.المحافظة</td>
-                    <td>  @item.دولة</td>
-                    <td>  @item.الاسم</td>
-                    <td>  @item.معرف</td>
-                    <td>  @item.رقم_العامل</td>
+        <tr class=" text-light">
+            <td>
+                <a class="text-light btn-danger btn form-control" href="@Url.Action("Delete", "workers",new { id = @item.رقم_العامل, add_id = @item.معرف})">
+                    <span>
+                        <i class="fas fa-user-times"></i>
+                    </span>
+                    حذف
+                </a>
+            </td>
+            <td>
+                <a class="text-light btn-warning btn form-control" href="@Url.Action("Edit", "workers",new { id = @item.رقم_العامل, add_id = @item.معرف})">
+                    <span>
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    تعديل
+                </a>
+            </td>
+            <td>  @item.فاكس</td>
+            <td>  @item.هاتف</td>
+            <td>  @item.تلفون</td>
+            <td>  @item.عنوان</td>
+            <td>  @item.بريد_الكتروني</td>
+            <td>  @item.المدينة</td>
+            <td>  @item.المحافظة</td>
+            <td>  @item.دولة</td>
+            <td>  @item.الاسم</td>
+            <td>  @item.معرف</td>
+            <td>  @item.رقم_العامل</td>
 
-                </tr>
+        </tr>
             }
         </table>
 

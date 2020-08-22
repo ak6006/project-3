@@ -7,7 +7,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-  
+
+    <script src="https://kit.fontawesome.com/459f34aff4.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 
@@ -42,34 +44,46 @@
             @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
         </li>*@
                 <li class="nav-item active">
-                    @Html.ActionLink("Customers", "Index", "Customers", null, new { @class = "nav-link" })
+                    @Html.ActionLink("وكلاء", "Index", "Customers", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Transvehciles", "Index", "Transvehciles", null, new { @class = "nav-link" })
+                    @Html.ActionLink("عربيات", "Index", "Transvehciles", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Products", "Index", "products", null, new { @class = "nav-link" })
+                    @Html.ActionLink("منتجات", "Index", "products", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Measurements", "Index", "measurements", null, new { @class = "nav-link" })
+                    @Html.ActionLink("وحدات قياس", "Index", "measurements", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Stores", "Index", "stores", null, new { @class = "nav-link" })
+                    @Html.ActionLink("متاجر", "Index", "stores", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Shift Admins", "Index", "shiftadmins", null, new { @class = "nav-link" })
+                    @Html.ActionLink("مديري ورديات", "Index", "shiftadmins", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Workers", "Index", "workers", null, new { @class = "nav-link" })
+                    @Html.ActionLink("عمال", "Index", "workers", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Shifts", "Index", "shifts", null, new { @class = "nav-link" })
+                    @Html.ActionLink("ورديات", "Index", "shifts", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Shift Workers", "Index", "ShiftWorker", null, new { @class = "nav-link" })
+                    @Html.ActionLink("عمال ورديات", "Index", "ShiftWorker", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item active">
-                    @Html.ActionLink("Orders", "Index", "orders", null, new { @class = "nav-link" })
+                    @Html.ActionLink("طلبيات", "Index", "orders", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item active">
+                    @Html.ActionLink("منتجات طلبيات", "Index", "OrderProducts", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item active">
+                    @Html.ActionLink("عربيات طلبيات", "Index", "OrderTrans", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item active">
+                    @Html.ActionLink("منتجات مخازن", "Index", "StoreProduct", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item active">
+                    @Html.ActionLink("تحميل الطلبيات", "Index", "TransOrder", null, new { @class = "nav-link" })
                 </li>
             </ul>
             @Html.Partial("_LoginPartial")

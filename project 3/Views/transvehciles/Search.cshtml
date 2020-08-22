@@ -42,7 +42,12 @@
 
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("اضافة عربيه جديدة ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+                @*@Html.ActionLink("اضافة عربيه جديدة ", "Create", null, new { @class = "text-light btn-success btn form-control" })*@
+                <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "transvehciles")">
+                    <span><i class="fas fa-user-plus fa-lg"></i></span>
+                    &nbsp;&nbsp;&nbsp;
+                    اضافة عربيه جديدة
+                </a>
             </div>
         </div>
 
@@ -67,10 +72,24 @@
             {
         <tr class=" text-light">
             <td>
-                @Html.ActionLink("حذف", "Delete", new { id = @item.الرقم }, new { @class = "text-light btn-danger btn form-control" })
+                <a class="col-md-9 text-light btn-danger btn form-control" href="@Url.Action("Delete", "transvehciles",new { id = @item.الرقم})">
+                    <span>
+                        <i class="fas fa-user-times"></i>
+                    </span>
+                    حذف
+                </a>
+
+                @*@Html.ActionLink("حذف", "Delete", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-danger btn form-control" })*@
             </td>
             <td>
-                @Html.ActionLink("تعديل", "Edit", new { id = @item.الرقم }, new { @class = "text-light btn-warning btn form-control" })
+
+                <a class="col-md-9 text-light btn-warning btn form-control" href="@Url.Action("Edit", "transvehciles",new { id = @item.الرقم})">
+                    <span>
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    تعديل
+                </a>
+                @*@Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })*@
             </td>
             <td>  @item.اسم_الوكيل</td>
             <td>  @item.رقم_الوكيل</td>

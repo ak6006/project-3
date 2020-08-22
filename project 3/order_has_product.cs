@@ -19,6 +19,9 @@ namespace project_3
         public int measurement_measure_id { get; set; }
         public int weight_weight_id { get; set; }
         public string Quantity { get; set; }
+        public Nullable<int> order_has_product_Pages_Count { get; set; }
+        public Nullable<int> order_has_product_dept_count { get; set; }
+        public Nullable<int> order_has_product_state { get; set; }
     
         public virtual measurement measurement { get; set; }
         public virtual order order { get; set; }

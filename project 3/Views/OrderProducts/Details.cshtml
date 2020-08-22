@@ -1,0 +1,58 @@
+﻿@model project_3.order_has_product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>order_has_product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.measurement.measre_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.measurement.measre_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order.notic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order.notic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.productName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.productName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weight.weight_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weight.weight_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

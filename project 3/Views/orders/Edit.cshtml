@@ -5,105 +5,103 @@
 }
 
 
-<div class="page-container">
-    @if (TempData["Msg"] != null)
-    {
+    <div class="page-container">
+        @if (TempData["Msg"] != null)
+        {
 
 
-        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
-            <div class="col-md-3">
+            <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+                <div class="col-md-3">
 
+                </div>
+                <h3>
+                    @TempData["Msg"]
+                </h3>
             </div>
-            <h3>
-                @TempData["Msg"]
-            </h3>
+
+
+        }
+
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 class="text-light">
+                تعديل طلبيه
+            </h1>
         </div>
 
 
-    }
 
-    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
-        <h1 class="text-light">
-            تعديل طلبيه 
-        </h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    @Html.DropDownListFor(m => m.customers_Customers_id, ViewBag.Customers_id as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "col-md-9 form-control" })
+                    @Html.HiddenFor(m => m.order_id)
+                    <span class="col-md-3 text-light">
+                        اسم الوكيل
+                    </span>
+                </div>
+
+                <div class="col-md-4"></div>
+            </div>
+
+
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    @Html.DropDownListFor(m => m.store_store_id, ViewBag.Stores_id as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "col-md-9 form-control" })
+
+                    <span class="col-md-3 text-light">
+                        المخزن
+                    </span>
+                </div>
+
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    <input id="datepicker" type="date" name="date" class="col-md-9 form-control datepicker" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    <span class="col-md-3 text-light">
+                        التاريخ
+                    </span>
+                </div>
+
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    @Html.TextAreaFor(m => m.notic, htmlAttributes: new { @class = "col-md-9 form-control" })
+
+                    <span class="col-md-3 text-light">
+                        ملاحظات
+                    </span>
+                </div>
+
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse ml-0">
+                <div class=" col-md-1">
+                </div>
+                <div class=" col-md-2">
+                    <button type="submit" class="col-md-11 text-light btn-success btn form-control">
+                        <span><i class="fas fa-user-plus fa-lg"></i></span>
+                        &nbsp;&nbsp;&nbsp;
+                        تعديل
+                    </button>
+                </div>
+                <div class="col-md-2">
+                    <a href="@Url.Action("Index","orders")" class="col-md-11 text-light btn-primary btn form-control">
+                        <i class="fas fa-undo"></i>
+                        &nbsp;&nbsp;&nbsp;
+                        رجوع للقائمه
+                    </a>
+                </div>
+            </div>
+
+        }
+
+
     </div>
-
-
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                @Html.DropDownListFor(m => m.customers_Customers_id, ViewBag.Customers_id as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
-                @Html.HiddenFor(m=>m.order_id)
-                <span class="col-md-4 text-light">
-                    اسم الوكيل
-                </span>
-            </div>
-
-            <div class="col-md-4"></div>
-        </div>
-
-
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                @Html.DropDownListFor(m => m.store_store_id, ViewBag.Stores_id as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
-
-                <span class="col-md-4 text-light">
-                    المخزن
-                </span>
-            </div>
-
-            <div class="col-md-4"></div>
-        </div>
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                <input id="datepicker" type="date" name="date" class="form-control datepicker" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
-                <span class="col-md-4 text-light">
-                    التاريخ
-                </span>
-            </div>
-
-            <div class="col-md-4"></div>
-        </div>
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                @Html.TextAreaFor(m => m.notic, htmlAttributes: new { @class = "form-control" })
-
-                <span class="col-md-4 text-light">
-                    ملاحظات
-                </span>
-            </div>
-
-            <div class="col-md-4"></div>
-        </div>
-        <div class="d-flex flex-row-reverse col-md-11">
-            <div class="col-md-2">
-
-            </div>
-
-            <div class=" col-md-2">
-                <input type="submit" value="حفظ" class="text-light btn-success btn form-control">
-
-
-            </div>
-
-
-
-
-            <div class="col-md-2 ">
-                @Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "text-light btn-primary btn form-control" })
-            </div>
-
-
-        </div>
-
-    }
-
-
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -61,22 +61,20 @@ namespace project_3.Controllers
         {
             if (form["shift_id"] != null)
             {
-                TempData["id"] = int.Parse(form["shift_id"]);
-               
-                return RedirectToAction("Create");
+                int SId = int.Parse(form["shift_id"]);
+                return RedirectToAction("Create",new {id = SId});
             }
             else
             {
                 return HttpNotFound();
             }
         }
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.shiftID = TempData["id"];
-            TempData["id2"] = TempData["id"];
-            ViewBag.shift = db.SP_Shift_Main_ID(TempData["id"].ToString());
+            ViewBag.SID = id;
+            ViewBag.Products = db.SP_Shift_Main_ID(id.ToString());
             var shifts = db.SP_Shift_Main_To_ComboBox();
-            ViewBag.shift_id = new SelectList(shifts, "shift_id", "shiftName", TempData["id"]);
+            ViewBag.shift_id = new SelectList(shifts, "shift_id", "shiftName", id);
             var workers = db.SP_Worker_To_ComboBox();
             ViewBag.worker_id = new SelectList(workers, "worker_id", "firstName");
             return View();
@@ -93,7 +91,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Worker_Add_New((int)TempData["id2"], shift.رقم_العامل,
+                db.SP_Shift_Worker_Add_New(shift.رقم_الوردية, shift.رقم_العامل,
                     NewIdentity, RecFound).ToList();
                 if ((int)RecFound.Value == 0)
                 {

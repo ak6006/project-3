@@ -1,0 +1,51 @@
+﻿@model IEnumerable<project_3.order_has_product>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.measurement.measre_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order.notic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.weight.weight_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.measurement.measre_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order.notic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weight.weight_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

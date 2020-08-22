@@ -14,6 +14,12 @@ namespace project_3
     
     public partial class store_has_product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public store_has_product()
+        {
+            this.orders = new HashSet<order>();
+        }
+    
         public int store_store_id { get; set; }
         public int product_product_id { get; set; }
         public int shift_shift_id { get; set; }
@@ -27,5 +33,7 @@ namespace project_3
         public virtual shift shift { get; set; }
         public virtual store store { get; set; }
         public virtual weight weight { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<order> orders { get; set; }
     }
 }

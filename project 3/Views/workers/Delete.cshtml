@@ -87,10 +87,19 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color d-flex flex-row-reverse">
-                <input type="submit" value="حذف" class="col-md-2 btn btn-danger" /> &nbsp; | &nbsp;
-                @Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "col-md-2 btn btn-primary" })
-            </div>
+    <div class="form-actions no-color d-flex flex-row-reverse">
+        <button type="submit" class="col-md-2 btn btn-danger">
+            <i class="fas fa-user-times"></i>
+            &nbsp;&nbsp;&nbsp;
+            حذف
+        </button>
+        &nbsp; | &nbsp;
+        <a href="@Url.Action("Index","workers")" class="col-md-2 text-light btn-primary btn form-control">
+            <i class="fas fa-undo"></i>
+            &nbsp;&nbsp;&nbsp;
+            رجوع للقائمه
+        </a>
+    </div>
         }
     </div>
 

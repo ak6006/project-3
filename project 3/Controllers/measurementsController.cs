@@ -25,10 +25,9 @@ namespace project_3.Controllers
         }
         public ActionResult Search(string Key)
         {
-            if (Key != null)
+            if (Key != null || Key!="")
             {
                 var measurements = db.SP_Measurement_Search(Key).ToList();
-                //TempData["SearchKey"] = Key;
                 return View(measurements);
             }
             else
@@ -69,7 +68,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter new_identity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Measurement_Add_New(measurement.اسم_وحدة_القياس, new_identity, rec_found).ToList();
+                db.SP_Measurement_Add_New(measurement.اسم_وحدة_القياس,measurement.measurement_Count_per_unit, new_identity, rec_found).ToList();
 
                 if ((int)rec_found.Value == 0)
                 {
@@ -112,7 +111,7 @@ namespace project_3.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
-                db.SP_Measurement_Update(measurement.رقم_الوحدة, measurement.اسم_وحدة_القياس, rec_found);
+                db.SP_Measurement_Update(measurement.رقم_الوحدة, measurement.اسم_وحدة_القياس, measurement.measurement_Count_per_unit, rec_found);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

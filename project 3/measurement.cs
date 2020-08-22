@@ -22,6 +22,7 @@ namespace project_3
     
         public int measure_id { get; set; }
         public string measre_name { get; set; }
+        public int measurement_Count_per_unit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_has_product> order_has_product { get; set; }

@@ -43,7 +43,11 @@
 
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("اضافة منتج جديد ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+                <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "products")">
+                    <span><i class="fas fa-user-plus fa-lg"></i></span>
+                    &nbsp;&nbsp;&nbsp;
+                    اضافة منتج جديد
+                </a>
             </div>
         </div>
 
@@ -68,10 +72,22 @@
             {
         <tr class=" text-light">
             <td>
-                @Html.ActionLink("حذف", "Delete", new { id = @item.رقم_المنتج }, new { @class = "text-light btn-danger btn form-control" })
+                <a class="col-md-5 text-light btn-danger btn form-control" href="@Url.Action("Delete", "products",new { id = @item.رقم_المنتج})">
+                    <span>
+                        <i class="fas fa-user-times"></i>
+                    </span>
+                    حذف
+                </a>
+
             </td>
             <td>
-                @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_المنتج }, new { @class = "text-light btn-warning btn form-control" })
+
+                <a class="col-md-5 text-light btn-warning btn form-control" href="@Url.Action("Edit", "products",new { id = @item.رقم_المنتج})">
+                    <span>
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    تعديل
+                </a>
             </td>
 
             <td> </td>

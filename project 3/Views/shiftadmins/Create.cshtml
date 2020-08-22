@@ -3,126 +3,112 @@
 @{
     ViewBag.Title = "Create";
 }
-<div class="page-container">
-    @if (TempData["Msg"] != null)
-    {
-
-
-        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
-            <div class="col-md-3">
-
+    <div class="page-container">
+        @if (TempData["Msg"] != null)
+        {
+            <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+                <div class="col-md-3">
+                </div>
+                <h3>
+                    @TempData["Msg"]
+                </h3>
             </div>
-            <h3>
-                @TempData["Msg"]
-            </h3>
+        }
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 class="text-light">
+                اضافة مدير ورديه جديد
+            </h1>
         </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-4">
+                    <input required type="text" class="form-control" name="الاسم" id="" />
+                    <span class="col-md-4 text-light">
+                        الاسم
+                    </span>
+                </div>
+                <div class="d-flex col-md-4">
+                    <input type="text" class="form-control" name="بريد_الكتروني" id="" />
+                    <span class="col-md-4 text-light">
+                        بريد الكترونى
+                    </span>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-4">
+                    <input type="text" class="form-control" name="دولة" id="" />
+
+                    <span class="col-md-4 text-light">
+                        دولة
+                    </span>
+                </div>
+                <div class="d-flex col-md-4">
+                    <input type="text" class="form-control" name="المدينة" id="" />
+                    <span class="col-md-4 text-light">
+                        المدينة
+                    </span>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-4">
+                    <input type="text" class="form-control" name="المحافظة" id="" />
+                    <span class="col-md-4 text-light">
+                        المحافظه
+                    </span>
+                </div>
+                <div class="d-flex col-md-4">
+                    <input type="text" class="form-control" name="عنوان" id="" />
+                    <span class="col-md-4 text-light">
+                        العنوان
+                    </span>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-4">
+                    <input type="text" class="form-control" name="تلفون" id="" />
+                    <span class="col-md-4 text-light">
+                        تليفون
+                    </span>
+                </div>
+                <div class="d-flex col-md-4">
+                    <input type="text" class="form-control" name="فاكس" id="" />
+                    <span class="col-md-4 text-light">
+                        فاكس
+                    </span>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse ml-0">
+                <div class="col-md-1">
+
+                </div>
+                <div class=" col-md-3 ">
+                    <button type="submit" class="col-md-11 text-light btn-success btn form-control">
+                        <span><i class="fas fa-user-plus fa-lg"></i></span>
+                        &nbsp;&nbsp;&nbsp;
+                        اضافه
+                    </button>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
+                    <a href="@Url.Action("Index","shiftadmins")" class="col-md-11 text-light btn-primary btn form-control">
+                        <i class="fas fa-undo"></i>
+                        &nbsp;&nbsp;&nbsp;
+                        رجوع للقائمه
+                    </a>
+                </div>
+            </div>
+        }
 
 
-    }
-
-    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
-        <h1 class="text-light">
-            اضافة مدير ورديه جديد
-        </h1>
     </div>
-
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                <input required type="text" class="form-control" name="الاسم" id="" />
-
-                <span class="col-md-4 text-light">
-                    الاسم
-                </span>
-            </div>
-            <div class="d-flex col-md-4">
-                <input type="text" class="form-control" name="بريد_الكتروني" id="" />
-                <span class="col-md-4 text-light">
-                    بريد الكترونى
-                </span>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                <input type="text" class="form-control" name="دولة" id="" />
-
-                <span class="col-md-4 text-light">
-                    دولة
-                </span>
-            </div>
-            <div class="d-flex col-md-4">
-                <input type="text" class="form-control" name="المدينة" id="" />
-                <span class="col-md-4 text-light">
-                    المدينة
-                </span>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                <input type="text" class="form-control" name="المحافظة" id="" />
-
-                <span class="col-md-4 text-light">
-                    المحافظه
-                </span>
-            </div>
-            <div class="d-flex col-md-4">
-                <input type="text" class="form-control" name="عنوان" id="" />
-                <span class="col-md-4 text-light">
-                    العنوان
-                </span>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="d-flex flex-row-reverse mb-2">
-            <div class="d-flex col-md-4">
-                <input type="text" class="form-control" name="تلفون" id="" />
-
-                <span class="col-md-4 text-light">
-                    تليفون
-                </span>
-            </div>
-            <div class="d-flex col-md-4">
-                <input type="text" class="form-control" name="فاكس" id="" />
-                <span class="col-md-4 text-light">
-                    فاكس
-                </span>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="d-flex flex-row-reverse col-md-11">
-            <div class="col-md-2">
-
-            </div>
-
-            <div class=" col-md-2">
-                <input type="submit" value="اضافه" class="text-light btn-success btn form-control">
-
-
-            </div>
-
-
-
-            <div class="col-md-2 ">
-                <input type="reset" value="الغاء" class="text-light btn-danger btn form-control">
-
-            </div>
-            <div class="col-md-2 ">
-                @Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "text-light btn-primary btn form-control" })
-            </div>
-
-
-        </div>
-
-    }
-
-
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

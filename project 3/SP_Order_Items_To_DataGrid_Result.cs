@@ -23,5 +23,7 @@ namespace project_3
         public int weight_id { get; set; }
         public int product_id { get; set; }
         public int measure_id { get; set; }
+        public Nullable<int> order_has_product_Pages_Count { get; set; }
+        public Nullable<int> order_has_product_dept_count { get; set; }
     }
 }

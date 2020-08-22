@@ -1,0 +1,148 @@
+﻿@model IEnumerable<project_3.SP_Order_Search_Result>
+@{
+    ViewBag.Title = "index";
+}
+@if (TempData["Msg"] != null)
+{
+    <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+        <div class="col-md-3">
+
+        </div>
+        <h3>
+            @TempData["Msg"]
+        </h3>
+    </div>
+}
+<style>
+    .highlight_row {
+        background-color: rgb(255, 211, 79);
+    }
+</style>
+
+<div class="page-container mb-5">
+    @using (Html.BeginForm("Search", "OrderProducts", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 class="text-light">
+                بيانات الطلبيات
+            </h1>
+        </div>
+        <div class="d-flex flex-row-reverse mr-2">
+            <h1 class="text-light">
+                بحث
+            </h1>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="Key" value="@TempData["SearchKey"]" />
+            </div>
+            <div>
+                <input type="submit" value="<<" class="bg-primary text-dark form-control">
+
+            </div>
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-2">
+                @*@Html.ActionLink("اضافة طلبيه جديده ", "Create", null, new { @class = "text-light btn-success btn form-control" })*@
+            </div>
+        </div>
+
+
+
+        <table class="table border-bottom border-light border-5">
+            <tr class=" text-light">
+
+                <th>ملاحظه</th>
+                <th>المخزن</th>
+                <th>رقم المخزن</th>
+                <th>التاريخ</th>
+                <th>اسم الوكيل</th>
+                <th>رقم الوكيل</th>
+                <th>رقم الطلبيه</th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+                <label>
+                    <tr class=" text-light">
+                        <td hidden>
+                            <input class="radioButton" hidden type="radio" name="OrderSelected" value="@item.رقم_الطلبية" />
+                        </td>
+                        <td>  @item.ملاحظة</td>
+                        <td>  @item.المخزن</td>
+                        <td>  @item.رقم_المخزن</td>
+                        <td>  @item.التاريخ</td>
+                        <td>  @item.اسم_الوكيل</td>
+                        <td>  @item.رقم_الوكيل</td>
+                        <td>  @item.رقم_الطلبية</td>
+
+                    </tr>
+                </label>
+            }
+        </table>
+
+    }
+        <div id="Products">
+
+        </div>
+
+
+    </div>
+
+
+<script type="text/javascript">
+
+    //to remove msg div after 5 seconds
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+
+
+    //to select table row
+    $(document).ready(function () {
+        $('.table tr').click(function (event) {
+            if (event.target.type !== 'radio') {
+                $(':radio', this).trigger('click');
+                getId();
+            }
+        });
+
+        $("input[type='radio']").change(function (e) {
+            e.stopPropagation();
+            $('.table tr').removeClass("highlight_row");
+            if ($(this).is(":checked")) {
+                $(this).closest('tr').addClass("highlight_row");
+                console.log(getId());
+            }
+        });
+    });
+
+    //to submit form on selected row changed
+    $(document).ready(function () {
+        $('.radioButton').click(function () {
+            $('#submitBtn').trigger('click');
+        });
+    })
+
+    //get selected order id
+    function getId() {
+        var btns = document.getElementsByClassName("radioButton");
+        for (var i = 0; i < btns.length; i++) {
+            if (btns[i].checked) {
+                return btns[i].value;
+            }
+        }
+        }
+
+
+        $(document).ready(function () {
+            $('.radioButton').click(function () {
+                $("#Products").load("@Url.Action("GetProducts", "OrderProducts")", { 'id': getId()  },
+                    function (response, status, xhr) {
+                        if (status == "error") {
+                            alert("An error occurred while loading the results.");
+                        }
+                    });
+            });
+        });
+</script>

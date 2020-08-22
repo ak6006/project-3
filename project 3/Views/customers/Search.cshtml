@@ -42,8 +42,15 @@
             <div class="col-md-7">
 
             </div>
-            <div class="col-md-2">
-                @Html.ActionLink("اضافة وكيل جديد ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+            <div class="col-md-2 rounded pt-2">
+
+                <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "Customers")">
+                    <span><i class="fas fa-user-plus fa-lg"></i></span>
+                    &nbsp;&nbsp;&nbsp;
+                    اضافة وكيل جديد
+                </a>
+
+                @*@Html.ActionLink("اضافة وكيل جديد ", "Create", null, new { @class = "text-light btn-success btn form-control" })*@
             </div>
         </div>
 
@@ -68,26 +75,40 @@
             </tr>
             @foreach (var item in Model)
             {
-                <tr class=" text-light">
-                    <td>
-                        @Html.ActionLink("حذف", "Delete", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-danger btn form-control" })
-                    </td>
-                    <td>
-                        @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })
-                    </td>
-                    <td>  @item.فاكس</td>
-                    <td>  @item.هاتف</td>
-                    <td>  @item.تلفون</td>
-                    <td>  @item.عنوان</td>
-                    <td>  @item.بريد_الكتروني</td>
-                    <td>  @item.المدينة</td>
-                    <td>  @item.المحافظة</td>
-                    <td>  @item.دولة</td>
-                    <td>  @item.الاسم</td>
-                    <td>  @item.معرف</td>
-                    <td>  @item.رقم_الوكيل</td>
+        <tr class=" text-light">
+            <td>
+                <a class="text-light btn-danger btn form-control" href="@Url.Action("Delete", "Customers",new { id = @item.رقم_الوكيل, add_id = @item.معرف})">
+                    <span>
+                        <i class="fas fa-user-times"></i>
+                    </span>
+                    حذف
+                </a>
 
-                </tr>
+                @*@Html.ActionLink("حذف", "Delete", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-danger btn form-control" })*@
+            </td>
+            <td>
+
+                <a class="text-light btn-warning btn form-control" href="@Url.Action("Edit", "Customers",new { id = @item.رقم_الوكيل, add_id = @item.معرف})">
+                    <span>
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    تعديل
+                </a>
+                @*@Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })*@
+            </td>
+            <td>  @item.فاكس</td>
+            <td>  @item.هاتف</td>
+            <td>  @item.تلفون</td>
+            <td>  @item.عنوان</td>
+            <td>  @item.بريد_الكتروني</td>
+            <td>  @item.المدينة</td>
+            <td>  @item.المحافظة</td>
+            <td>  @item.دولة</td>
+            <td>  @item.الاسم</td>
+            <td>  @item.معرف</td>
+            <td>  @item.رقم_الوكيل</td>
+
+        </tr>
             }
         </table>
 

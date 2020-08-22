@@ -1,0 +1,34 @@
+﻿@model project_3.transvehcile_has_order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>transvehcile_has_order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.transVehcile_has_order_state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transVehcile_has_order_state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order.notic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order.notic)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

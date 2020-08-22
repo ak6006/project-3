@@ -43,7 +43,11 @@
 
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("اضافة طلبيه جديده ", "Create", null, new { @class = "text-light btn-success btn form-control" })
+                <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "orders")">
+                    <i class="fas fa-user-plus fa-lg"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    اضافة طلبيه جديده
+                </a>
             </div>
         </div>
 
@@ -70,10 +74,22 @@
             {
         <tr class=" text-light">
             <td>
-                @Html.ActionLink("حذف", "Delete", new { id = @item.رقم_الطلبية }, new { @class = "text-light btn-danger btn form-control" })
+                <a class=" text-light btn-danger btn form-control" href="@Url.Action("Delete", "orders",new { id = @item.رقم_الطلبية})">
+                    <span>
+                        <i class="fas fa-user-times"></i>
+                    </span>
+                    حذف
+                </a>
+
             </td>
             <td>
-                @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الطلبية }, new { @class = "text-light btn-warning btn form-control" })
+
+                <a class=" text-light btn-warning btn form-control" href="@Url.Action("Edit", "orders",new { id = @item.رقم_الطلبية})">
+                    <span>
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    تعديل
+                </a>
             </td>
             @*<td>  @item.فاكس</td>
         <td>  @item.هاتف</td>
