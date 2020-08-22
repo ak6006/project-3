@@ -38,7 +38,7 @@
                 <div class="d-flex col-md-4">
                     @Html.TextBoxFor(m => m.BarCode, new { @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
-                    <span class="col-md-4 text-light">
+                    <span id="SerialTextBox" class="col-md-4 text-light">
                         باركود
                     </span>
                 </div>
@@ -46,10 +46,10 @@
             </div>
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.CName, new { @Class = "form-control" })
+                    @Html.HiddenFor(m => m.CName, new { @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
                     <span class="col-md-4 text-light">
-                        اسم الوكيل
+                        @*اسم الوكيل*@
                     </span>
                 </div>
 
@@ -57,51 +57,30 @@
 
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.DName, new { @Class = "form-control" })
+                    @Html.HiddenFor(m => m.DName, new { @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
                     <span class="col-md-4 text-light">
-                        اسم السائق
+                        @*اسم السائق*@
                     </span>
                 </div>
 
             </div>
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.OId, new { @Class = "form-control" })
+                    @Html.HiddenFor(m => m.OId, new { @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
                     <span class="col-md-4 text-light">
-                        رقم الطلبيه
+                        @*رقم الطلبيه*@
                     </span>
                 </div>
 
             </div>
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.All, new { @Class = "form-control" })
+                    @Html.HiddenFor(m => m.All, new { @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
                     <span class="col-md-4 text-light">
-                        الشكاير
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="d-flex flex-row-reverse mb-2 justify-content-center">
-                <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.Remaining, new { @Class = "form-control" })
-                    @*<input name="BarCode" class="form-control" />*@
-                    <span class="col-md-4 text-light">
-                        المتبقى
-                    </span>
-                </div>
-
-            </div>
-            <div class="d-flex flex-row-reverse mb-2 justify-content-center">
-                <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.Counter, new { @Class = "form-control" })
-                    @*<input name="BarCode" class="form-control" />*@
-                    <span class="col-md-4 text-light">
-                        Counter
+                        @*الشكاير*@
                     </span>
                 </div>
 
@@ -109,20 +88,41 @@
 
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.PId, new { @Class = "form-control" })
+                    @Html.HiddenFor(m => m.Remaining, new { @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
                     <span class="col-md-4 text-light">
-                        رقم المنتج
+                        @*المتبقى*@
                     </span>
                 </div>
 
             </div>
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.WId, new { @Class = "form-control" })
+                    @Html.HiddenFor(m => m.Counter, new { @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
                     <span class="col-md-4 text-light">
-                        رقم الوزن
+                        @*Counter*@
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+                <div class="d-flex col-md-4">
+                    @Html.HiddenFor(m => m.PId, new { @Class = "form-control" })
+                    @*<input name="BarCode" class="form-control" />*@
+                    <span class="col-md-4 text-light">
+                        @*رقم المنتج*@
+                    </span>
+                </div>
+
+            </div>
+            <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+                <div class="d-flex col-md-4">
+                    @Html.HiddenFor(m => m.WId, new { @Class = "form-control" })
+                    @*<input name="BarCode" class="form-control" />*@
+                    <span class="col-md-4 text-light">
+                        @*رقم الوزن*@
                     </span>
                 </div>
 
@@ -140,25 +140,10 @@
                 </div>
             </div>
         }
-        @if (TempData["Msg"] != null)
-        {
-
-
-            <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
-                <div class="col-md-3">
-
-                </div>
-                <h3>
-                    @TempData["Msg"]
-                </h3>
-            </div>
-
-
-        }
+        
         <table class="table table-hover border-bottom border-light border-5">
             <tr class=" text-light">
 
-                <th>net Counter </th>
                 <th>عدد الشكاير المتبقيه</th>
                 <th>عدد الشكاير</th>
                 <th>اسم السائق</th>
@@ -168,7 +153,6 @@
             </tr>
 
             <tr class=" text-light">
-                <td>@Model.Counter</td>
                 <td>@Model.Remaining</td>
                 <td>@Model.All</td>
                 <td>@Model.DName</td>

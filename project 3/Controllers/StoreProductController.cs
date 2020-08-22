@@ -107,7 +107,7 @@ namespace project_3.Controllers
                 {
                     db.SP_Store_Product_Add_New(SProd.shift_shift_id, SProd.product_product_id,
                         SProd.store_store_id, SProd.weight_weight_id, SProd.store_has_productDate,
-                        SProd.barcode_serialNumber, NewIdentity,RecFound);
+                        SProd.barcode_serialNumber, NewIdentity,RecFound).ToList();
                     
                     
                     if((int)RecFound.Value > 0)

@@ -577,6 +577,36 @@ namespace project_3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Product_Update", productIdParameter, productNameParameter, rec_found);
         }
     
+        public virtual ObjectResult<string> SP_Sales_BarCode(string barcode, string orderId, string prodductId, string weightId, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
+        {
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            var orderIdParameter = orderId != null ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(string));
+    
+            var prodductIdParameter = prodductId != null ?
+                new ObjectParameter("ProdductId", prodductId) :
+                new ObjectParameter("ProdductId", typeof(string));
+    
+            var weightIdParameter = weightId != null ?
+                new ObjectParameter("weightId", weightId) :
+                new ObjectParameter("weightId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Sales_BarCode", barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, serial_found, rec_found, netCounter);
+        }
+    
+        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_Load_Result> SP_Sales_Order_Trans_Vin_Load(string transVehcileSerial)
+        {
+            var transVehcileSerialParameter = transVehcileSerial != null ?
+                new ObjectParameter("transVehcileSerial", transVehcileSerial) :
+                new ObjectParameter("transVehcileSerial", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_Load_Result>("SP_Sales_Order_Trans_Vin_Load", transVehcileSerialParameter);
+        }
+    
         public virtual ObjectResult<string> SP_Shift_Admin_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var a_NameParameter = a_Name != null ?
@@ -885,7 +915,7 @@ namespace project_3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Store_ID_Result>("SP_Store_ID", iDParameter);
         }
     
-        public virtual int SP_Store_Product_Add_New(Nullable<int> shiftId, Nullable<int> productId, Nullable<int> storeId, Nullable<int> weight, Nullable<System.DateTime> date1, string serialNumber, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Store_Product_Add_New(Nullable<int> shiftId, Nullable<int> productId, Nullable<int> storeId, Nullable<int> weight, Nullable<System.DateTime> date1, string serialNumber, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
@@ -911,7 +941,7 @@ namespace project_3
                 new ObjectParameter("SerialNumber", serialNumber) :
                 new ObjectParameter("SerialNumber", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Store_Product_Add_New", shiftIdParameter, productIdParameter, storeIdParameter, weightParameter, date1Parameter, serialNumberParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Store_Product_Add_New", shiftIdParameter, productIdParameter, storeIdParameter, weightParameter, date1Parameter, serialNumberParameter, new_identity, rec_found);
         }
     
         public virtual ObjectResult<SP_Store_Search_Result> SP_Store_Search(string sEARCH)
@@ -931,6 +961,11 @@ namespace project_3
         public virtual ObjectResult<SP_Store_To_DataGrid_Result> SP_Store_To_DataGrid()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Store_To_DataGrid_Result>("SP_Store_To_DataGrid");
+        }
+    
+        public virtual ObjectResult<SP_Store_To_DataGrid_tmp_Result> SP_Store_To_DataGrid_tmp()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Store_To_DataGrid_tmp_Result>("SP_Store_To_DataGrid_tmp");
         }
     
         public virtual int SP_Store_Update(Nullable<int> store_ID, string store_Name, string a_Country, string store_Admin, string store_Location)
@@ -1247,39 +1282,13 @@ namespace project_3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Workers_To_DataGrid_Result>("SP_Workers_To_DataGrid");
         }
     
-        public virtual ObjectResult<SP_Store_To_DataGrid_tmp_Result> SP_Store_To_DataGrid_tmp()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Store_To_DataGrid_tmp_Result>("SP_Store_To_DataGrid_tmp");
-        }
-    
-        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_Load_Result> SP_Sales_Order_Trans_Vin_Load(string transVehcileSerial)
-        {
-            var transVehcileSerialParameter = transVehcileSerial != null ?
-                new ObjectParameter("transVehcileSerial", transVehcileSerial) :
-                new ObjectParameter("transVehcileSerial", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_Load_Result>("SP_Sales_Order_Trans_Vin_Load", transVehcileSerialParameter);
-        }
-    
-        public virtual ObjectResult<string> SP_Sales_BarCode(string barcode, string orderId, string prodductId, string weightId, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
+        public virtual ObjectResult<SP_Sales_BarCode_Check_Result> SP_Sales_BarCode_Check(string barcode, ObjectParameter rec_found)
         {
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
     
-            var orderIdParameter = orderId != null ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(string));
-    
-            var prodductIdParameter = prodductId != null ?
-                new ObjectParameter("ProdductId", prodductId) :
-                new ObjectParameter("ProdductId", typeof(string));
-    
-            var weightIdParameter = weightId != null ?
-                new ObjectParameter("weightId", weightId) :
-                new ObjectParameter("weightId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Sales_BarCode", barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, serial_found, rec_found, netCounter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_BarCode_Check_Result>("SP_Sales_BarCode_Check", barcodeParameter, rec_found);
         }
     }
 }

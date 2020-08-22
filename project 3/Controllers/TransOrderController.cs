@@ -31,15 +31,9 @@ namespace project_3.Controllers
         }
 
         
-        public ActionResult Transport(int OId , int PId , int WId , string CName , string DName , int All , int Remaining)
+        public ActionResult Transport(int OId , int PId , int WId , string CName , string DName , int All , int Remaining, int? Counter)
         {
-            //ViewBag.OId = OId;
-            //ViewBag.PId = PId;
-            //ViewBag.WId = WId;
-            //ViewBag.CName = CName;
-            //ViewBag.DName = DName;
-            //ViewBag.All = All;
-            //ViewBag.Remaining = Remaining;
+           
             OrderVehicleViewModel result = new OrderVehicleViewModel
             {
                 OId = OId,
@@ -50,57 +44,64 @@ namespace project_3.Controllers
                 All = All,
                 Remaining = Remaining
             };
+            if(Counter != null)
+            {
+                result.Counter = (int)Counter;
+            }
             return View(result);
         }
 
         [HttpPost]
         public ActionResult Transport2(OrderVehicleViewModel record)
         {
-            ObjectParameter SerialFound = new ObjectParameter("serial_found", typeof(int));
-            ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-            ObjectParameter NetCounter = new ObjectParameter("netCounter", typeof(int));
-            
-            try
+            if (ModelState.IsValid)
             {
-                db.SP_Sales_BarCode(record.BarCode, record.OId.ToString(), record.PId.ToString()
-                , record.WId.ToString(), SerialFound, RecFound, NetCounter);
+                ObjectParameter SerialFound = new ObjectParameter("Serial_found", typeof(int));
+                ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
+                ObjectParameter NtCounter = new ObjectParameter("NetCounter", typeof(int));
 
-                ViewBag.OId = record.OId;
-                ViewBag.PId = record.PId;
-                ViewBag.WId = record.WId;
-                ViewBag.CName = record.CName;
-                ViewBag.DName = record.DName;
-                ViewBag.All = record.All;
-                ViewBag.Remaining = record.Remaining;
-                record.Counter = (int)NetCounter.Value;
+                try
+                {
+                    db.SP_Sales_BarCode(record.BarCode, record.OId.ToString(), record.PId.ToString(),
+                        record.WId.ToString(), SerialFound, RecFound, NtCounter).ToList();
+                }
+                catch
+                {
+                    return RedirectToAction("Transport", record);
+                }
+                int num;
+                if (int.TryParse(NtCounter.Value.ToString(),out num))
+                {
+                    if((int)NtCounter.Value == 0)
+                    {
+                        TempData["Msg"] = "تم انتهاء التحميل بالفعل";
+                        record.Counter = (int)NtCounter.Value;
+                        record.Remaining = (int)NtCounter.Value;
+                        return RedirectToAction("Transport", record);
+                    }
+                }
 
                 if ((int)RecFound.Value == 0)
                 {
                     TempData["Msg"] = "السريال غير صحيح";
-                    return RedirectToAction("Transport",record);
-                }
-                else if ((int)NetCounter.Value == 0)
-                {
-                    TempData["Msg"] = "تم انتهاء التحميل بالفعل";
                     return RedirectToAction("Transport", record);
                 }
-                else if ((int)SerialFound.Value > 0)
+                if ((int)SerialFound.Value > 0)
                 {
                     TempData["Msg"] = "تم بيع الشكارة بالفعل";
                     return RedirectToAction("Transport", record);
                 }
-
                 else
                 {
+                    record.Remaining = (int)NtCounter.Value;
+                    record.Counter = (int)NtCounter.Value;
                     TempData["Msg"] = "تمت الاضافه بنجاح";
                     db.SaveChangesAsync();
                     return RedirectToAction("Transport", record);
                 }
+
             }
-            catch
-            {
-                return RedirectToAction("Transport", record);
-            }
+            return RedirectToAction("Transport", record);
         }
 
 

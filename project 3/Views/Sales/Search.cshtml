@@ -1,0 +1,118 @@
+﻿@model IEnumerable<SP_Sales_BarCode_Check_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="page-container">
+
+
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2 justify-content-center">
+        <h1 class="text-light">
+            بيانات تحميل العربيات
+        </h1>
+    </div>
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+            <div class="d-flex col-md-4">
+                <input id="SerialTextBox" name="Key" class="form-control" />
+                <span class="col-md-4 text-light">
+
+                </span>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+            <div class="d-flex col-md-4">
+                <button hidden type="submit" class="text-light btn-success btn form-control">
+                    <span><i class="fas fa-user-plus fa-lg"></i></span>
+                    &nbsp;&nbsp;&nbsp;
+                    تحميل
+                </button>
+                <span class="col-md-4 text-light">
+                </span>
+            </div>
+        </div>
+    }
+    @if (TempData["Msg"] != null)
+    {
+
+
+        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+
+
+    }
+    <table class="table table-hover border-bottom border-light border-5">
+        <tr class=" text-light">
+            <th>السريال</th>
+            <th>الوزن</th>
+            <th>المنتج</th>
+            <th>التاريخ</th>
+            <th>سائق العربيه</th>
+            <th>رقم العربيه</th>
+            <th>اسم الوكيل</th>
+            <th>مدير الورديه</th>
+            <th>الورديه</th>
+            <th>store_has_productDate</th>
+            <th>رقم المخزن</th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr class=" text-light">
+        
+        <td>@item.barcode_serialNumber</td>
+        <td>@item.weight_net</td>
+        <td>@item.productName</td>
+        <td>@item.date</td>
+        <td>@item.transVehcile_driver_name</td>
+        <td>@item.transVehcile_num</td>
+        <td>@item.Customer_Name</td>
+        <td>@item.Shift_Name</td>
+        <td>@item.shiftName</td>
+        <td>@item.store_has_productDate</td>
+        <td>@item.store_store_id</td>
+
+    </tr>
+        }
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+
+    $(document).ready(function () {
+        $("#Result").load("@Url.Action("GetProducts", "StoreProduct")",
+            function (response, status, xhr) {
+                if (status == "error") {
+                    $("#Result").text = "An error occurred while loading the results.";
+                }
+            });
+    });
+
+    function func()
+    {
+        $('#SerialTextBox').focus();
+    }
+    $(document).ready($(function () { setInterval(func, 1) }));
+</script>
