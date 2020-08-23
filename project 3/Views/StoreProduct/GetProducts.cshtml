@@ -3,79 +3,76 @@
 @{
     ViewBag.Title = "index";
     Layout = null;
+   
 }
 
-<div class="mb-5">
 
-    @*<div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
-        <h1 style='font-family:"BeInNormal"' class="text-light ">
-            بيانات المنتجات
-        </h1>
+    <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+        <div class="d-flex col-md-4">
+            <input name="shift_shift_id" class="form-control " disabled value="@ViewBag.Shift" />
+
+
+            <span class="col-md-4 text-light">
+                الورديه
+            </span>
+        </div>
+
     </div>
-    <div class="d-flex flex-row-reverse mr-2">
-
-        <h1 class="text-light">
-        </h1>
-        <div class="col-md-2">
+    <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+        <div class="d-flex col-md-4">
+            <input name="store_store_id" class="form-control " disabled value="@ViewBag.Store" />
+            <span class="col-md-4 text-light">
+                المتجر
+            </span>
         </div>
-        <div>
+
+    </div>
+    <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+        <div class="d-flex col-md-4">
+            <input name="product_product_id" class="form-control " disabled value="@ViewBag.Product" />
+            <span class="col-md-4 text-light">
+                اسم المنتج
+            </span>
         </div>
-        <div class="col-md-7">
+    </div>
 
-        </div>*@
-        @*<div class="col-md-3">
-            @using (Html.BeginForm("Create1", "OrderProducts", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                <input type="text" hidden name="CustomerName" value="@ViewBag.CustomerName" />
-                <input type="text" hidden name="ThisOrderId" value="@ViewBag.OrderId" />
-                <button type="submit" class="col-md-5 text-light btn-success btn form-control">
-                    <span><i class="fas fa-user-plus fa-lg"></i></span>
-                    &nbsp;&nbsp;&nbsp;
-                    اضافه
-                </button>
+    <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+        <div class="d-flex col-md-4">
+            <input name="weight_weight_id" class="form-control " disabled value="@ViewBag.Weight" />
+            <span class="col-md-4 text-light">
+                الوزن
+            </span>
+        </div>
+
+    </div>
+    <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+        <div class="d-flex col-md-4">
+            <input name="store_has_productDate" class="form-control " disabled value="@ViewBag.Date" />
+            <span class="col-md-4 text-light">
+                التاريخ
+            </span>
+        </div>
+
+    </div>
 
 
-            }
-        </div>*@
-
-    </@*div*@>
 
 
 
+
+<div class="mb-5">
     <table class="table  border-bottom border-light border-5">
         <tr class=" text-light">
-            @*<th>حذف</th>
-            <th>تعديل</th>
-            <th>عدد الشكاير المتبقيه</th>
-            <th>عدد شكاير الطلبيه</th>
-            <th>الوزن</th>*@
             <th>السريال</th>
             <th>التاريخ</th>
             <th>الوزن</th>
             <th>المنتج</th>
             <th>المخزن</th>
             <th>الوردية</th>
-
         </tr>
         @foreach (var item in Model)
         {
             <tr class=" text-light">
-                @*<td>
-                    <a class="text-light btn-danger btn form-control" href="@Url.Action("Delete", "OrderProducts",new { OId = @item.رقم_الطلبية ,PId = item.product_id, MId=item.measure_id ,WId = item.weight_id , CName = item.اسم_العميل})">
-                        <i class="fas fa-user-times"></i>
-                        حذف
-                    </a>
-                </td>
-                <td>
-                    <a class="text-light btn-warning btn form-control" href="@Url.Action("Edit", "OrderProducts",new { OId = @item.رقم_الطلبية ,PId = item.product_id, MId=item.measure_id ,WId = item.weight_id , CName = item.اسم_العميل})">
-                        <i class="fas fa-user-edit"></i>
-                        تعديل
-                    </a>
-                </td>*@
-                @*<td>@item.order_has_product_dept_count</td>
-                <td>@item.order_has_product_Pages_Count</td>
-                <td>@item.الوزن</td>*@
                 <td>@item.barcode_serialNumber</td>
                 <td>@item.store_has_productDate</td>
                 <td>@item.weight_net</td>
@@ -84,9 +81,7 @@
                 <td>@item.shiftName</td>
             </tr>
         }
-
     </table>
-
 </div>
 
 

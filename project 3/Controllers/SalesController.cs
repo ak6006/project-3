@@ -24,7 +24,7 @@ namespace project_3.Controllers
         public ActionResult Search(string Key)
         {
             ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-            var result = db.SP_Sales_BarCode_Check(Key,RecFound).ToList();
+            var result = db.SP_Sales_BarCode_Check(Key,RecFound).FirstOrDefault();
             return View(result);
         }
 

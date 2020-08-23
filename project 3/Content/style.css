@@ -1,0 +1,62 @@
+.page-container {
+  background-image: url("imgs/Main.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 55rem;
+}
+
+.centered1 {
+  position: absolute;
+  top: 24%;
+  left: 12%;
+  transform: translate(-50%, -50%);
+}
+
+.centered2 {
+  position: absolute;
+  top: 24%;
+  left: 31.5%rem;
+  transform: translate(-50%, -50%);
+}
+.centered3 {
+  position: absolute;
+  top: 18%;
+  left: 59%;
+  transform: translate(-50%, -50%);
+}
+.centered4 {
+  position: absolute;
+  top: 21%;
+  left: 79%;
+  transform: translate(-50%, -50%);
+}
+.centered5 {
+  position: absolute;
+  top: 45%;
+  left: 12%;
+  transform: translate(-50%, -50%);
+}
+.centered6 {
+  position: absolute;
+  top: 45%;
+  left: 87%;
+  transform: translate(-50%, -50%);
+}
+.centered7 {
+  position: absolute;
+  top: 86%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+}
+.centered8 {
+  position: absolute;
+  top: 86%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+}
+.centered9 {
+  position: absolute;
+  top: 86%;
+  left: 74%;
+  transform: translate(-50%, -50%);
+}

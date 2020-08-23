@@ -38,10 +38,8 @@
                 <input type="submit" value="<<" class="bg-primary text-dark form-control">
 
             </div>
-            <div class="col-md-7">
-
-            </div>
-            <div class="col-md-2">
+            
+            <div class=" mr-auto">
                 <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "shifts")">
                     <span><i class="fas fa-user-plus fa-lg"></i></span>
                     &nbsp;&nbsp;&nbsp;
@@ -52,15 +50,11 @@
 
 
 
-        <table class="table table-hover border-bottom border-light border-5">
+        <table class="text-center table table-hover border-bottom border-light border-5">
             <tr class=" text-light">
                 <th>حذف</th>
                 <th>تعديل</th>
-                <th> </th>
-                <th> </th>
-                <th></th>
-                <th></th>
-                <th> </th>
+               
                 <th>اسم مدير الوردية</th>
                 <th>رقم مدير الوردية</th>
                 <th>اسم الوردية</th>
@@ -86,11 +80,7 @@
                     تعديل
                 </a>
             </td>
-            <td>  </td>
-            <td> </td>
-            <td>  </td>
-            <td>  </td>
-            <td>  </td>
+            
             <td>  @item.اسم_مدير_الوردية</td>
             <td>  @item.رقم_مدير_الوردية</td>
             <td>  @item.اسم_الوردية</td>

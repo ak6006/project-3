@@ -1,31 +1,118 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<link href="~/Content/style.css" rel="stylesheet" />
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<div class="d-flex justify-content-center ">
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "Customers")">
+            <img src="~/Content/imgs/customer.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "Transvehciles")">
+            <img src="~/Content/imgs/vin.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        @*<a href="@Url.Action("Index", "products")">
+            <img src="~/Content/imgs/product.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>*@
+    </div>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "measurements")">
+            <img src="~/Content/imgs/mesurment.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "stores")">
+            <img src="~/Content/imgs/store.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
 </div>
+<div class="d-flex justify-content-center mt-5 ">
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "shiftadmins")">
+            <img src="~/Content/imgs/shift admin.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "workers")">
+            <img src="~/Content/imgs/workers.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        @*<a href="@Url.Action("Index", "shifts")">
+            <img src="~/Content/imgs/shift.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>*@
+        <img src="~/Content/imgs/04.png" class=" img-fluid" alt="" style="width: 80%;" />
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "ShiftWorker")">
+            <img src="~/Content/imgs/shiftWorkers.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "orders")">
+            <img src="~/Content/imgs/orders.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
     </div>
+</div>
+<div class="d-flex justify-content-center  ">
+    <div class="container ">
+        <a href="@Url.Action("Index", "OrderProducts")">
+            <img src="~/Content/imgs/orderItems.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container">
+        <a href="@Url.Action("Index", "OrderTrans")">
+            <img src="~/Content/imgs/transOrder.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container ">
+        @*<a href="@Url.Action("Index", "StoreProduct")">
+            <img src="~/Content/imgs/productLine.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>*@
+    </div>
+    <div class="container ">
+        <a href="@Url.Action("Index", "TransOrder")">
+            <img src="~/Content/imgs/orderLoad.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container ">
+        <a href="@Url.Action("Index", "Sales")">
+            <img src="~/Content/imgs/check.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+</div>
+<div class="d-flex justify-content-center mt-5 ">
+    <div class="container mt-5">
+        @*<a href="@Url.Action("Index", "StoreProduct")">
+                <img src="~/Content/imgs/productLine.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>*@
+    </div>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "shifts")">
+            <img src="~/Content/imgs/shift.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "StoreProduct")">
+            <img src="~/Content/imgs/productLine.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        <a href="@Url.Action("Index", "products")">
+            <img src="~/Content/imgs/product.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+        </a>
+    </div>
+    <div class="container mt-5">
+        @*<a href="@Url.Action("Index", "StoreProduct")">
+                <img src="~/Content/imgs/productLine.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>*@
+    </div>
+
+
 </div>

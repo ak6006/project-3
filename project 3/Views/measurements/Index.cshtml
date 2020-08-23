@@ -38,11 +38,8 @@
                 <input type="submit" value="<<" class="bg-primary text-dark form-control">
 
             </div>
-            <div class="col-md-7">
-
-            </div>
-            <div class="col-md-2">
-                @*@Html.ActionLink("اضافة وحدة قياس جديدة ", "Create", null, new { @class = "text-light btn-success btn form-control" })*@
+            
+            <div class="mr-auto">
                 <a class="btn p-2 btn-success form-control text-light" href="@Url.Action("Create", "measurements")">
                     <span><i class="fas fa-user-plus fa-lg"></i></span>
                     
@@ -53,7 +50,7 @@
 
 
 
-        <table class="table table-hover border-bottom border-light border-5">
+        <table class="text-center table table-hover border-bottom border-light border-5">
             <tr class=" text-light">
                 <th>حذف</th>
                 <th>تعديل</th>

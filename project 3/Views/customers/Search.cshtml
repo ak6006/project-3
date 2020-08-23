@@ -39,10 +39,8 @@
                 <input type="submit" value="<<" class="bg-primary text-dark form-control">
 
             </div>
-            <div class="col-md-7">
-
-            </div>
-            <div class="col-md-2 rounded pt-2">
+            
+            <div class="mr-auto rounded pt-2">
 
                 <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "Customers")">
                     <span><i class="fas fa-user-plus fa-lg"></i></span>
@@ -56,16 +54,16 @@
 
 
 
-        <table class="table table-hover border-bottom border-light border-5">
+        <table class="text-center table table-hover border-bottom border-light border-5">
             <tr class=" text-light">
                 <th>حذف</th>
                 <th>تعديل</th>
-                <th>فاكس</th>
+                @*<th>فاكس</th>
                 <th>هاتف</th>
                 <th>تلفون</th>
                 <th>عنوان</th>
                 <th>بريد_الكتروني</th>
-                <th>المدينة</th>
+                <th>المدينة</th>*@
                 <th>المحافظة</th>
                 <th>دولة</th>
                 <th>الاسم</th>
@@ -96,12 +94,12 @@
                 </a>
                 @*@Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })*@
             </td>
-            <td>  @item.فاكس</td>
+            @*<td>  @item.فاكس</td>
             <td>  @item.هاتف</td>
             <td>  @item.تلفون</td>
             <td>  @item.عنوان</td>
             <td>  @item.بريد_الكتروني</td>
-            <td>  @item.المدينة</td>
+            <td>  @item.المدينة</td>*@
             <td>  @item.المحافظة</td>
             <td>  @item.دولة</td>
             <td>  @item.الاسم</td>

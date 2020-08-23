@@ -1,9 +1,11 @@
 ﻿* {
-    font-family: "BeInNormal"
+    font-family: "BeInNormal";
 }
 
+
+
 body {
-    background-color:#020202;
+    background-color: #020202;
     color: white;
 }
 
@@ -29,7 +31,7 @@ textarea {
     background-image: url("/Content/imgs/Main.png");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 49rem;
+    background-attachment:fixed;
 }
 
 @font-face {

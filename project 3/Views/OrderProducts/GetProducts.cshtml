@@ -16,20 +16,14 @@
 
                 <h1 class="text-light">
                 </h1>
-                <div class="col-md-2">
-                </div>
-                <div>
-                </div>
-                <div class="col-md-7">
-
-                </div>
-                <div class="col-md-3">
+                
+                <div class="mr-auto">
                     @using (Html.BeginForm("Create1", "OrderProducts", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
                         <input type="text" hidden name="CustomerName" value="@ViewBag.CustomerName" />
                         <input type="text" hidden name="ThisOrderId" value="@ViewBag.OrderId" />
-                        <button type="submit" class="col-md-5 text-light btn-success btn form-control">
+                        <button type="submit" class=" text-light btn-success btn form-control">
                             <span><i class="fas fa-user-plus fa-lg"></i></span>
                             &nbsp;&nbsp;&nbsp;
                             اضافه
@@ -44,7 +38,7 @@
 
 
 
-            <table class="table  border-bottom border-light border-5">
+            <table class="text-center table  border-bottom border-light border-5">
                 <tr class=" text-light">
                     <th>حذف</th>
                     <th>تعديل</th>

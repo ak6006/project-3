@@ -1,97 +1,179 @@
-﻿@model IEnumerable<SP_Sales_BarCode_Check_Result>
+﻿@model SP_Sales_BarCode_Check_Result
 
 @{
     ViewBag.Title = "Index";
 }
 
 
-<div class="page-container">
+    <div class="page-container">
 
 
-    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2 justify-content-center">
-        <h1 class="text-light">
-            بيانات تحميل العربيات
-        </h1>
-    </div>
-
-
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="d-flex flex-row-reverse mb-2 justify-content-center">
-            <div class="d-flex col-md-4">
-                <input id="SerialTextBox" name="Key" class="form-control" />
-                <span class="col-md-4 text-light">
-
-                </span>
-            </div>
-
-        </div>
-
-        <div class="d-flex flex-row-reverse mb-2 justify-content-center">
-            <div class="d-flex col-md-4">
-                <button hidden type="submit" class="text-light btn-success btn form-control">
-                    <span><i class="fas fa-user-plus fa-lg"></i></span>
-                    &nbsp;&nbsp;&nbsp;
-                    تحميل
-                </button>
-                <span class="col-md-4 text-light">
-                </span>
-            </div>
-        </div>
-    }
-    @if (TempData["Msg"] != null)
-    {
-
-
-        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
-            <div class="col-md-3">
-
-            </div>
-            <h3>
-                @TempData["Msg"]
-            </h3>
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2 ">
+            <h1 class="text-light">
+                عرض بيانات الشكارة حسب الباركود
+            </h1>
         </div>
 
 
-    }
-    <table class="table table-hover border-bottom border-light border-5">
-        <tr class=" text-light">
-            <th>السريال</th>
-            <th>الوزن</th>
-            <th>المنتج</th>
-            <th>التاريخ</th>
-            <th>سائق العربيه</th>
-            <th>رقم العربيه</th>
-            <th>اسم الوكيل</th>
-            <th>مدير الورديه</th>
-            <th>الورديه</th>
-            <th>store_has_productDate</th>
-            <th>رقم المخزن</th>
 
-        </tr>
-        @foreach (var item in Model)
+        @using (Html.BeginForm())
         {
-    <tr class=" text-light">
-        
-        <td>@item.barcode_serialNumber</td>
-        <td>@item.weight_net</td>
-        <td>@item.productName</td>
-        <td>@item.date</td>
-        <td>@item.transVehcile_driver_name</td>
-        <td>@item.transVehcile_num</td>
-        <td>@item.Customer_Name</td>
-        <td>@item.Shift_Name</td>
-        <td>@item.shiftName</td>
-        <td>@item.store_has_productDate</td>
-        <td>@item.store_store_id</td>
+            @Html.AntiForgeryToken()
 
-    </tr>
+            <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+                <div class="d-flex col-md-4">
+                    <input id="SerialTextBox" name="Key" class="form-control" />
+                    <span class="col-md-4 text-light">
+
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="d-flex flex-row-reverse mb-2 justify-content-center">
+                <div class="d-flex col-md-4">
+                    <button hidden type="submit" class="text-light btn-success btn form-control">
+                        <span><i class="fas fa-user-plus fa-lg"></i></span>
+                        &nbsp;&nbsp;&nbsp;
+                        تحميل
+                    </button>
+                    <span class="col-md-4 text-light">
+                    </span>
+                </div>
+            </div>
         }
-    </table>
-</div>
+        @if (TempData["Msg"] != null)
+        {
+
+
+            <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+                <div class="col-md-3">
+
+                </div>
+                <h3>
+                    @TempData["Msg"]
+                </h3>
+            </div>
+
+
+        }
+
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                <input disabled type="text" class="form-control" value="@Model.store_store_id" id="" />
+
+                <span class="col-md-4 text-light">
+                    رقم المخزن
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input disabled class="form-control" value="@Model.store_has_productDate" id="" />
+                <span class="col-md-4 text-light">
+                    تاريخ الانتاج
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input disabled class="form-control" value="@Model.shiftName" id="" />
+                <span class="col-md-4 text-light">
+                    الورديه
+                </span>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                <input disabled type="text" class="form-control" value="@Model.Shift_Name" id="" />
+
+                <span class="col-md-4 text-light">
+                    مدير الورديه
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input disabled class="form-control" value="@Model.Customer_Name" id="" />
+                <span class="col-md-4 text-light">
+                    الوكيل
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input disabled class="form-control" value="@Model.transVehcile_num" id="" />
+                <span class="col-md-4 text-light">
+                    رقم العربيه
+                </span>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                <input disabled type="text" class="form-control" value="@Model.transVehcile_driver_name" id="" />
+
+                <span class="col-md-4 text-light">
+                    سائق العربيه
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input disabled class="form-control" value="@Model.date" id="" />
+                <span class="col-md-4 text-light">
+                    تاريخ البيع
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input disabled class="form-control" value="@Model.productName" id="" />
+                <span class="col-md-4 text-light">
+                    المنتج
+                </span>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse mb-2">
+            <div class="d-flex col-md-4">
+                <input disabled type="text" class="form-control" value="@Model.weight_net" id="" />
+
+                <span class="col-md-4 text-light">
+                    الوزن
+                </span>
+            </div>
+            <div class="d-flex col-md-4">
+                <input disabled class="form-control" value="@Model.barcode_serialNumber" id="" />
+                <span class="col-md-4 text-light">
+                    السريال
+                </span>
+            </div>
+            
+        </div>
+
+
+        @*<table class="table table-hover border-bottom border-light border-5">
+            <tr class=" text-light">
+                <th>السريال</th>
+                <th>الوزن</th>
+                <th>المنتج</th>
+                <th>التاريخ</th>
+                <th>سائق العربيه</th>
+                <th>رقم العربيه</th>
+                <th>اسم الوكيل</th>
+                <th>مدير الورديه</th>
+                <th>الورديه</th>
+                <th>store_has_productDate</th>
+                <th>رقم المخزن</th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr class=" text-light">
+
+                <td>@Model.barcode_serialNumber</td>
+                <td>@Model.weight_net</td>
+                <td>@Model.productName</td>
+                <td>@Model.date</td>
+                <td>@Model.transVehcile_driver_name</td>
+                <td>@Model.transVehcile_num</td>
+                <td>@Model.Customer_Name</td>
+                <td>@Model.Shift_Name</td>
+                <td>@Model.shiftName</td>
+                <td>@Model.store_has_productDate</td>
+                <td>@Model.store_store_id</td>
+
+            </tr>
+            }
+        </table>*@
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

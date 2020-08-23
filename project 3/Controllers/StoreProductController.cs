@@ -53,6 +53,12 @@ namespace project_3.Controllers
         public ActionResult GetProducts()
         {
             var Products = db.SP_Store_To_DataGrid_tmp();
+            var Products1 = db.SP_Store_To_DataGrid_tmp().FirstOrDefault();
+            ViewBag.Shift = Products1.shiftName;
+            ViewBag.Store = Products1.storeName;
+            ViewBag.Product = Products1.productName;
+            ViewBag.Weight = Products1.weight_net;
+            ViewBag.Date = Products1.store_has_productDate;
             return View(Products);
         }
 

@@ -7,7 +7,7 @@
     <div class="page-container mb-5">
         <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
             <h1 class="text-light">
-                عمال الورديات
+                بيانات عمال الورديات
             </h1>
         </div>
         <div class="d-flex flex-row-reverse mr-2">
@@ -17,27 +17,21 @@
             <div class="col-md-2">
                 @Html.DropDownListFor(m => m.ToList().First().رقم_الوردية, ViewBag.shift_id as IEnumerable<SelectListItem>, htmlAttributes: new { onchange = "updateWorkers();", @class = "form-control",@id= "shift_id", Name = "shift_id" })
             </div>
-            <div>
+            <div class="mr-auto">
                 <button type="submit" class="text-light btn-success btn form-control">
                     <i class="fas fa-user-plus fa-lg"></i>
                     &nbsp;&nbsp;&nbsp;
                     اضافة عامل جديد للوردية
                 </button>
             </div>
-            <div class="col-md-7">
-
-            </div>
+            
             
         </div>
-        <table id="dataTable"  class="table table-hover border-bottom border-light border-5">
+        <table id="dataTable"  class="text-center table table-hover border-bottom border-light border-5">
             <thead class=" text-light">
                 <th>حذف</th>
                 @*<th>تعديل</th>*@
-                <th> </th>
-                <th> </th>
-                <th></th>
-                <th></th>
-                <th> </th>
+               
                 <th>  اسم العامل</th>
                 <th>رقم العامل</th>
                 <th>رقم الوردية</th>
@@ -57,11 +51,7 @@
                     @*<td>
                         @Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوردية }, new { @class = "text-light btn-warning btn form-control" })
                     </td>*@
-                    <td>  </td>
-                    <td> </td>
-                    <td>  </td>
-                    <td>  </td>
-                    <td>  </td>
+                    
                     <td>  @item.اسم_العامل</td>
                     <td>  @item.رقم_العامل</td>
                     <td>@item.رقم_الوردية</td>
