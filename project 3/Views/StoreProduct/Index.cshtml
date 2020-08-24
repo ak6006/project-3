@@ -30,16 +30,17 @@
 
 
 
-        @using (Html.BeginForm("Index2","StoreProduct",FormMethod.Post))
+        @using (Html.BeginForm("Index2", "StoreProduct", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-
+            
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
                     @Html.DropDownListFor(m => m.shift_shift_id, ViewBag.ShiftId as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
                     <span class="col-md-4 text-light">
                         الورديه
                     </span>
+
                 </div>
 
             </div>
@@ -49,6 +50,7 @@
                     <span class="col-md-4 text-light">
                         المتجر
                     </span>
+                    <input hidden id="StoreInput" name="store" />
                 </div>
 
             </div>
@@ -59,6 +61,8 @@
                     <span class="col-md-4 text-light">
                         اسم المنتج
                     </span>
+                    <input hidden id="ProductInput" name="product" />
+
                 </div>
             </div>
 
@@ -68,6 +72,7 @@
                     <span class="col-md-4 text-light">
                         الوزن
                     </span>
+                    <input hidden name="weight" id="WInput" />
                 </div>
 
             </div>
@@ -80,22 +85,22 @@
                 </div>
 
             </div>
-           
+
 
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
                     <button type="submit" class="text-light btn-success btn form-control">
-                        
+
                         بدء عملية الانتاج
                     </button>
                     <span class="col-md-4 text-light">
                     </span>
                 </div>
-                
-              
+
+
             </div>
         }
-      
+
     </div>
 
 @section Scripts {
@@ -115,6 +120,26 @@
                             $("#Products").text = "An error occurred while loading the results.";
                         }
                     });
+             
             });
      });
+
+    function func() {
+        var e = document.getElementById("shift_shift_id");
+        var strUser = e.options[e.selectedIndex].text;
+        document.getElementById("ShiftInput").value = strUser;
+
+        var e2 = document.getElementById("store_store_id");
+        var strUser2 = e2.options[e2.selectedIndex].text;
+        document.getElementById("StoreInput").value = strUser2;
+
+        var e3 = document.getElementById("product_product_id");
+        var strUser3 = e3.options[e3.selectedIndex].text;
+        document.getElementById("ProductInput").value = strUser3;
+
+        var e4 = document.getElementById("weight_weight_id");
+        var strUser4 = e4.options[e4.selectedIndex].text;
+        document.getElementById("WInput").value = strUser4;
+    }
+    $(document).ready($(function () { setInterval(func, 1) }));
 </script>
