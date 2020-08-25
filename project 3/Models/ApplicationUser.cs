@@ -18,6 +18,7 @@ namespace project_3.Models
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
+        
         public bool RememberMe { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

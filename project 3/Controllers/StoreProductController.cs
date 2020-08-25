@@ -50,6 +50,7 @@ namespace project_3.Controllers
             ViewBag.SelectedWieght = db.weights.Find(SProd.weight_weight_id).weight_net;
             ViewBag.SelectedStoreId = SProd.store_store_id;
             ViewBag.SelectedStore = db.stores.Find(SProd.store_store_id).storeName;
+            ViewBag.SelecteddateId = SProd.store_has_productDate;
             ViewBag.Selecteddate = SProd.store_has_productDate;
             return View(SProd);
         }
