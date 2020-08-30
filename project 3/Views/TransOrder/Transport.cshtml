@@ -36,9 +36,9 @@
 
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.BarCode, new { @Class = "form-control" })
+                    @Html.TextBoxFor(m => m.BarCode, new { @id= "SerialTextBox", @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
-                    <span id="SerialTextBox" class="col-md-4 text-light">
+                    <span id="" class="col-md-4 text-light">
                         باركود
                     </span>
                 </div>

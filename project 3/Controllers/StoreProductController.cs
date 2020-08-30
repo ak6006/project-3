@@ -52,6 +52,7 @@ namespace project_3.Controllers
             ViewBag.SelectedStore = db.stores.Find(SProd.store_store_id).storeName;
             ViewBag.SelecteddateId = SProd.store_has_productDate;
             ViewBag.Selecteddate = SProd.store_has_productDate;
+
             return View(SProd);
         }
 
