@@ -37,13 +37,13 @@ namespace project_3.Controllers
             }
         }
         // GET: shiftadmins/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            shiftadmin shiftadmin = await db.shiftadmins.FindAsync(id);
+            var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).SingleOrDefault();
             if (shiftadmin == null)
             {
                 return HttpNotFound();

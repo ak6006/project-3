@@ -39,13 +39,13 @@ namespace project_3.Controllers
         }
 
         // GET: customers/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            customer customer = await db.customers.FindAsync(id);
+            var customer = db.SP_Customer_ID(id).FirstOrDefault();
             if (customer == null)
             {
                 return HttpNotFound();

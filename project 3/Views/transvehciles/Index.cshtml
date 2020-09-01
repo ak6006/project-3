@@ -55,15 +55,10 @@
             <tr class=" text-light">
                 <th>حذف</th>
                 <th>تعديل</th>
+                <th>بيانات</th>
                 <th>اسم الوكيل</th>
-                @*<th>رقم الوكيل</th>*@
-                <th>العنوان</th>
-                <th>الهاتف</th>
-                @*<th>سريال العربيه</th>*@
-                @*<th>الموديل</th>*@
                 <th>رقم العربيه</th>
                 <th>اسم السائق</th>
-                <th>الرقم</th>
                
             </tr>
             @foreach (var item in Model)
@@ -76,28 +71,26 @@
                     </span>
                     حذف
                 </a>
-
-                @*@Html.ActionLink("حذف", "Delete", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-danger btn form-control" })*@
             </td>
             <td>
-
                 <a class="col-md-9 text-light btn-warning btn form-control" href="@Url.Action("Edit", "transvehciles",new { id = @item.الرقم})">
                     <span>
                         <i class="fas fa-user-edit"></i>
                     </span>
                     تعديل
                 </a>
-                @*@Html.ActionLink("تعديل", "Edit", new { id = @item.رقم_الوكيل, add_id = @item.معرف }, new { @class = "text-light btn-warning btn form-control" })*@
+            </td>
+            <td>
+                <a class="col-md-9 text-light btn-primary btn form-control" href="@Url.Action("Details", "transvehciles",new { id = @item.الرقم})">
+                    <span>
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    بيانات
+                </a>
             </td>
             <td>  @item.اسم_الوكيل</td>
-            @*<td>  @item.رقم_الوكيل</td>*@
-            <td>  @item.العنوان</td>
-            <td>  @item.هاتف</td>
-            @*<td>  @item.سريال_العربية</td>*@
-            @*<td>  @item.الموديل</td>*@
             <td>  @item.رقم_العربية</td>
             <td>  @item.اسم_السائق</td>
-            <td>  @item.الرقم</td>
 
 
         </tr>

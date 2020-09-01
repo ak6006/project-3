@@ -38,13 +38,13 @@ namespace project_3.Controllers
         }
 
         // GET: workers/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            worker worker = await db.workers.FindAsync(id);
+            var worker =  db.SP_Worker_ID(id).SingleOrDefault();
             if (worker == null)
             {
                 return HttpNotFound();

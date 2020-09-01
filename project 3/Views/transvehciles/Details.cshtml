@@ -1,74 +1,125 @@
-﻿@model project_3.transvehcile
-
+﻿@model  project_3.SP_Trans_Vin_ID_Result
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Delete";
 }
 
-<h2>Details</h2>
+<div class="page-container">
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            بيانات عربية
+        </h1>
+    </div>
+   
 
-<div>
-    <h4>transvehcile</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.transVehcile_driver_name)
-        </dt>
+    <div class=" mb-5 mt-2 mr-2 text-light">
 
-        <dd>
-            @Html.DisplayFor(model => model.transVehcile_driver_name)
-        </dd>
+        <hr />
+        <div class="d-flex flex-row-reverse">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.transVehcile_num)
-        </dt>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>رقم السائق</b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.transVehcile_num)
-        </dd>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.الرقم)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.transVehcile_model)
-        </dt>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.اسم_السائق)</b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.transVehcile_model)
-        </dd>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.اسم_السائق)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.transVehcile_serial)
-        </dt>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.رقم_العربية)</b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.transVehcile_serial)
-        </dd>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.رقم_العربية)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.transVehcile_phone)
-        </dt>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.الموديل)</b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.transVehcile_phone)
-        </dd>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.الموديل)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.transVehcile_add)
-        </dt>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.سريال_العربية)</b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.transVehcile_add)
-        </dd>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.سريال_العربية)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customer.Customers_id)
-        </dt>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.هاتف)</b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.customer.Customers_id)
-        </dd>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.هاتف)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
 
-    </dl>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.العنوان)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.العنوان)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.رقم_الوكيل)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.رقم_الوكيل)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.اسم_الوكيل)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.اسم_الوكيل)
+            </div>
+        </div>
+     
+        <br />
+        <div class="form-actions no-color d-flex flex-row-reverse">
+            <a href="@Url.Action("Edit","transvehciles",new {id = Model.الرقم })" class="text-light col-md-2 btn btn-warning">
+                <i class="text-light fas fa-user-edit"></i>
+                &nbsp;&nbsp;&nbsp;
+                تعديل
+            </a>
+            &nbsp; | &nbsp;
+            <a href="@Url.Action("Index","transvehciles")" class="col-md-2 text-light btn-primary btn form-control">
+                <i class="fas fa-undo"></i>
+                &nbsp;&nbsp;&nbsp;
+                رجوع للقائمه
+            </a>
+        </div>
+
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

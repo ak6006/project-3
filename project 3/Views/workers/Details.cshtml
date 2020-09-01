@@ -1,26 +1,133 @@
-﻿@model project_3.worker
+﻿@model  project_3.SP_Worker_ID_Result
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Delete";
 }
 
-<h2>Details</h2>
+<div class="page-container">
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            بيانات عامل
+        </h1>
+    </div>
+   
 
-<div>
-    <h4>worker</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.address.firstName)
-        </dt>
+    <div class=" mb-5 mt-2 mr-2 text-light">
 
-        <dd>
-            @Html.DisplayFor(model => model.address.firstName)
-        </dd>
+        <hr />
+        <div class="d-flex flex-row-reverse">
 
-    </dl>
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.رقم_العامل)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.رقم_العامل)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.الاسم)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.الاسم)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.دولة)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.دولة)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.المحافظة)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.المحافظة)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.المدينة)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.المدينة)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.عنوان)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.عنوان)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.تلفون)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.تلفون)
+            </div>
+        </div>
+       
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.بريد_الكتروني)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.بريد_الكتروني)
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.فاكس)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.فاكس)
+            </div>
+        </div>
+
+        <br />
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color d-flex flex-row-reverse">
+                <a href="@Url.Action("Edit","workers",new { id = Model.رقم_العامل, add_id = Model.معرف})" class="col-md-2 text-light btn btn-warning">
+                    <i class="fas fa-user-edit"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    تعديل
+                </a>
+                &nbsp; | &nbsp;
+                <a href="@Url.Action("Index","workers")" class="col-md-2 text-light btn-primary btn form-control">
+                    <i class="fas fa-undo"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    رجوع للقائمه
+                </a>
+            </div>
+        }
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.worker_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

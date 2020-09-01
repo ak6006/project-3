@@ -40,13 +40,13 @@ namespace project_3.Controllers
         }
 
         // GET: transvehciles/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            transvehcile transvehcile = await db.transvehciles.FindAsync(id);
+            var transvehcile = db.SP_Trans_Vin_ID(id).SingleOrDefault();
             if (transvehcile == null)
             {
                 return HttpNotFound();

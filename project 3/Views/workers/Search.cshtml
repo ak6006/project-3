@@ -39,7 +39,7 @@
                 <input type="submit" value="<<" class="bg-primary text-dark form-control">
 
             </div>
-           
+
             <div class=" mr-auto">
                 <a class="btn btn-success form-control text-light" href="@Url.Action("Create", "workers")">
                     <span><i class="fas fa-user-plus fa-lg"></i></span>
@@ -55,57 +55,53 @@
             <tr class=" text-light">
                 <th>حذف</th>
                 <th>تعديل</th>
-                @*<th>فاكس</th>
-                <th>هاتف</th>
-                <th>تلفون</th>
-                <th>عنوان</th>
-                <th>بريد_الكتروني</th>
-                <th>المدينة</th>*@
-                <th>المحافظة</th>
-                <th>دولة</th>
+                <th>بيانات</th>
+                <th></th>
+                <th></th>
+                <th></th>
                 <th>الاسم</th>
-                <th>معرف</th>
+
                 <th>رقم العامل</th>
 
             </tr>
             @foreach (var item in Model)
             {
-        <tr class=" text-light">
-            <td>
-                <a class="text-light btn-danger btn form-control" href="@Url.Action("Delete", "workers",new { id = @item.رقم_العامل, add_id = @item.معرف})">
-                    <span>
-                        <i class="fas fa-user-times"></i>
-                    </span>
-                    حذف
-                </a>
-            </td>
-            <td>
-                <a class="text-light btn-warning btn form-control" href="@Url.Action("Edit", "workers",new { id = @item.رقم_العامل, add_id = @item.معرف})">
-                    <span>
-                        <i class="fas fa-user-edit"></i>
-                    </span>
-                    تعديل
-                </a>
-            </td>
-            @*<td>  @item.فاكس</td>
-            <td>  @item.هاتف</td>
-            <td>  @item.تلفون</td>
-            <td>  @item.عنوان</td>
-            <td>  @item.بريد_الكتروني</td>
-            <td>  @item.المدينة</td>*@
-            <td>  @item.المحافظة</td>
-            <td>  @item.دولة</td>
-            <td>  @item.الاسم</td>
-            <td>  @item.معرف</td>
-            <td>  @item.رقم_العامل</td>
+                <tr class=" text-light">
+                    <td>
+                        <a class="text-light btn-danger btn form-control" href="@Url.Action("Delete", "workers",new { id = @item.رقم_العامل, add_id = @item.معرف})">
+                            <span>
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            حذف
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-light btn-warning btn form-control" href="@Url.Action("Edit", "workers",new { id = @item.رقم_العامل, add_id = @item.معرف})">
+                            <span>
+                                <i class="fas fa-user-edit"></i>
+                            </span>
+                            تعديل
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-light btn-primary btn form-control" href="@Url.Action("Details", "workers",new { id = @item.رقم_العامل, add_id = @item.معرف})">
+                            <span>
+                                <i class="fas fa-user-edit"></i>
+                            </span>
+                            بيانات
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
 
-        </tr>
+                    <td>  @item.الاسم</td>
+
+                    <td>  @item.رقم_العامل</td>
+
+                </tr>
             }
         </table>
-
-
-
-
 
     </div>
 }
