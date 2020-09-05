@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
+using project_3.Models;
 
 namespace project_3.Controllers
 {

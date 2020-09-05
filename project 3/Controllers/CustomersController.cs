@@ -73,8 +73,8 @@ namespace project_3.Controllers
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Customer_Add_New(customer.الاسم, customer.دولة, customer.المحافظة, customer.المدينة,
                     customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان, NewIdentity, RecFound).ToList();
-               
-               
+
+                              
                 if((int)RecFound.Value==0)
                 {
                     TempData["Msg"] = "تمت الاضافه بنجاح";
@@ -83,7 +83,7 @@ namespace project_3.Controllers
                 }
                 else
                 {
-                    TempData["Msg"] = "الاسم موجود بالفعل";
+                    TempData["Msg"] = "الاسم او الهاتف موجود بالفعل";
                     return RedirectToAction("Create");
                 }
 

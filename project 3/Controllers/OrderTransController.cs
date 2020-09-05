@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using project_3;
+using project_3.Models;
 
 namespace project_3.Controllers
 {

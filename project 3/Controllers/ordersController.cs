@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using project_3;
+using project_3.Models;
 
 namespace project_3.Controllers
 {
@@ -70,9 +71,13 @@ namespace project_3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(SP_Order_To_DataGrid_Result order)
         {
+            DateTime s = order.التاريخ.Value;
+            TimeSpan ts = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            s = s.Date + ts;
+
             if (ModelState.IsValid)
             {
-                db.SP_Order_Add_New(order.رقم_الوكيل, order.رقم_المخزن, order.التاريخ, order.ملاحظة);
+                db.SP_Order_Add_New(order.رقم_الوكيل, order.رقم_المخزن, s, order.ملاحظة);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
