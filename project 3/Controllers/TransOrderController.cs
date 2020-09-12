@@ -10,6 +10,9 @@ using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
 using project_3.Models;
+using System.Web.Script.Serialization;
+using System.Text;
+using System.Net.Http;
 
 namespace project_3.Controllers
 {
@@ -30,10 +33,10 @@ namespace project_3.Controllers
             return View(result);
         }
 
-        
-        public ActionResult Transport(int OId , int PId , int WId , string CName , string DName , int All , int Remaining, int? Counter)
+
+        public ActionResult Transport(int OId, int PId, int WId, string CName, string DName, int All, int Remaining, int? Counter)
         {
-           
+
             OrderVehicleViewModel result = new OrderVehicleViewModel
             {
                 OId = OId,
@@ -44,7 +47,7 @@ namespace project_3.Controllers
                 All = All,
                 Remaining = Remaining
             };
-            if(Counter != null)
+            if (Counter != null)
             {
                 result.Counter = (int)Counter;
             }
@@ -59,7 +62,6 @@ namespace project_3.Controllers
                 ObjectParameter SerialFound = new ObjectParameter("Serial_found", typeof(int));
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NtCounter = new ObjectParameter("NetCounter", typeof(int));
-
                 try
                 {
                     db.SP_Sales_BarCode(record.BarCode, record.OId.ToString(), record.PId.ToString(),
@@ -69,18 +71,33 @@ namespace project_3.Controllers
                 {
                     return RedirectToAction("Transport", record);
                 }
+                //for api notification 
+                var customerPhone = db.addresses.Where(c => c.firstName == record.CName).FirstOrDefault().phone;
+                var CarNumber = db.transvehciles.Where(n => n.transVehcile_driver_name == record.DName).FirstOrDefault().transVehcile_num;
+                var msg = "";
+                //
                 int num;
-                if (int.TryParse(NtCounter.Value.ToString(),out num))
+                if (int.TryParse(NtCounter.Value.ToString(), out num))
                 {
-                    if((int)NtCounter.Value == 0)
+                    if ((int)NtCounter.Value == 0)
                     {
+                        //send notification that car has left
+                        msg = "العربيه رقم" + CarNumber + "غادرت المصنع";
+                        var input = new NotificationViewModel()
+                        {
+                            Msg = msg,
+                            CustomerPhone = customerPhone
+                        };
+                        var client = new HttpClient();
+                        client.BaseAddress = new Uri("http://192.168.100.65:92/api/noti/");
+                        client.PostAsJsonAsync<NotificationViewModel>("Data", input);
+                        //
                         TempData["Msg"] = "تم انتهاء التحميل بالفعل";
                         record.Counter = (int)NtCounter.Value;
                         record.Remaining = (int)NtCounter.Value;
                         return RedirectToAction("Transport", record);
                     }
                 }
-
                 if ((int)RecFound.Value == 0)
                 {
                     TempData["Msg"] = "السريال غير صحيح";
@@ -95,11 +112,24 @@ namespace project_3.Controllers
                 {
                     record.Remaining = (int)NtCounter.Value;
                     record.Counter = (int)NtCounter.Value;
+                    //send notification that car has entered 
+                    if (record.All-record.Remaining==1)
+                    {
+                        msg = "العربيه رقم" + CarNumber + "وصلت المصنع";
+                        var input = new NotificationViewModel()
+                        {
+                            Msg = msg,
+                            CustomerPhone = customerPhone
+                        };
+                        var client = new HttpClient();
+                        client.BaseAddress = new Uri("http://192.168.100.65:92/api/noti/");
+                        client.PostAsJsonAsync<NotificationViewModel>("Data", input);
+                    }
+                    //
                     TempData["Msg"] = "تمت الاضافه بنجاح";
                     db.SaveChangesAsync();
                     return RedirectToAction("Transport", record);
                 }
-
             }
             return RedirectToAction("Transport", record);
         }
