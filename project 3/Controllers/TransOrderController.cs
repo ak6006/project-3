@@ -89,7 +89,7 @@ namespace project_3.Controllers
                             CustomerPhone = customerPhone
                         };
                         var client = new HttpClient();
-                        client.BaseAddress = new Uri("http://192.168.100.65:92/api/noti/");
+                        client.BaseAddress = new Uri("http://ak772000842-001-site1.etempurl.com/api/noti/");
                         client.PostAsJsonAsync<NotificationViewModel>("Data", input);
                         //
                         TempData["Msg"] = "تم انتهاء التحميل بالفعل";
@@ -122,7 +122,7 @@ namespace project_3.Controllers
                             CustomerPhone = customerPhone
                         };
                         var client = new HttpClient();
-                        client.BaseAddress = new Uri("http://192.168.100.65:92/api/noti/");
+                        client.BaseAddress = new Uri("http://ak772000842-001-site1.etempurl.com/api/noti/");
                         client.PostAsJsonAsync<NotificationViewModel>("Data", input);
                     }
                     //
