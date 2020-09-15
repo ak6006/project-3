@@ -1308,5 +1308,10 @@ namespace project_3.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Workers_To_DataGrid_Result>("SP_Workers_To_DataGrid");
         }
+    
+        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_display_Result> SP_Sales_Order_Trans_Vin_display()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_display_Result>("SP_Sales_Order_Trans_Vin_display");
+        }
     }
 }

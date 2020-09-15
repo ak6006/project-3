@@ -216,6 +216,7 @@
     <Compile Include="Controllers\storesController.cs" />
     <Compile Include="Controllers\OrderTransController.cs" />
     <Compile Include="Controllers\TransOrderController.cs" />
+    <Compile Include="Controllers\WaitingCarsController.cs" />
     <Compile Include="Controllers\workersController.cs" />
     <Compile Include="Models\address.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -350,6 +351,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_Sales_BarCode_Check_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Sales_Order_Trans_Vin_display_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_Sales_Order_Trans_Vin_Load_Result.cs">
@@ -743,6 +747,8 @@
     <Content Include="Views\Sales\Edit.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Sales\Search.cshtml" />
+    <Content Include="Views\WaitingCars\Index.cshtml" />
+    <Content Include="Views\WaitingCars\GetCars.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

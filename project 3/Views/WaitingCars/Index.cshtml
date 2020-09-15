@@ -1,0 +1,30 @@
+﻿@model IEnumerable<project_3.Models.SP_Sales_Order_Trans_Vin_display_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="Result">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+            $("#Result").load("@Url.Action("GetCars", "WaitingCars")",
+                function (response, status, xhr) {
+                    if (status == "error") {
+                        $("#Result").text = "An error occurred while loading the results.";
+                    }
+                });
+        }, 1000);
+    });
+    @*$(document).ready(function () {
+        $("#Result").load("@Url.Action("GetCars", "WaitingCars")",
+            function (response, status, xhr) {
+                if (status == "error") {
+                    $("#Result").text = "An error occurred while loading the results.";
+                }
+            });
+    });*@
+</script>

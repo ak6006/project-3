@@ -1,0 +1,30 @@
+﻿@model IEnumerable<project_3.Models.SP_Sales_Order_Trans_Vin_display_Result>
+
+@{
+    ViewBag.Title = "GetCars";
+}
+
+<div class="page-container mb-5">
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 style='font-family:"BeInNormal"' class="text-light ">
+            انتظار العربيات
+        </h1>
+    </div>
+    <table class="text-center table table-hover border-bottom border-light border-5">
+        <tr class=" text-light">
+            <th>اسم السائق</th>
+            <th>رقم العربية</th>
+            <th>موديل العربية</th>
+            <th>اسم الوكيل</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class=" text-light">
+                <td>@item.transVehcile_driver_name</td>
+                <td>@item.transVehcile_num</td>
+                <td>@item.transVehcile_model</td>
+                <td>@item.firstName</td>
+            </tr>
+        }
+    </table>
+</div>

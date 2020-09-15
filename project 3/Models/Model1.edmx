@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_A67616_makahighfeedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_A67616_makahighfeedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="address">
           <Key>
             <PropertyRef Name="add_id" />
@@ -788,6 +788,7 @@
           <Parameter Name="Barcode" Type="nvarchar" Mode="In" />
           <Parameter Name="rec_found" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="SP_Sales_Order_Trans_Vin_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Sales_Order_Trans_Vin_Load" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="transVehcileSerial" Type="nvarchar" Mode="In" />
         </Function>
@@ -1148,8 +1149,7 @@
             <End Role="workers" EntitySet="workers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_A67616_makahighfeedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1778,10 +1778,10 @@
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Customer_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Customer_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Customer_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Customer_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Customer_To_DataGrid_Result)" />
@@ -1799,10 +1799,10 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_flutter_Customer_Orders_Query" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_flutter_Customer_Orders_Query_Result)">
-            <Parameter Name="CustmerPhone" Mode="In" Type="String" />
+          <Parameter Name="CustmerPhone" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_flutter_Query_Trans" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_flutter_Query_Trans_Result)">
-            <Parameter Name="CustmerPhone" Mode="In" Type="String" />
+          <Parameter Name="CustmerPhone" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_LOGINSELECT" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_LOGINSELECT_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -1823,13 +1823,13 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_DELETE">
-            <Parameter Name="MeasurementId" Mode="In" Type="Int32" />
+          <Parameter Name="MeasurementId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Measurement_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Measurement_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Measurement_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Measurement_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Measurement_To_DataGrid_Result)" />
@@ -1846,10 +1846,10 @@
             <Parameter Name="OrderNote" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_DELETE">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Order_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_Add_New">
             <Parameter Name="OrderId" Mode="In" Type="Int32" />
@@ -1871,7 +1871,7 @@
             <Parameter Name="weightId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Order_Items_To_DataGrid_Result)">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_Update">
             <Parameter Name="OrderId" Mode="In" Type="Int32" />
@@ -1884,7 +1884,7 @@
             <Parameter Name="NewQuantity" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Order_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Order_To_DataGrid_Result)" />
           <FunctionImport Name="SP_Order_Trans_Vin_Add_New">
@@ -1900,7 +1900,7 @@
             <Parameter Name="transvehcileID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Trans_Vin_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Order_Trans_Vin_To_DataGrid_Result)">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Trans_Vin_Update">
             <Parameter Name="OrderId" Mode="In" Type="Int32" />
@@ -1921,13 +1921,13 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_DELETE">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Product_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_To_DataGrid_Result)" />
@@ -1950,7 +1950,7 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Sales_Order_Trans_Vin_Load" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_Load_Result)">
-            <Parameter Name="transVehcileSerial" Mode="In" Type="String" />
+          <Parameter Name="transVehcileSerial" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_Add_New" ReturnType="Collection(String)">
             <Parameter Name="A_Name" Mode="In" Type="String" />
@@ -1969,10 +1969,10 @@
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Admin_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="String" />
+          <Parameter Name="ID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_SEARCH" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Admin_SEARCH_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Admin_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Shift_Admin_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Admin_To_DataGrid_Result)" />
@@ -1996,13 +1996,13 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_DELETE">
-            <Parameter Name="ShiftId" Mode="In" Type="Int32" />
+          <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Main_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="String" />
+          <Parameter Name="ID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Main_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Main_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Shift_Main_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Main_To_DataGrid_Result)" />
@@ -2031,7 +2031,7 @@
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Worker_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Worker_To_DataGrid_Result)">
-            <Parameter Name="ShiftId" Mode="In" Type="Int32" />
+          <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Worker_To_DataGrid_All" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Shift_Worker_To_DataGrid_All_Result)" />
           <FunctionImport Name="SP_Shift_Worker_Update">
@@ -2048,10 +2048,10 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Delete">
-            <Parameter Name="Store_ID" Mode="In" Type="Int32" />
+          <Parameter Name="Store_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Store_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Product_Add_New" ReturnType="Collection(String)">
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
@@ -2064,7 +2064,7 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Store_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Store_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Store_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Store_To_DataGrid_Result)" />
@@ -2088,16 +2088,16 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_DELETE">
-            <Parameter Name="VinNo" Mode="In" Type="Int32" />
+          <Parameter Name="VinNo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Trans_Vin_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_TRANS_VIN_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_TRANS_VIN_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Trans_Vin_To_ComboBox_Result)">
-            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Trans_Vin_To_DataGrid_Result)" />
           <FunctionImport Name="SP_Trans_vin_Update">
@@ -2144,10 +2144,10 @@
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Worker_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_SEARCH" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Worker_SEARCH_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Worker_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Worker_Update">
@@ -2164,6 +2164,7 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Workers_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Workers_To_DataGrid_Result)" />
+          <FunctionImport Name="SP_Sales_Order_Trans_Vin_display" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_display_Result)" />
         </EntityContainer>
         <ComplexType Name="SP_Customer_ID_Result">
           <Property Type="Int32" Name="رقم_الوكيل" Nullable="false" />
@@ -2588,6 +2589,12 @@
           <Property Type="String" Name="تلفون" Nullable="true" MaxLength="45" />
           <Property Type="String" Name="هاتف" Nullable="true" MaxLength="45" />
           <Property Type="String" Name="فاكس" Nullable="true" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="SP_Sales_Order_Trans_Vin_display_Result">
+          <Property Type="String" Name="transVehcile_driver_name" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="transVehcile_num" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="transVehcile_model" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="45" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3499,6 +3506,16 @@
                 <ScalarProperty Name="تلفون" ColumnName="تلفون" />
                 <ScalarProperty Name="هاتف" ColumnName="هاتف" />
                 <ScalarProperty Name="فاكس" ColumnName="فاكس" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Sales_Order_Trans_Vin_display" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Sales_Order_Trans_Vin_display">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_display_Result">
+                <ScalarProperty Name="transVehcile_driver_name" ColumnName="transVehcile_driver_name" />
+                <ScalarProperty Name="transVehcile_num" ColumnName="transVehcile_num" />
+                <ScalarProperty Name="transVehcile_model" ColumnName="transVehcile_model" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
