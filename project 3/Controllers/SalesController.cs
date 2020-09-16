@@ -24,9 +24,16 @@ namespace project_3.Controllers
         }
         public ActionResult Search(string Key)
         {
+
             ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-            var result = db.SP_Sales_BarCode_Check(Key,RecFound).FirstOrDefault();
-            return View(result);
+            var result = db.SP_Sales_BarCode_Check(Key, RecFound).FirstOrDefault();
+            if((int)RecFound.Value==1)
+                return View(result);
+            else
+            {
+                TempData["Msg"] = "لا يوجد شكارة من مكه هاي فيد بهذا السريال";
+                return View("Index");
+            }
         }
 
         // GET: Sales/Details/5

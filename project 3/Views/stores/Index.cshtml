@@ -6,14 +6,29 @@
 
 @if (TempData["Msg"] != null)
 {
-    <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
-        <div class="col-md-3">
+    if (TempData["Color"].ToString() == "Green")
+    {
+        <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+            <div class="col-md-3">
 
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
         </div>
-        <h3>
-            @TempData["Msg"]
-        </h3>
-    </div>
+    }
+    else if (TempData["Color"].ToString() == "Red")
+    {
+        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+    }
+
 }
 
 
@@ -53,7 +68,7 @@
             <tr class=" text-light">
                 <th>حذف</th>
                 <th>تعديل</th>
-                
+
                 <th>مكان المخزن</th>
                 <th>اسم مدير المخزن</th>
                 <th>اسم المخزن</th>
@@ -63,33 +78,33 @@
             </tr>
             @foreach (var item in Model)
             {
-        <tr class=" text-light">
-            <td>
-                <a class="col-md-8 text-light btn-danger btn form-control" href="@Url.Action("Delete", "stores",new { id = @item.store_id})">
-                    <span>
-                        <i class="fas fa-user-times"></i>
-                    </span>
-                    حذف
-                </a>
+                <tr class=" text-light">
+                    <td>
+                        <a class="col-md-8 text-light btn-danger btn form-control" href="@Url.Action("Delete", "stores",new { id = @item.store_id})">
+                            <span>
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            حذف
+                        </a>
 
-            </td>
-            <td>
+                    </td>
+                    <td>
 
-                <a class="col-md-8 text-light btn-warning btn form-control" href="@Url.Action("Edit", "stores",new { id = @item.store_id})">
-                    <span>
-                        <i class="fas fa-user-edit"></i>
-                    </span>
-                    تعديل
-                </a>
-            </td>
-       
-            <td>@item.storeLocation</td>
-            <td>@item.storeAdminName</td>
-            <td>  @item.storeName</td>
-            <td>  @item.store_id</td>
+                        <a class="col-md-8 text-light btn-warning btn form-control" href="@Url.Action("Edit", "stores",new { id = @item.store_id})">
+                            <span>
+                                <i class="fas fa-user-edit"></i>
+                            </span>
+                            تعديل
+                        </a>
+                    </td>
+
+                    <td>@item.storeLocation</td>
+                    <td>@item.storeAdminName</td>
+                    <td>  @item.storeName</td>
+                    <td>  @item.store_id</td>
 
 
-        </tr>
+                </tr>
             }
         </table>
 

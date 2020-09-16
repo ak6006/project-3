@@ -8,17 +8,28 @@
     <div class="page-container">
         @if (TempData["Msg"] != null)
         {
+            if (TempData["Color"].ToString() == "Green")
+            {
+                <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+                    <div class="col-md-3">
 
-
-            <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
-                <div class="col-md-3">
-
+                    </div>
+                    <h3>
+                        @TempData["Msg"]
+                    </h3>
                 </div>
-                <h3>
-                    @TempData["Msg"]
-                </h3>
-            </div>
+            }
+            else if (TempData["Color"].ToString() == "Red")
+            {
+                <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+                    <div class="col-md-3">
 
+                    </div>
+                    <h3>
+                        @TempData["Msg"]
+                    </h3>
+                </div>
+            }
 
         }
 
@@ -36,7 +47,7 @@
 
             <div class="d-flex flex-row-reverse mb-2 justify-content-center">
                 <div class="d-flex col-md-4">
-                    @Html.TextBoxFor(m => m.BarCode, new { @id= "SerialTextBox", @Class = "form-control" })
+                    @Html.TextBoxFor(m => m.BarCode, new { @id = "SerialTextBox", @Class = "form-control" })
                     @*<input name="BarCode" class="form-control" />*@
                     <span id="" class="col-md-4 text-light">
                         باركود
@@ -140,7 +151,7 @@
                 </div>
             </div>
         }
-        
+
         <table class="table table-hover border-bottom border-light border-5">
             <tr class=" text-light">
 

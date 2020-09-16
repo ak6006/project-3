@@ -7,14 +7,29 @@
 
 @if (TempData["Msg"] != null)
 {
-    <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
-        <div class="col-md-3">
+    if (TempData["Color"].ToString() == "Green")
+    {
+        <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+            <div class="col-md-3">
 
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
         </div>
-        <h3>
-            @TempData["Msg"]
-        </h3>
-    </div>
+    }
+    else if (TempData["Color"].ToString() == "Red")
+    {
+        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+    }
+
 }
 
 @using (Html.BeginForm("Search", "shiftadmins", FormMethod.Post))
@@ -57,37 +72,37 @@
             </tr>
             @foreach (var item in Model)
             {
-        <tr class=" text-light">
-            <td>
-                <a class="text-light btn-danger btn form-control" href="@Url.Action("Delete", "shiftadmins",new { id = @item.رقم_المدير, add_id = @item.معرف})">
-                    <span>
-                        <i class="fas fa-user-times"></i>
-                    </span>
-                    حذف
-                </a>
-            </td>
-            <td>
-                <a class="text-light btn-warning btn form-control" href="@Url.Action("Edit", "shiftadmins",new { id = @item.رقم_المدير, add_id = @item.معرف})">
-                    <span>
-                        <i class="fas fa-user-edit"></i>
-                    </span>
-                    تعديل
-                </a>
-            </td>
-            <td>
-                <a class="text-light btn-primary btn form-control" href="@Url.Action("Details", "shiftadmins",new { id = @item.رقم_المدير, add_id = @item.معرف})">
-                    <span>
-                        <i class="fas fa-user-edit"></i>
-                    </span>
-                    بيانات
-                </a>
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>  @item.الاسم</td>
-            <td>  @item.رقم_المدير</td>
-        </tr>
+                <tr class=" text-light">
+                    <td>
+                        <a class="text-light btn-danger btn form-control" href="@Url.Action("Delete", "shiftadmins",new { id = @item.رقم_المدير, add_id = @item.معرف})">
+                            <span>
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            حذف
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-light btn-warning btn form-control" href="@Url.Action("Edit", "shiftadmins",new { id = @item.رقم_المدير, add_id = @item.معرف})">
+                            <span>
+                                <i class="fas fa-user-edit"></i>
+                            </span>
+                            تعديل
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-light btn-primary btn form-control" href="@Url.Action("Details", "shiftadmins",new { id = @item.رقم_المدير, add_id = @item.معرف})">
+                            <span>
+                                <i class="fas fa-user-edit"></i>
+                            </span>
+                            بيانات
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>  @item.الاسم</td>
+                    <td>  @item.رقم_المدير</td>
+                </tr>
             }
         </table>
     </div>

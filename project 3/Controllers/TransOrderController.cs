@@ -93,6 +93,7 @@ namespace project_3.Controllers
                         client.PostAsJsonAsync<NotificationViewModel>("Data", input);
                         //
                         TempData["Msg"] = "تم انتهاء التحميل بالفعل";
+                        TempData["Color"] = "Red";
                         record.Counter = (int)NtCounter.Value;
                         record.Remaining = (int)NtCounter.Value;
                         return RedirectToAction("Transport", record);
@@ -101,11 +102,13 @@ namespace project_3.Controllers
                 if ((int)RecFound.Value == 0)
                 {
                     TempData["Msg"] = "السريال غير صحيح";
+                    TempData["Color"] = "Red";
                     return RedirectToAction("Transport", record);
                 }
                 if ((int)SerialFound.Value > 0)
                 {
                     TempData["Msg"] = "تم بيع الشكارة بالفعل";
+                    TempData["Color"] = "Red";
                     return RedirectToAction("Transport", record);
                 }
                 else
@@ -127,6 +130,7 @@ namespace project_3.Controllers
                     }
                     //
                     TempData["Msg"] = "تمت الاضافه بنجاح";
+                    TempData["Color"] = "Green";
                     db.SaveChangesAsync();
                     return RedirectToAction("Transport", record);
                 }

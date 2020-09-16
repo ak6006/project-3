@@ -22,11 +22,8 @@ namespace project_3.Controllers
         {
             var shifts = db.SP_Shift_Main_To_ComboBox();
             ViewBag.shift_id = new SelectList(shifts, "shift_id", "shiftName");
-            
-
             var id = db.shifts.FirstOrDefault().shift_id;
             var ShiftWorkers = db.SP_Shift_Worker_To_DataGrid_All();
-
             return View(ShiftWorkers);
         }
 

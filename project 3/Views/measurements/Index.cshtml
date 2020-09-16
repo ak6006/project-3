@@ -6,14 +6,29 @@
 
 @if (TempData["Msg"] != null)
 {
-    <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
-        <div class="col-md-3">
+    if (TempData["Color"].ToString() == "Green")
+    {
+        <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+            <div class="col-md-3">
 
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
         </div>
-        <h3>
-            @TempData["Msg"]
-        </h3>
-    </div>
+    }
+    else if (TempData["Color"].ToString() == "Red")
+    {
+        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+    }
+
 }
 
 
@@ -38,11 +53,11 @@
                 <input type="submit" value="<<" class="bg-primary text-dark form-control">
 
             </div>
-            
+
             <div class="mr-auto">
                 <a class="btn p-2 btn-success form-control text-light" href="@Url.Action("Create", "measurements")">
                     <span><i class="fas fa-user-plus fa-lg"></i></span>
-                    
+
                     اضافة وحدة قياس جديدة
                 </a>
             </div>
@@ -68,37 +83,37 @@
             </tr>
             @foreach (var item in Model)
             {
-        <tr class=" text-light">
-            <td>
-                <a class="text-light col-md-8 btn-danger btn form-control" href="@Url.Action("Delete", "measurements",new { id = @item.رقم_الوحدة})">
-                    <span>
-                        <i class="fas fa-user-times"></i>
-                    </span>
-                    حذف
-                </a>
+                <tr class=" text-light">
+                    <td>
+                        <a class="text-light col-md-8 btn-danger btn form-control" href="@Url.Action("Delete", "measurements",new { id = @item.رقم_الوحدة})">
+                            <span>
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            حذف
+                        </a>
 
-            </td>
-            <td>
+                    </td>
+                    <td>
 
-                <a class="text-light col-md-8 btn-warning btn form-control" href="@Url.Action("Edit", "measurements",new { id = @item.رقم_الوحدة})">
-                    <span>
-                        <i class="fas fa-user-edit"></i>
-                    </span>
-                    تعديل
-                </a>
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>@item.measurement_Count_per_unit</td>
-            <td>  @item.اسم_وحدة_القياس</td>
-            <td>  @item.رقم_الوحدة</td>
+                        <a class="text-light col-md-8 btn-warning btn form-control" href="@Url.Action("Edit", "measurements",new { id = @item.رقم_الوحدة})">
+                            <span>
+                                <i class="fas fa-user-edit"></i>
+                            </span>
+                            تعديل
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>@item.measurement_Count_per_unit</td>
+                    <td>  @item.اسم_وحدة_القياس</td>
+                    <td>  @item.رقم_الوحدة</td>
 
 
-        </tr>
+                </tr>
             }
         </table>
 

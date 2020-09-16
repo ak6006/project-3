@@ -29,7 +29,6 @@ namespace project_3.Controllers
             if (Key != null)
             {
                 var worker = db.SP_Worker_SEARCH(Key).ToList();
-                //TempData["SearchKey"] = Key;
                 return View(worker);
             }
             else
@@ -78,12 +77,14 @@ namespace project_3.Controllers
                 if ((int)RecFound.Value == 0)
                 {
                     TempData["Msg"] = "تمت الاضافه بنجاح";
+                    TempData["Color"] = "Green";
                     return RedirectToAction("Index");
 
                 }
                 else
                 {
                     TempData["Msg"] = "الاسم موجود بالفعل";
+                    TempData["Color"] = "Red";
                     return RedirectToAction("Create");
                 }
 
@@ -161,8 +162,11 @@ namespace project_3.Controllers
             catch
             {
                 TempData["Msg"] = "لا يمكن الحذف لارتباطه بسجلات اخرى";
+                TempData["Color"] = "Red";
                 return RedirectToAction("Index");
             }
+            TempData["Msg"] = "تم الحذف بنجاح";
+            TempData["Color"] = "Green";
             return RedirectToAction("Index");
         }
 
