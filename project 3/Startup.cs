@@ -11,11 +11,6 @@ namespace project_3
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                ExpireTimeSpan = TimeSpan.FromDays(1),
-                LoginPath = new PathString("~/OrderProducts/Index"),
-            }) ;
         }
     }
 }

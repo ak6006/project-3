@@ -2,107 +2,516 @@
     ViewBag.Title = "Home Page";
 }
 <link href="~/Content/style.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/459f34aff4.js" crossorigin="anonymous"></script>
 
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 
-<div class="d-flex justify-content-center ">
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "Customers")">
-            <img src="~/Content/imgs/customer.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "Transvehciles")">
-            <img src="~/Content/imgs/vin.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-       
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "measurements")">
-            <img src="~/Content/imgs/mesurment.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "stores")">
-            <img src="~/Content/imgs/store.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-</div>
-<div class="d-flex justify-content-center mt-5 ">
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "shiftadmins")">
-            <img src="~/Content/imgs/shift admin.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "workers")">
-            <img src="~/Content/imgs/workers.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-      
-        <img src="~/Content/imgs/04.png" class=" img-fluid" alt="" style="width: 80%;" />
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "ShiftWorker")">
-            <img src="~/Content/imgs/shiftWorkers.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "orders")">
-            <img src="~/Content/imgs/orders.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-</div>
-<div class="d-flex justify-content-center  ">
-    <div class="container ">
-        <a href="@Url.Action("Index", "OrderProducts")">
-            <img src="~/Content/imgs/orderItems.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<section class="iq-features page-container">
     <div class="container">
-        <a href="@Url.Action("Index", "OrderTrans")">
-            <img src="~/Content/imgs/transOrder.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container ">
-      
-    </div>
-    <div class="container ">
-        <a href="@Url.Action("Index", "TransOrder")">
-            <img src="~/Content/imgs/orderLoad.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container ">
-        <a href="@Url.Action("Index", "Sales")">
-            <img src="~/Content/imgs/check.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-</div>
-<div class="d-flex justify-content-center mt-5 ">
-    <div class="container mt-5">
-        
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "shifts")">
-            <img src="~/Content/imgs/shift.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "StoreProduct")">
-            <img src="~/Content/imgs/productLine.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-        <a href="@Url.Action("Index", "products")">
-            <img src="~/Content/imgs/product.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
-        </a>
-    </div>
-    <div class="container mt-5">
-    
-    </div>
+        <div class="row align-items-center">
+            <div class="col-lg-3 col-md-12"></div>
+            <div class="col-lg-6 col-md-12">
+                <div class="holderCircle">
+                    <div class="round"></div>
+                    <div class="dotCircle">
+
+                        <a href="" class="itemDot itemDot6" data-tab="6" data-toggle="modal" data-target="#المشتريات">
+                            <img src="~/Content/imgs/المشتريات.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </a>
+
+                        <span class="itemDot itemDot7" data-tab="7" data-toggle="modal" data-target="#الموظفين">
+                            <img src="~/Content/imgs/الموظفين.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot8" data-tab="8" data-toggle="modal" data-target="#النظام">
+                            <img src="~/Content/imgs/اساسيات النظام.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot3" data-tab="3" data-toggle="modal" data-target="#المخازن">
+                            <img src="~/Content/imgs/ادارة المخازن.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot2" data-tab="2" data-toggle="modal" data-target="#المبيعات">
+                            <img src="~/Content/imgs/المبيعات.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot1" data-tab="1" data-toggle="modal" data-target="#الموارد">
+                            <img src="~/Content/imgs/ادارة الموارد.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot5" data-tab="5" data-toggle="modal" data-target="#المحاسبة">
+                            <img src="~/Content/imgs/المحاسبة.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot4" data-tab="4" data-toggle="modal" data-target="#الانتاج">
+                            <img src="~/Content/imgs/الانتاج.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
 
 
+                    </div>
+                    <div class="contentCircle">
+                        <div class="CirItem title-box active CirItem1">
+                            <img src="~/Content/imgs/04.png" class="rounded-circle img-fluid" style="width: 90%;" alt="">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+
+            </div>
+        </div>
+    </div>
+    @*<div class="ml-3">
+        <div>
+            <button id="Exit" class="rounded-circle p-2 bg-danger">
+                <i class="fas fa-power-off text-light"></i>
+            </button>
+        </div>
+        <div class="text-light">
+            خروج
+        </div>
+    </div>*@
+</section>
+
+<div class="modal" id="المحاسبة">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">المحاسبة</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
 </div>
+
+<div class="modal" id="الانتاج">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">الانتاج</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="المشتريات">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">المشتريات</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal text-right" id="الموظفين">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header d-flex flex-row-reverse">
+                <h4 class="modal-title ">الموظفين</h4>
+                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <a href="@Url.Action("Index", "workers")">
+                    العمال
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "ShiftWorker")">
+                    عمال الورديات
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "shifts")">
+                    الورديات
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "shiftadmins")">
+                    مديرى الورديات
+                </a>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="النظام">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">اساسيات النظام</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                الامان و الصلاحيات
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal text-right" id="المخازن">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header d-flex flex-row-reverse">
+                <h4 class="modal-title ">ادارة المخازن</h4>
+                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <a href="@Url.Action("Index", "StoreProduct")">
+                    خط الانتاج
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "stores")">
+                    المخازن
+                </a>
+                <br />
+
+                <br />
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal text-right" id="الموارد">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header d-flex flex-row-reverse">
+                <h4 class="modal-title ">ادارة الموارد</h4>
+                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <br />
+                <a href="@Url.Action("Index", "products")">
+                    المنتجات
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "measurements")">
+                    وحدات القياس
+                </a>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal text-right" id="المبيعات">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header d-flex flex-row-reverse">
+                <h4 class="modal-title ">المبيعات</h4>
+                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <a href="@Url.Action("Index", "Sales")">
+                    فحص شيكاره
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "Customers")">
+                    الوكلاء
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "Transvehciles")">
+                    عربيات النقل
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "orders")">
+                    الطلبيات
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "OrderProducts")">
+                    بيانات الطلبيه
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "OrderTrans")">
+                    عربيات الطلبيه
+                </a>
+                <br />
+                <a href="@Url.Action("Index", "TransOrder")">
+                    تحميل الطلبيه
+                </a>
+                <br />
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="d-flex justify-content-center ">
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "Customers")">
+                <img src="~/Content/imgs/customer.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "Transvehciles")">
+                <img src="~/Content/imgs/vin.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "measurements")">
+                <img src="~/Content/imgs/mesurment.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "stores")">
+                <img src="~/Content/imgs/store.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-5 ">
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "shiftadmins")">
+                <img src="~/Content/imgs/shift admin.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "workers")">
+                <img src="~/Content/imgs/workers.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+
+            <img src="~/Content/imgs/04.png" class=" img-fluid" alt="" style="width: 80%;" />
+
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "ShiftWorker")">
+                <img src="~/Content/imgs/shiftWorkers.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "orders")">
+                <img src="~/Content/imgs/orders.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center  ">
+        <div class="container ">
+            <a href="@Url.Action("Index", "OrderProducts")">
+                <img src="~/Content/imgs/orderItems.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container">
+            <a href="@Url.Action("Index", "OrderTrans")">
+                <img src="~/Content/imgs/transOrder.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container ">
+
+        </div>
+        <div class="container ">
+            <a href="@Url.Action("Index", "TransOrder")">
+                <img src="~/Content/imgs/orderLoad.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container ">
+            <a href="@Url.Action("Index", "Sales")">
+                <img src="~/Content/imgs/check.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-5 ">
+        <div class="container mt-5">
+
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "shifts")">
+                <img src="~/Content/imgs/shift.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "StoreProduct")">
+                <img src="~/Content/imgs/productLine.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+            <a href="@Url.Action("Index", "products")">
+                <img src="~/Content/imgs/product.png" class="ml-5 img-fluid" alt="" style="width: 70%;" />
+            </a>
+        </div>
+        <div class="container mt-5">
+
+        </div>
+
+
+    </div>*@
+
+
+
+<script type="text/javascript">
+
+   
+    let i = 2;
+
+
+    $(document).ready(function () {
+        $("#Exit").click(function () {
+            window.close();
+        });
+        var radius = 200;
+        var fields = $('.itemDot');
+        var container = $('.dotCircle');
+        var width = container.width();
+        radius = width / 2.5;
+
+        var height = container.height();
+        var angle = 0, step = (2 * Math.PI) / fields.length;
+        fields.each(function () {
+            var x = Math.round(width / 2 + radius * Math.cos(angle) - $(this).width() / 2);
+            var y = Math.round(height / 2 + radius * Math.sin(angle) - $(this).height() / 2);
+            if (window.console) {
+                console.log($(this).text(), x, y);
+            }
+
+            $(this).css({
+                left: x + 'px',
+                top: y + 'px'
+            });
+            angle += step;
+        });
+    });
+
+
+
+</script>

@@ -13,6 +13,7 @@ using System.Data.Entity.Core.Objects;
 
 namespace project_3.Controllers
 {
+    [Authorize]
     public class productsController : Controller
     {
         private Entities db = new Entities();

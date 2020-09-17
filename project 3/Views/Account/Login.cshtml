@@ -11,57 +11,60 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 
+
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <div class=" Login-Page p-5">
-        <div class="container d-flex flex-row-reverse p-5">
-            <div class="col-md-8 ">
+<div class=" Login-Page p-5">
+
+    <div class="container d-flex flex-row-reverse p-5">
+        <div class="col-md-8 ">
 
 
-                <div class="d-flex flex-row-reverse mb-5  mr-2">
+            <div class="d-flex flex-row-reverse mb-5  mr-2">
+                <h3 class="text-light col-md-3">
+                    مرحباً بك
+                </h3>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="">
+                <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+                    <h5 class="text-light col-md-3">
+                        اسم المستخدم
+                    </h5>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = " col-md-5 textBox-border" })
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="">
+                <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+                    <h5 class="text-light col-md-3">
+                        كلمة الســـــــــــر
+                    </h5>
+                    @Html.TextBoxFor(m => m.Password, new { @Type = "Password" ,@class = " col-md-5 textBox-border" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="">
+                <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
                     <h3 class="text-light col-md-3">
-                        مرحباً بك
                     </h3>
-                </div>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="">
-                    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
-                        <h5 class="text-light col-md-3">
-                            اسم المستخدم
-                        </h5>
-                        @Html.TextBoxFor(m => m.UserName, new { @class = " col-md-5 textBox-border" })
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                    <div class="d-flex justify-content-between">
+                        @Html.ActionLink("تسجيل حساب", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "input btns col-md-5 m-3" })
+                        @*<input type="button" value="إلغاء الأمر" class="btns col-md-5 m-3" />*@
+                        <input type="submit" value="تسجيل الدخول" class=" btns col-md-5 m-3" />
                     </div>
-                </div>
-                <div class="">
-                    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
-                        <h5 class="text-light col-md-3">
-                            كلمة الســـــــــــر
-                        </h5>
-                        @Html.TextBoxFor(m => m.Password, new { @class = " col-md-5 textBox-border" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="">
-                    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
-                        <h3 class="text-light col-md-3">
-                        </h3>
-                        <div class="d-flex justify-content-between">
-                            <input type="button" value="إلغاء الأمر" onclick="closeApp()" class="btns col-md-5 m-3" />
-                            <input type="submit" value="تسجيل الدخول" class=" btns col-md-5 m-3" />
-                        </div>
 
-                    </div>
                 </div>
-
             </div>
 
-            <div class="col-md-4">
-                <img src="~/Content/imgs/04.png" style="max-width:100%; height:auto" class="img-fluid" />
-            </div>
+        </div>
+
+        <div class="col-md-4">
+            <img src="~/Content/imgs/04.png" style="max-width:100%; height:auto" class="img-fluid" />
         </div>
     </div>
+</div>
 }
 
 
@@ -112,3 +115,80 @@
 @*<p>
         @Html.ActionLink("Register as a new user", "Register")
     </p>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@using project_3.Models
+    @model LoginViewModel
+    @{
+        ViewBag.Title = "Log in";
+    }
+
+    <h2>@ViewBag.Title.</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Use a local account to log in.</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Log in" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </p>*@
+@* Enable this once you have account confirmation enabled for password reset functionality
+    <p>
+        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+    </p>*@
+@*}
+        </section>
+    </div>*@
+@*<div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>*@
+@*</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

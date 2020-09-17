@@ -6,10 +6,12 @@ using System.Web.Mvc;
 
 namespace project_3.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -26,5 +28,7 @@ namespace project_3.Controllers
 
             return View();
         }
+
+      
     }
 }

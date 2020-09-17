@@ -208,6 +208,7 @@
     <Compile Include="Controllers\measurementsController.cs" />
     <Compile Include="Controllers\OrderProductsController.cs" />
     <Compile Include="Controllers\ordersController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\shiftadminsController.cs" />
     <Compile Include="Controllers\shiftsController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Controllers\TransOrderController.cs" />
     <Compile Include="Controllers\WaitingCarsController.cs" />
     <Compile Include="Controllers\workersController.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\address.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -230,6 +232,7 @@
     <Compile Include="Models\customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\measurement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -240,8 +243,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Model1.Context.cs">
@@ -480,6 +481,7 @@
     <Content Include="Content\imgs\check.png" />
     <Content Include="Content\imgs\Circle.png" />
     <Content Include="Content\imgs\customer.png" />
+    <Content Include="Content\imgs\HUD - Copy.png" />
     <Content Include="Content\imgs\Main.png" />
     <Content Include="Content\imgs\mesurment.png" />
     <Content Include="Content\imgs\orderItems.png" />
@@ -494,6 +496,14 @@
     <Content Include="Content\imgs\transOrder.png" />
     <Content Include="Content\imgs\vin.png" />
     <Content Include="Content\imgs\workers.png" />
+    <Content Include="Content\imgs\ادارة المخازن.png" />
+    <Content Include="Content\imgs\ادارة الموارد.png" />
+    <Content Include="Content\imgs\اساسيات النظام.png" />
+    <Content Include="Content\imgs\الانتاج.png" />
+    <Content Include="Content\imgs\المبيعات.png" />
+    <Content Include="Content\imgs\المحاسبة.png" />
+    <Content Include="Content\imgs\المشتريات.png" />
+    <Content Include="Content\imgs\الموظفين.png" />
     <Content Include="Content\LoginStyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
@@ -665,7 +675,6 @@
     <Content Include="Views\users\Details.cshtml" />
     <Content Include="Views\users\Edit.cshtml" />
     <Content Include="Views\users\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\products\Create.cshtml" />
@@ -749,6 +758,16 @@
     <Content Include="Views\Sales\Search.cshtml" />
     <Content Include="Views\WaitingCars\Index.cshtml" />
     <Content Include="Views\WaitingCars\GetCars.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\RoleViewModels\Create.cshtml" />
+    <Content Include="Views\RoleViewModels\Delete.cshtml" />
+    <Content Include="Views\RoleViewModels\Details.cshtml" />
+    <Content Include="Views\RoleViewModels\Edit.cshtml" />
+    <Content Include="Views\RoleViewModels\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

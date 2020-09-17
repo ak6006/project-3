@@ -13,9 +13,15 @@ body {
     border-left: outset 2px chocolate;
 }
 
-.btns
-{
-    text-align:center;
-    color:white;
+.btns {
+    text-align: center;
+    color: white;
     background-color: chocolate;
+    text-decoration: none;
+}
+
+.btns:hover {
+  
+    color: white;
+    text-decoration: none;
 }
