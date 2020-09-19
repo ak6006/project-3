@@ -3,20 +3,25 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" ,@class = "btn btn-outline-dark" })*@
-        </li>
-        <li><a class="btn btn-outline-dark" href="javascript:document.getElementById('logoutForm').submit()">تسجيل خروج</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" ,@class = "btn btn-outline-dark" })*@
+            </li>
+            <li>
+                <a class="btns p-2 rounded" href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    تسجيل خروج
+                </a>
+            </li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item active">@Html.ActionLink("تسجيل حساب", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" ,@class = "btn btn-outline-dark" })</li>
+        <li class="nav-item active">@Html.ActionLink("تسجيل حساب", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-outline-dark" })</li>
         <li class="nav-item active">@Html.ActionLink("تسجيل دخول", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-outline-dark" })</li>
     </ul>
 }

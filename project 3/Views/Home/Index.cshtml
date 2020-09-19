@@ -4,8 +4,7 @@
 <link href="~/Content/style.css" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/459f34aff4.js" crossorigin="anonymous"></script>
 
-<link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -94,14 +93,14 @@
     </div>*@
 </section>
 
-<div class="modal" id="المحاسبة">
+<div class="modal text-right" id="المحاسبة">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">المحاسبة</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
@@ -110,22 +109,22 @@
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
 </div>
 
-<div class="modal" id="الانتاج">
+<div class="modal text-right" id="الانتاج">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">الانتاج</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
@@ -134,22 +133,22 @@
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
 </div>
 
-<div class="modal" id="المشتريات">
+<div class="modal text-right" id="المشتريات">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">المشتريات</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
@@ -158,8 +157,8 @@
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
@@ -168,36 +167,36 @@
 
 <div class="modal text-right" id="الموظفين">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">الموظفين</h4>
-                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+                <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
-                <a href="@Url.Action("Index", "workers")">
+            <div class="modal-body ">
+                <a class="text-light" href="@Url.Action("Index", "workers")">
                     العمال
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "ShiftWorker")">
+                <a class="text-light" href="@Url.Action("Index", "ShiftWorker")">
                     عمال الورديات
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "shifts")">
+                <a class="text-light" href="@Url.Action("Index", "shifts")">
                     الورديات
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "shiftadmins")">
+                <a class="text-light" href="@Url.Action("Index", "shiftadmins")">
                     مديرى الورديات
                 </a>
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start ">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
@@ -205,24 +204,27 @@
 </div>
 
 
-<div class="modal" id="النظام">
+<div class="modal text-right" id="النظام">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">اساسيات النظام</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                الامان و الصلاحيات
+                <a class="text-light">
+                    الامان و الصلاحيات
+                </a>
+                
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
@@ -232,21 +234,21 @@
 
 <div class="modal text-right" id="المخازن">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">ادارة المخازن</h4>
-                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+                <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <a href="@Url.Action("Index", "StoreProduct")">
+                <a class="text-light" href="@Url.Action("Index", "StoreProduct")">
                     خط الانتاج
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "stores")">
+                <a class="text-light" href="@Url.Action("Index", "stores")">
                     المخازن
                 </a>
                 <br />
@@ -256,8 +258,8 @@
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
@@ -266,30 +268,30 @@
 
 <div class="modal text-right" id="الموارد">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">ادارة الموارد</h4>
-                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+                <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
 
                 <br />
-                <a href="@Url.Action("Index", "products")">
+                <a class="text-light" href="@Url.Action("Index", "products")">
                     المنتجات
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "measurements")">
+                <a class="text-light" href="@Url.Action("Index", "measurements")">
                     وحدات القياس
                 </a>
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
@@ -298,41 +300,41 @@
 
 <div class="modal text-right" id="المبيعات">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content page-container text-light">
 
             <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">المبيعات</h4>
-                <button type="button" class="close ml-0" data-dismiss="modal">&times;</button>
+                <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <a href="@Url.Action("Index", "Sales")">
+                <a class="text-light" href="@Url.Action("Index", "Sales")">
                     فحص شيكاره
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "Customers")">
+                <a class="text-light" href="@Url.Action("Index", "Customers")">
                     الوكلاء
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "Transvehciles")">
+                <a class="text-light" href="@Url.Action("Index", "Transvehciles")">
                     عربيات النقل
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "orders")">
+                <a class="text-light" href="@Url.Action("Index", "orders")">
                     الطلبيات
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "OrderProducts")">
+                <a class="text-light" href="@Url.Action("Index", "OrderProducts")">
                     بيانات الطلبيه
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "OrderTrans")">
+                <a class="text-light" href="@Url.Action("Index", "OrderTrans")">
                     عربيات الطلبيه
                 </a>
                 <br />
-                <a href="@Url.Action("Index", "TransOrder")">
+                <a class="text-light" href="@Url.Action("Index", "TransOrder")">
                     تحميل الطلبيه
                 </a>
                 <br />
@@ -340,8 +342,8 @@
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>

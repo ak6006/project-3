@@ -50,8 +50,8 @@
                     <h3 class="text-light col-md-3">
                     </h3>
                     <div class="d-flex justify-content-between">
-                        @Html.ActionLink("تسجيل حساب", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "input btns col-md-5 m-3" })
-                        @*<input type="button" value="إلغاء الأمر" class="btns col-md-5 m-3" />*@
+                        @*@Html.ActionLink("تسجيل حساب", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "input btns col-md-5 m-3" })*@
+                        <input type="reset" value="إلغاء الأمر" class="btns col-md-5 m-3" />
                         <input type="submit" value="تسجيل الدخول" class=" btns col-md-5 m-3" />
                     </div>
 
@@ -82,39 +82,7 @@
 
 
 
-@*<h4>Use a local account to log in.</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
-@*<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div class="checkbox">
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-            </div>
-        </div>
-    </div>*@
-@*<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Log in" class="btn btn-default" />
-        </div>
-    </div>*@
-@*<p>
-        @Html.ActionLink("Register as a new user", "Register")
-    </p>*@
+
 
 
 

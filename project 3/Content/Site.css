@@ -2,7 +2,17 @@
     font-family: "BeInNormal";
 }
 
+.btns {
+    text-align: center;
+    color: white;
+    background-color: chocolate;
+    text-decoration: none;
+}
 
+    .btns:hover {
+        color: white;
+        text-decoration: none;
+    }
 
 body {
     background-color: #020202;
@@ -11,7 +21,6 @@ body {
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -27,11 +36,12 @@ select,
 textarea {
     max-width: 280px;
 }
+
 .page-container {
     background-image: url("/Content/imgs/Main.png");
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment:fixed;
+    background-attachment: fixed;
 }
 
 @font-face {

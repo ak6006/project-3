@@ -33,8 +33,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item active">
-                    @Html.ActionLink("الرئيسيه", "Index", "Home", null, new { @class = " btn btn-outline-dark" })
+                <li class="nav-item active ">
+                    @*@Html.ActionLink("الرئيسيه", "Index", "Home", null, new { @class = " btns col-md-2 " })*@
+                    <a class="btns p-2 rounded " href="@Url.Action("Index","Home")">
+                        <i class="fas fa-home"></i>
+                        الرئيسيه
+                    </a>
                 </li>
             </ul>
             @Html.Partial("_LoginPartial")
