@@ -15,5 +15,7 @@ namespace project_3.Models
     {
         public int رقم_المنتج { get; set; }
         public string اسم_المنتج { get; set; }
+        public Nullable<double> السعر { get; set; }
+        public Nullable<System.DateTime> اخر_تحديث_للسعر { get; set; }
     }
 }

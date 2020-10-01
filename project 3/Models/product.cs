@@ -24,6 +24,8 @@ namespace project_3.Models
     
         public int product_id { get; set; }
         public string productName { get; set; }
+        public Nullable<double> TodayPrice { get; set; }
+        public Nullable<System.DateTime> PriceUpdateTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_has_product> order_has_product { get; set; }

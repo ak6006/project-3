@@ -9,5 +9,8 @@ namespace project_3.Models
     {
         public int رقم_المنتج { get; set; }
         public string اسم_المنتج { get; set; }
+        public float TodayPrice { get; set; }
+        public DateTime PriceUpdateTime { get; set; }
+
     }
 }

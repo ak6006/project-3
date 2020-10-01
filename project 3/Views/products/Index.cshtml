@@ -1,4 +1,4 @@
-﻿@model IEnumerable<project_3.Models.SP_Product_To_DataGrid_Result>
+﻿@model IEnumerable<project_3.Models.product>
 
 @{
     ViewBag.Title = "Index";
@@ -58,8 +58,8 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th></th>
-                <th></th>
+                <th>اخر تحديث للسعر</th>
+                <th>السعر</th>
                 <th>اسم المنتج</th>
                 <th>رقم المنتج</th>
 
@@ -69,17 +69,15 @@
             {
         <tr class=" text-light">
             <td>
-                <a class=" text-light btn-danger btn form-control" href="@Url.Action("Delete", "products",new { id = @item.رقم_المنتج})">
+                <a class=" text-light btn-danger btn form-control" href="@Url.Action("Delete", "products",new { id = @item.product_id})">
                     <span>
                         <i class="fas fa-user-times"></i>
                     </span>
                     حذف
                 </a>
-
             </td>
             <td>
-
-                <a class=" text-light btn-warning btn form-control" href="@Url.Action("Edit", "products",new { id = @item.رقم_المنتج})">
+                <a class=" text-light btn-warning btn form-control" href="@Url.Action("Edit", "products",new { id = @item.product_id})">
                     <span>
                         <i class="fas fa-user-edit"></i>
                     </span>
@@ -90,10 +88,10 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td>  @item.اسم_المنتج</td>
-            <td>  @item.رقم_المنتج</td>
+            <td>@item.PriceUpdateTime</td>
+            <td>@item.TodayPrice</td>
+            <td>@item.productName</td>
+            <td>@item.product_id</td>
 
 
         </tr>

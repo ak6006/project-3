@@ -1,4 +1,4 @@
-﻿@model project_3.Models.SP_Product_ID_Result
+﻿@model project_3.Models.product
 
 @{
     ViewBag.Title = "Edit";
@@ -17,15 +17,28 @@
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.رقم_المنتج)
+            @Html.HiddenFor(model => model.product_id)
 
             <div class="d-flex flex-row-reverse mb-2">
                 <div class="d-flex col-md-5">
-                    @Html.EditorFor(model => model.اسم_المنتج, new { htmlAttributes = new { @class = "col-md-9 form-control" } })
-                    @Html.ValidationMessageFor(model => model.اسم_المنتج, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.productName, new { htmlAttributes = new { @class = "col-md-9 form-control" } })
+                    @Html.ValidationMessageFor(model => model.productName, "", new { @class = "text-danger" })
 
                     <span class="col-md-4 text-light">
                         اسم المنتج
+                    </span>
+                </div>
+
+                <div class="col-md-4"></div>
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    @*<input required type="number" min="0" step="0.01" class="col-md-9 form-control" name="TodayPrice" id="" />*@
+                    @Html.EditorFor(model => model.TodayPrice, new { htmlAttributes = new { @class = "col-md-9 form-control" , @Type="number", min = "0" ,step = "0.01" } })
+                    @Html.ValidationMessageFor(model => model.TodayPrice, "", new { @class = "text-danger" })
+
+                    <span class="col-md-4 text-light">
+                        سعر المنتج
                     </span>
                 </div>
 

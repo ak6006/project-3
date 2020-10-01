@@ -21,7 +21,7 @@ namespace project_3.Controllers
         // GET: products
         public ActionResult Index()
         {
-            var Products = db.SP_Product_To_DataGrid();
+            var Products = db.products.ToList();
             return View(Products);
         }
         public ActionResult Search(string Key)
@@ -64,13 +64,13 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProductViewModel product)
+        public async Task<ActionResult> Create(product product)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter new_identity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Product_Add_New(product.اسم_المنتج, new_identity, rec_found).ToList();
+                db.SP_Product_Add_New(product.productName,product.TodayPrice, new_identity, rec_found).ToList();
 
                 if ((int)rec_found.Value == 0)
                 {
@@ -95,7 +95,9 @@ namespace project_3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.SP_Product_ID(id).FirstOrDefault();
+            var product = db.products.Find(id);
+            
+            
             if (product == null)
             {
                 return HttpNotFound();
@@ -108,12 +110,12 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ProductViewModel product)
+        public async Task<ActionResult> Edit(product product)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
-                db.SP_Product_Update(product.رقم_المنتج, product.اسم_المنتج, rec_found);
+                db.SP_Update_Product_Price(product.product_id, product.productName,product.TodayPrice);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

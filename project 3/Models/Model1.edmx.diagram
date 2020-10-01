@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.measurement" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.order" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.order_has_product" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.product" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.role" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.shift" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.shiftadmin" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
@@ -36,19 +35,20 @@
         <AssociationConnector Association="DB_A67616_makahighfeedModel.order_fk_order_users1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.order_has_product_fk_order_has_product_order1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.transvehcile_has_order_fk_transVehcile_has_order_order1" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_A67616_makahighfeedModel.order_has_product_fk_order_has_product_product1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.order_has_product_fk_order_has_product_weight1" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_product1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.shift_fk_shift_shiftAdmin1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_shift1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_store1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_weight1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.orderserial" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_A67616_makahighfeedModel.product_has_weight" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.shift_has_workers" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.store_has_product_has_order" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A67616_makahighfeedModel.users_has_roles" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="DB_A67616_makahighfeedModel.product" Width="1.5" PointX="0.75" PointY="16.5" />
+        <AssociationConnector Association="DB_A67616_makahighfeedModel.order_has_product_fk_order_has_product_product1" />
+        <AssociationConnector Association="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_product1" />
+        <AssociationConnector Association="DB_A67616_makahighfeedModel.product_has_weight" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
