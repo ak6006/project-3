@@ -14,6 +14,7 @@ namespace project_3.Models
     
     public partial class order_has_product
     {
+        public int order_has_product_Id { get; set; }
         public int order_order_id { get; set; }
         public int product_product_id { get; set; }
         public int measurement_measure_id { get; set; }
@@ -24,11 +25,10 @@ namespace project_3.Models
         public Nullable<int> order_has_product_state { get; set; }
         public Nullable<System.DateTime> order_has_product_in_date { get; set; }
         public Nullable<System.DateTime> order_has_product_out_date { get; set; }
-        public int order_has_product_Id { get; set; }
     
         public virtual measurement measurement { get; set; }
         public virtual order order { get; set; }
-        public virtual weight weight { get; set; }
         public virtual product product { get; set; }
+        public virtual weight weight { get; set; }
     }
 }

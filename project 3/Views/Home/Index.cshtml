@@ -23,47 +23,46 @@
                     <div class="round"></div>
                     <div class="dotCircle">
 
-                        <a href="" class="itemDot itemDot6" data-tab="6" data-toggle="modal" data-target="#المشتريات">
+                        <a href="@Url.Action("Purchases","Home")" class="itemDot itemDot6" data-tab="6" @*data-toggle="modal" data-target="#المشتريات"*@>
                             <img src="~/Content/imgs/المشتريات.png" class="rounded-circle img-fluid">
                             <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
                         </a>
 
-                        <span class="itemDot itemDot7" data-tab="7" data-toggle="modal" data-target="#الموظفين">
+                        <a href="@Url.Action("Employees","Home")" class="itemDot itemDot7" data-tab="7" >
                             <img src="~/Content/imgs/الموظفين.png" class="rounded-circle img-fluid">
-                            <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
-                        </span>
-                        <span class="itemDot itemDot8" data-tab="8" data-toggle="modal" data-target="#النظام">
+                        </a>
+                        <a href="@Url.Action("System","Home")" class="itemDot itemDot8" data-tab="8" >
                             <img src="~/Content/imgs/اساسيات النظام.png" class="rounded-circle img-fluid">
                             <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
-                        </span>
-                        <span class="itemDot itemDot3" data-tab="3" data-toggle="modal" data-target="#المخازن">
+                        </a>
+                        <a href="@Url.Action("Stores","Home")" class="itemDot itemDot3" data-tab="3" @*data-toggle="modal" data-target="#المخازن"*@>
                             <img src="~/Content/imgs/ادارة المخازن.png" class="rounded-circle img-fluid">
                             <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
-                        </span>
-                        <span class="itemDot itemDot2" data-tab="2" data-toggle="modal" data-target="#المبيعات">
+                        </a>
+                        <a href="@Url.Action("Sales","Home")" class="itemDot itemDot2" data-tab="2" @*data-toggle="modal" data-target="#المبيعات"*@>
                             <img src="~/Content/imgs/المبيعات.png" class="rounded-circle img-fluid">
                             <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
-                        </span>
-                        <span class="itemDot itemDot1" data-tab="1" data-toggle="modal" data-target="#الموارد">
+                        </a>
+                        <a href="@Url.Action("Resources","Home")" class="itemDot itemDot1" data-tab="1" @*data-toggle="modal" data-target="#الموارد"*@>
                             <img src="~/Content/imgs/ادارة الموارد.png" class="rounded-circle img-fluid">
                             <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
-                        </span>
-                        <span class="itemDot itemDot5" data-tab="5" data-toggle="modal" data-target="#المحاسبة">
+                        </a>
+                        <a href="@Url.Action("Accounting", "Home")" class="itemDot itemDot5"  data-tab="5" @*data-toggle="modal" data-target="#المحاسبة"*@>
                             <img src="~/Content/imgs/المحاسبة.png" class="rounded-circle img-fluid">
                             <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
-                        </span>
-                        <span class="itemDot itemDot4" data-tab="4" data-toggle="modal" data-target="#الانتاج">
+                        </a>
+                        <a href="@Url.Action("Production", "Home")" class="itemDot itemDot4" data-tab="4" @*data-toggle="modal" data-target="#الانتاج"*@>
                             <img src="~/Content/imgs/الانتاج.png" class="rounded-circle img-fluid">
                             <!-- <i class="fa fa-briefcase"></i> -->
                             <span class="forActive"></span>
-                        </span>
+                        </a>
 
 
                     </div>
@@ -93,91 +92,80 @@
     </div>*@
 </section>
 
-<div class="modal text-right" id="المحاسبة">
+@*<div class="modal text-right" id="المحاسبة">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">المحاسبة</h4>
                 <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body">
 
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
-<div class="modal text-right" id="الانتاج">
+@*<div class="modal text-right" id="الانتاج">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">الانتاج</h4>
                 <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body">
                 <a class="text-light" href="@Url.Action("Index", "StoreProduct")">
                     خط الانتاج
                 </a>
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
-<div class="modal text-right" id="المشتريات">
+@*<div class="modal text-right" id="المشتريات">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">المشتريات</h4>
                 <button type="button" class="btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body">
 
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
-<div class="modal text-right" id="الموظفين">
+@*<div class="modal text-right" id="الموظفين">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">الموظفين</h4>
                 <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body ">
                 <a class="text-light" href="@Url.Action("Index", "workers")">
                     العمال
@@ -196,27 +184,24 @@
                 </a>
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start ">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
 
-<div class="modal text-right" id="النظام">
+@*<div class="modal text-right" id="النظام">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title">اساسيات النظام</h4>
                 <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body">
                 <a class="text-light">
                     الامان و الصلاحيات
@@ -224,27 +209,24 @@
                 
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
 
-<div class="modal text-right" id="المخازن">
+@*<div class="modal text-right" id="المخازن">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">ادارة المخازن</h4>
                 <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body">
               
                 <a class="text-light" href="@Url.Action("Index", "stores")">
@@ -256,26 +238,23 @@
 
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
-<div class="modal text-right" id="الموارد">
+@*<div class="modal text-right" id="الموارد">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">ادارة الموارد</h4>
                 <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body">
 
                 <br />
@@ -288,26 +267,23 @@
                 </a>
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
-<div class="modal text-right" id="المبيعات">
+@*<div class="modal text-right" id="المبيعات">
     <div class="modal-dialog">
         <div class="modal-content page-container text-light">
 
-            <!-- Modal Header -->
             <div class="modal-header d-flex flex-row-reverse">
                 <h4 class="modal-title ">المبيعات</h4>
                 <button type="button" class=" btns p-2 ml-0" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body">
                 <a class="text-light" href="@Url.Action("Index", "Sales")">
                     فحص شيكاره
@@ -340,14 +316,13 @@
 
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btns p-2" data-dismiss="modal">اغلاق</button>
             </div>
 
         </div>
     </div>
-</div>
+</div>*@
 
 
 

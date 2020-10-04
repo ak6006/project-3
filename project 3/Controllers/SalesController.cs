@@ -26,14 +26,23 @@ namespace project_3.Controllers
         {
 
             ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-            var result = db.SP_Sales_BarCode_Check(Key, RecFound).FirstOrDefault();
-            if((int)RecFound.Value==1)
-                return View(result);
-            else
+            
+            try
             {
-                TempData["Msg"] = "لا يوجد شكارة من مكه هاي فيد بهذا السريال";
-                return View("Index");
+                var result = db.SP_Sales_BarCode_Check(Key, RecFound).FirstOrDefault();
+                if ((int)RecFound.Value == 1)
+                    return View(result);
+                else
+                {
+                    TempData["Msg"] = "لا يوجد شكارة من مكه هاي فيد بهذا السريال";
+                    return View("Index");
+                }
             }
+            catch(Exception e)
+            {
+                return View(e.Message);
+            }
+            
         }
 
         // GET: Sales/Details/5

@@ -644,8 +644,34 @@
         <Function Name="SP_flutter_Customer_Orders_Query" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustmerPhone" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="SP_Flutter_Order_Add_New" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="StoreId" Type="int" Mode="In" />
+          <Parameter Name="OrderDate" Type="date" Mode="In" />
+          <Parameter Name="OrderNote" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProductId" Type="int" Mode="In" />
+          <Parameter Name="measureId" Type="int" Mode="In" />
+          <Parameter Name="weightId" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="listOfvan" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Flutter_Order_van_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="int" Mode="In" />
+          <Parameter Name="OrderHasProductId" Type="int" Mode="In" />
+          <Parameter Name="OrderDate" Type="date" Mode="In" />
+          <Parameter Name="ProductId" Type="int" Mode="In" />
+          <Parameter Name="WieghtId" Type="int" Mode="In" />
+          <Parameter Name="MeasureId" Type="int" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="listOfvan" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="SP_flutter_Query_Trans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustmerPhone" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_flutter_SumQuantity_Orders_Query" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustmerPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="BeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="SP_LOGINSELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
@@ -1014,6 +1040,17 @@
           <Parameter Name="rec_found" Type="int" Mode="InOut" />
         </Function>
         <Function Name="SP_Workers_To_DataGrid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SplitList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="list" Type="varchar(max)" Mode="In" />
+          <Parameter Name="separator" Type="varchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Value" Type="varchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="DB_A67616_makahighfeedModelStoreContainer">
           <EntitySet Name="address" EntityType="Self.address" Schema="makahighfeed.v.0" store:Type="Tables" />
           <EntitySet Name="addresstype" EntityType="Self.addresstype" Schema="makahighfeed.v.0" store:Type="Tables" />
@@ -1163,6 +1200,9 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_A67616_makahighfeedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="SplitList_Result">
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </ComplexType>
         <EntityType Name="address">
           <Key>
             <PropertyRef Name="add_id" />
@@ -1248,6 +1288,7 @@
             <PropertyRef Name="product_product_id" />
             <PropertyRef Name="weight_weight_id" />
           </Key>
+          <Property Name="order_has_product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="order_order_id" Type="Int32" Nullable="false" />
           <Property Name="product_product_id" Type="Int32" Nullable="false" />
           <Property Name="measurement_measure_id" Type="Int32" Nullable="false" />
@@ -1260,9 +1301,20 @@
           <Property Name="order_has_product_out_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="measurement" Relationship="Self.order_has_product_fk_order_has_product_measurement1" FromRole="order_has_product" ToRole="measurement" />
           <NavigationProperty Name="order" Relationship="Self.order_has_product_fk_order_has_product_order1" FromRole="order_has_product" ToRole="order" />
+          <NavigationProperty Name="product" Relationship="Self.order_has_product_fk_order_has_product_product1" FromRole="order_has_product" ToRole="product" />
           <NavigationProperty Name="weight" Relationship="Self.order_has_product_fk_order_has_product_weight1" FromRole="order_has_product" ToRole="weight" />
-          <Property Name="order_has_product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="product" Relationship="DB_A67616_makahighfeedModel.order_has_product_fk_order_has_product_product1" FromRole="order_has_product" ToRole="product" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="TodayPrice" Type="Double" />
+          <Property Name="PriceUpdateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="order_has_product" Relationship="Self.order_has_product_fk_order_has_product_product1" FromRole="product" ToRole="order_has_product" />
+          <NavigationProperty Name="store_has_product" Relationship="Self.store_has_product_fk_store_has_product_product1" FromRole="product" ToRole="store_has_product" />
+          <NavigationProperty Name="weights" Relationship="Self.product_has_weight" FromRole="product" ToRole="weight" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -1319,11 +1371,11 @@
           <Property Name="store_has_productDate" Type="DateTime" Precision="3" />
           <Property Name="store_has_product_state" Type="Int32" />
           <NavigationProperty Name="barcode" Relationship="Self.store_has_product_fk_store_has_product_barcode1" FromRole="store_has_product" ToRole="barcode" />
+          <NavigationProperty Name="product" Relationship="Self.store_has_product_fk_store_has_product_product1" FromRole="store_has_product" ToRole="product" />
           <NavigationProperty Name="shift" Relationship="Self.store_has_product_fk_store_has_product_shift1" FromRole="store_has_product" ToRole="shift" />
           <NavigationProperty Name="store" Relationship="Self.store_has_product_fk_store_has_product_store1" FromRole="store_has_product" ToRole="store" />
           <NavigationProperty Name="weight" Relationship="Self.store_has_product_fk_store_has_product_weight1" FromRole="store_has_product" ToRole="weight" />
           <NavigationProperty Name="orders" Relationship="Self.store_has_product_has_order" FromRole="store_has_product" ToRole="order" />
-          <NavigationProperty Name="product" Relationship="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_product1" FromRole="store_has_product" ToRole="product" />
         </EntityType>
         <EntityType Name="transvehcile">
           <Key>
@@ -1345,13 +1397,13 @@
             <PropertyRef Name="transVehcile_v_id" />
             <PropertyRef Name="order_order_id" />
           </Key>
+          <Property Name="transVehcile_has_order_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="transVehcile_v_id" Type="Int32" Nullable="false" />
           <Property Name="order_order_id" Type="Int32" Nullable="false" />
           <Property Name="transVehcile_has_order_state" Type="Int32" />
           <Property Name="trans_in_date" Type="DateTime" Precision="3" />
           <Property Name="trans_out_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="order" Relationship="Self.transvehcile_has_order_fk_transVehcile_has_order_order1" FromRole="transvehcile_has_order" ToRole="order" />
-          <Property Name="transVehcile_has_order_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -1373,7 +1425,7 @@
           <Property Name="weight_net" Type="Int32" />
           <NavigationProperty Name="order_has_product" Relationship="Self.order_has_product_fk_order_has_product_weight1" FromRole="weight" ToRole="order_has_product" />
           <NavigationProperty Name="store_has_product" Relationship="Self.store_has_product_fk_store_has_product_weight1" FromRole="weight" ToRole="store_has_product" />
-          <NavigationProperty Name="products" Relationship="DB_A67616_makahighfeedModel.product_has_weight" FromRole="weight" ToRole="product" />
+          <NavigationProperty Name="products" Relationship="Self.product_has_weight" FromRole="weight" ToRole="product" />
         </EntityType>
         <EntityType Name="worker">
           <Key>
@@ -1540,6 +1592,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="order_has_product_fk_order_has_product_product1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="order_has_product" Type="Self.order_has_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="order_has_product">
+              <PropertyRef Name="product_product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="order_has_product_fk_order_has_product_weight1">
           <End Role="weight" Type="Self.weight" Multiplicity="1" />
           <End Role="order_has_product" Type="Self.order_has_product" Multiplicity="*" />
@@ -1549,6 +1613,18 @@
             </Principal>
             <Dependent Role="order_has_product">
               <PropertyRef Name="weight_weight_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="store_has_product_fk_store_has_product_product1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="store_has_product" Type="Self.store_has_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="store_has_product">
+              <PropertyRef Name="product_product_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1604,6 +1680,10 @@
           <End Role="barcode" Type="Self.barcode" Multiplicity="*" />
           <End Role="order" Type="Self.order" Multiplicity="*" />
         </Association>
+        <Association Name="product_has_weight">
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <End Role="weight" Type="Self.weight" Multiplicity="*" />
+        </Association>
         <Association Name="shift_has_workers">
           <End Role="shift" Type="Self.shift" Multiplicity="*" />
           <End Role="workers" Type="Self.worker" Multiplicity="*" />
@@ -1624,6 +1704,7 @@
           <EntitySet Name="measurements" EntityType="Self.measurement" />
           <EntitySet Name="orders" EntityType="Self.order" />
           <EntitySet Name="order_has_product" EntityType="Self.order_has_product" />
+          <EntitySet Name="products" EntityType="Self.product" />
           <EntitySet Name="roles" EntityType="Self.role" />
           <EntitySet Name="shifts" EntityType="Self.shift" />
           <EntitySet Name="shiftadmins" EntityType="Self.shiftadmin" />
@@ -1686,9 +1767,17 @@
             <End Role="order" EntitySet="orders" />
             <End Role="transvehcile_has_order" EntitySet="transvehcile_has_order" />
           </AssociationSet>
+          <AssociationSet Name="order_has_product_fk_order_has_product_product1" Association="Self.order_has_product_fk_order_has_product_product1">
+            <End Role="product" EntitySet="products" />
+            <End Role="order_has_product" EntitySet="order_has_product" />
+          </AssociationSet>
           <AssociationSet Name="order_has_product_fk_order_has_product_weight1" Association="Self.order_has_product_fk_order_has_product_weight1">
             <End Role="weight" EntitySet="weights" />
             <End Role="order_has_product" EntitySet="order_has_product" />
+          </AssociationSet>
+          <AssociationSet Name="store_has_product_fk_store_has_product_product1" Association="Self.store_has_product_fk_store_has_product_product1">
+            <End Role="product" EntitySet="products" />
+            <End Role="store_has_product" EntitySet="store_has_product" />
           </AssociationSet>
           <AssociationSet Name="shift_fk_shift_shiftAdmin1" Association="Self.shift_fk_shift_shiftAdmin1">
             <End Role="shiftadmin" EntitySet="shiftadmins" />
@@ -1710,6 +1799,10 @@
             <End Role="barcode" EntitySet="barcodes" />
             <End Role="order" EntitySet="orders" />
           </AssociationSet>
+          <AssociationSet Name="product_has_weight" Association="Self.product_has_weight">
+            <End Role="product" EntitySet="products" />
+            <End Role="weight" EntitySet="weights" />
+          </AssociationSet>
           <AssociationSet Name="shift_has_workers" Association="Self.shift_has_workers">
             <End Role="shift" EntitySet="shifts" />
             <End Role="workers" EntitySet="workers" />
@@ -1722,6 +1815,10 @@
             <End Role="roles" EntitySet="roles" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
+          <FunctionImport Name="SplitList" IsComposable="true" ReturnType="Collection(DB_A67616_makahighfeedModel.SplitList_Result)">
+            <Parameter Name="list" Mode="In" Type="String" />
+            <Parameter Name="separator" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_Customer_Add_New" ReturnType="Collection(String)">
             <Parameter Name="A_Name" Mode="In" Type="String" />
             <Parameter Name="A_Country" Mode="In" Type="String" />
@@ -1762,8 +1859,34 @@
           <FunctionImport Name="SP_flutter_Customer_Orders_Query" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_flutter_Customer_Orders_Query_Result)">
           <Parameter Name="CustmerPhone" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_Flutter_Order_Add_New">
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="StoreId" Mode="In" Type="Int32" />
+            <Parameter Name="OrderDate" Mode="In" Type="DateTime" />
+            <Parameter Name="OrderNote" Mode="In" Type="String" />
+            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+            <Parameter Name="measureId" Mode="In" Type="Int32" />
+            <Parameter Name="weightId" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="listOfvan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Flutter_Order_van_Update">
+            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+            <Parameter Name="OrderHasProductId" Mode="In" Type="Int32" />
+            <Parameter Name="OrderDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+            <Parameter Name="WieghtId" Mode="In" Type="Int32" />
+            <Parameter Name="MeasureId" Mode="In" Type="Int32" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="listOfvan" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_flutter_Query_Trans" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_flutter_Query_Trans_Result)">
           <Parameter Name="CustmerPhone" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_flutter_SumQuantity_Orders_Query" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_flutter_SumQuantity_Orders_Query_Result)">
+            <Parameter Name="CustmerPhone" Mode="In" Type="String" />
+            <Parameter Name="BeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="SP_LOGINSELECT" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_LOGINSELECT_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -1876,14 +1999,21 @@
             <Parameter Name="OrderDate" Mode="In" Type="DateTime" />
             <Parameter Name="OrderNote" Mode="In" Type="String" />
           </FunctionImport>
-          
+          <FunctionImport Name="SP_Product_Add_New" ReturnType="Collection(String)">
+            <Parameter Name="ProductName" Mode="In" Type="String" />
+            <Parameter Name="ProductPrice" Mode="In" Type="Double" />
+            <Parameter Name="new_identity" Mode="InOut" Type="Int32" />
+            <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="SP_Product_DELETE">
           <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_ID" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_ID_Result)">
           <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
-          
+          <FunctionImport Name="SP_Product_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_Search_Result)">
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_Product_To_ComboBox" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Product_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_To_DataGrid_Result)" />
           <FunctionImport Name="SP_Product_Update">
@@ -1900,10 +2030,8 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
             <Parameter Name="NetCounter" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SP_Sales_BarCode_Check" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Sales_BarCode_Check_Result)">
-            <Parameter Name="Barcode" Mode="In" Type="String" />
-            <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
-          </FunctionImport>
+         
+          <FunctionImport Name="SP_Sales_Order_Trans_Vin_display" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_display_Result)" />
           <FunctionImport Name="SP_Sales_Order_Trans_Vin_Load" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_Load_Result)">
           <Parameter Name="transVehcileSerial" Mode="In" Type="String" />
           </FunctionImport>
@@ -2066,6 +2194,11 @@
             <Parameter Name="TxtSerial" Mode="In" Type="String" />
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_Update_Product_Price">
+            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+            <Parameter Name="ProductName" Mode="In" Type="String" />
+            <Parameter Name="ProductPrice" Mode="In" Type="Double" />
+          </FunctionImport>
           <FunctionImport Name="SP_User_Add_New" ReturnType="Collection(String)">
             <Parameter Name="userName" Mode="In" Type="String" />
             <Parameter Name="userPassword" Mode="In" Type="String" />
@@ -2119,38 +2252,11 @@
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Workers_To_DataGrid" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Workers_To_DataGrid_Result)" />
-          <FunctionImport Name="SP_Sales_Order_Trans_Vin_display" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_display_Result)" />
-          <EntitySet Name="products" EntityType="DB_A67616_makahighfeedModel.product" />
-          <AssociationSet Name="order_has_product_fk_order_has_product_product1" Association="DB_A67616_makahighfeedModel.order_has_product_fk_order_has_product_product1">
-            <End Role="product" EntitySet="products" />
-            <End Role="order_has_product" EntitySet="order_has_product" />
-          </AssociationSet>
-          <AssociationSet Name="store_has_product_fk_store_has_product_product1" Association="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_product1">
-            <End Role="product" EntitySet="products" />
-            <End Role="store_has_product" EntitySet="store_has_product" />
-          </AssociationSet>
-          <AssociationSet Name="product_has_weight" Association="DB_A67616_makahighfeedModel.product_has_weight">
-            <End Role="product" EntitySet="products" />
-            <End Role="weight" EntitySet="weights" />
-          </AssociationSet>
-          <FunctionImport Name="SP_Product_Add_New" ReturnType="Collection(String)">
-            <Parameter Name="ProductName" Mode="In" Type="String" />
-            <Parameter Name="ProductPrice" Mode="In" Type="Double" />
-            <Parameter Name="new_identity" Mode="InOut" Type="Int32" />
+          <FunctionImport Name="SP_Sales_BarCode_Check" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Sales_BarCode_Check_Result)">
+            <Parameter Name="Barcode" Mode="In" Type="String" />
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SP_Product_Search" ReturnType="Collection(DB_A67616_makahighfeedModel.SP_Product_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SP_Update_Product_Price">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
-            <Parameter Name="ProductName" Mode="In" Type="String" />
-            <Parameter Name="ProductPrice" Mode="In" Type="Double" />
-          </FunctionImport>
-          
-         
-         
-          
+        
         </EntityContainer>
         <ComplexType Name="SP_Customer_ID_Result">
           <Property Type="Int32" Name="رقم_الوكيل" Nullable="false" />
@@ -2215,6 +2321,11 @@
           <Property Type="Int32" Name="transVehcile_has_order_state" Nullable="true" />
           <Property Type="DateTime" Name="trans_in_date" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="trans_out_date" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_flutter_SumQuantity_Orders_Query_Result">
+          <Property Type="String" Name="productName" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="measre_name" Nullable="false" MaxLength="45" />
+          <Property Type="Int32" Name="sumQuantity" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_LOGINSELECT_Result">
           <Property Type="Int32" Name="user_id" Nullable="false" />
@@ -2320,7 +2431,12 @@
           <Property Type="Int32" Name="رقم_المنتج" Nullable="false" />
           <Property Type="String" Name="اسم_المنتج" Nullable="true" MaxLength="45" />
         </ComplexType>
-     
+        <ComplexType Name="SP_Product_Search_Result">
+          <Property Type="Int32" Name="رقم_المنتج" Nullable="false" />
+          <Property Type="String" Name="اسم_المنتج" Nullable="true" MaxLength="45" />
+          <Property Type="Double" Name="السعر" Nullable="true" />
+          <Property Type="DateTime" Name="اخر_تحديث_للسعر" Nullable="true" Precision="23" />
+        </ComplexType>
         <ComplexType Name="SP_Product_To_ComboBox_Result">
           <Property Type="Int32" Name="product_id" Nullable="false" />
           <Property Type="String" Name="productName" Nullable="true" MaxLength="45" />
@@ -2329,18 +2445,12 @@
           <Property Type="Int32" Name="رقم_المنتج" Nullable="false" />
           <Property Type="String" Name="اسم_المنتج" Nullable="true" MaxLength="45" />
         </ComplexType>
-        <ComplexType Name="SP_Sales_BarCode_Check_Result">
-          <Property Type="Int32" Name="store_store_id" Nullable="false" />
-          <Property Type="DateTime" Name="store_has_productDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="shiftName" Nullable="true" MaxLength="45" />
-          <Property Type="String" Name="Shift_Name" Nullable="true" MaxLength="45" />
-          <Property Type="String" Name="Customer_Name" Nullable="true" MaxLength="45" />
-          <Property Type="String" Name="transVehcile_num" Nullable="true" MaxLength="45" />
+        
+        <ComplexType Name="SP_Sales_Order_Trans_Vin_display_Result">
           <Property Type="String" Name="transVehcile_driver_name" Nullable="false" MaxLength="120" />
-          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
-          <Property Type="String" Name="productName" Nullable="true" MaxLength="45" />
-          <Property Type="Int32" Name="weight_net" Nullable="true" />
-          <Property Type="String" Name="barcode_serialNumber" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="transVehcile_num" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="transVehcile_model" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="45" />
         </ComplexType>
         <ComplexType Name="SP_Sales_Order_Trans_Vin_Load_Result">
           <Property Type="Int32" Name="order_id" Nullable="false" />
@@ -2573,59 +2683,22 @@
           <Property Type="String" Name="هاتف" Nullable="true" MaxLength="45" />
           <Property Type="String" Name="فاكس" Nullable="true" MaxLength="45" />
         </ComplexType>
-        <ComplexType Name="SP_Sales_Order_Trans_Vin_display_Result">
-          <Property Type="String" Name="transVehcile_driver_name" Nullable="false" MaxLength="120" />
+        <ComplexType Name="SP_Sales_BarCode_Check_Result">
+          <Property Type="Int32" Name="store_store_id" Nullable="false" />
+          <Property Type="DateTime" Name="store_has_productDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="shiftName" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="Shift_admin_Name" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="Customer_Name" Nullable="true" MaxLength="45" />
           <Property Type="String" Name="transVehcile_num" Nullable="true" MaxLength="45" />
-          <Property Type="String" Name="transVehcile_model" Nullable="true" MaxLength="45" />
-          <Property Type="String" Name="firstName" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="transVehcile_driver_name" Nullable="false" MaxLength="120" />
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="productName" Nullable="true" MaxLength="45" />
+          <Property Type="Int32" Name="weight_net" Nullable="true" />
+          <Property Type="String" Name="barcode_serialNumber" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Quantity" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="measre_name" Nullable="false" MaxLength="45" />
         </ComplexType>
-        <EntityType Name="product">
-          <Key>
-            <PropertyRef Name="product_id" />
-          </Key>
-          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="productName" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
-          <Property Name="TodayPrice" Type="Double" />
-          <Property Name="PriceUpdateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="order_has_product" Relationship="DB_A67616_makahighfeedModel.order_has_product_fk_order_has_product_product1" FromRole="product" ToRole="order_has_product" />
-          <NavigationProperty Name="store_has_product" Relationship="DB_A67616_makahighfeedModel.store_has_product_fk_store_has_product_product1" FromRole="product" ToRole="store_has_product" />
-          <NavigationProperty Name="weights" Relationship="DB_A67616_makahighfeedModel.product_has_weight" FromRole="product" ToRole="weight" />
-        </EntityType>
-        <Association Name="order_has_product_fk_order_has_product_product1">
-          <End Type="DB_A67616_makahighfeedModel.product" Role="product" Multiplicity="1" />
-          <End Type="DB_A67616_makahighfeedModel.order_has_product" Role="order_has_product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="order_has_product">
-              <PropertyRef Name="product_product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="store_has_product_fk_store_has_product_product1">
-          <End Type="DB_A67616_makahighfeedModel.product" Role="product" Multiplicity="1" />
-          <End Type="DB_A67616_makahighfeedModel.store_has_product" Role="store_has_product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="store_has_product">
-              <PropertyRef Name="product_product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="product_has_weight">
-          <End Type="DB_A67616_makahighfeedModel.product" Role="product" Multiplicity="*" />
-          <End Type="DB_A67616_makahighfeedModel.weight" Role="weight" Multiplicity="*" />
-        </Association>
-        <ComplexType Name="SP_Product_Search_Result">
-          <Property Type="Int32" Name="رقم_المنتج" Nullable="false" />
-          <Property Type="String" Name="اسم_المنتج" Nullable="true" MaxLength="45" />
-          <Property Type="Double" Name="السعر" Nullable="true" />
-          <Property Type="DateTime" Name="اخر_تحديث_للسعر" Nullable="true" Precision="23" />
-        </ComplexType>
-       
+        
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2712,6 +2785,16 @@
                 <ScalarProperty Name="order_has_product_state" ColumnName="order_has_product_state" />
                 <ScalarProperty Name="order_has_product_in_date" ColumnName="order_has_product_in_date" />
                 <ScalarProperty Name="order_has_product_out_date" ColumnName="order_has_product_out_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="DB_A67616_makahighfeedModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="TodayPrice" ColumnName="TodayPrice" />
+                <ScalarProperty Name="PriceUpdateTime" ColumnName="PriceUpdateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2823,6 +2906,14 @@
               <ScalarProperty Name="order_id" ColumnName="order_order_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="product_has_weight" TypeName="DB_A67616_makahighfeedModel.product_has_weight" StoreEntitySet="product_has_weight">
+            <EndProperty Name="product">
+              <ScalarProperty Name="product_id" ColumnName="product_product_id" />
+            </EndProperty>
+            <EndProperty Name="weight">
+              <ScalarProperty Name="weight_id" ColumnName="weight_weight_id" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="shift_has_workers" TypeName="DB_A67616_makahighfeedModel.shift_has_workers" StoreEntitySet="shift_has_workers">
             <EndProperty Name="shift">
               <ScalarProperty Name="shift_id" ColumnName="shift_shift_id" />
@@ -2851,6 +2942,13 @@
               <ScalarProperty Name="user_id" ColumnName="users_user_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionName="DB_A67616_makahighfeedModel.Store.SplitList" FunctionImportName="SplitList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SplitList_Result">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_Customer_Add_New" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Customer_Add_New" />
           <FunctionImportMapping FunctionImportName="SP_Customer_Delete" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Customer_Delete" />
           <FunctionImportMapping FunctionImportName="SP_Customer_ID" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Customer_ID">
@@ -2929,6 +3027,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Flutter_Order_Add_New" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Flutter_Order_Add_New" />
+          <FunctionImportMapping FunctionImportName="SP_Flutter_Order_van_Update" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Flutter_Order_van_Update" />
           <FunctionImportMapping FunctionImportName="SP_flutter_Query_Trans" FunctionName="DB_A67616_makahighfeedModel.Store.SP_flutter_Query_Trans">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_flutter_Query_Trans_Result">
@@ -2939,6 +3039,15 @@
                 <ScalarProperty Name="transVehcile_has_order_state" ColumnName="transVehcile_has_order_state" />
                 <ScalarProperty Name="trans_in_date" ColumnName="trans_in_date" />
                 <ScalarProperty Name="trans_out_date" ColumnName="trans_out_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_flutter_SumQuantity_Orders_Query" FunctionName="DB_A67616_makahighfeedModel.Store.SP_flutter_SumQuantity_Orders_Query">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_flutter_SumQuantity_Orders_Query_Result">
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="measre_name" ColumnName="measre_name" />
+                <ScalarProperty Name="sumQuantity" ColumnName="sumQuantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3106,6 +3215,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_Order_Trans_Vin_Update" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Order_Trans_Vin_Update" />
           <FunctionImportMapping FunctionImportName="SP_Order_Update" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Order_Update" />
+          <FunctionImportMapping FunctionImportName="SP_Product_Add_New" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_Add_New" />
           <FunctionImportMapping FunctionImportName="SP_Product_DELETE" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_DELETE" />
           <FunctionImportMapping FunctionImportName="SP_Product_ID" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_ID">
             <ResultMapping>
@@ -3115,7 +3225,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-         
+          <FunctionImportMapping FunctionImportName="SP_Product_Search" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_Search">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Product_Search_Result">
+                <ScalarProperty Name="رقم_المنتج" ColumnName="رقم المنتج" />
+                <ScalarProperty Name="اسم_المنتج" ColumnName="اسم المنتج" />
+                <ScalarProperty Name="السعر" ColumnName="السعر" />
+                <ScalarProperty Name="اخر_تحديث_للسعر" ColumnName="اخر تحديث للسعر" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_Product_To_ComboBox" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_To_ComboBox">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Product_To_ComboBox_Result">
@@ -3134,20 +3253,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_Product_Update" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_Update" />
           <FunctionImportMapping FunctionImportName="SP_Sales_BarCode" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Sales_BarCode" />
-          <FunctionImportMapping FunctionImportName="SP_Sales_BarCode_Check" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Sales_BarCode_Check">
+          
+          <FunctionImportMapping FunctionImportName="SP_Sales_Order_Trans_Vin_display" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Sales_Order_Trans_Vin_display">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Sales_BarCode_Check_Result">
-                <ScalarProperty Name="store_store_id" ColumnName="store_store_id" />
-                <ScalarProperty Name="store_has_productDate" ColumnName="store_has_productDate" />
-                <ScalarProperty Name="shiftName" ColumnName="shiftName" />
-                <ScalarProperty Name="Shift_Name" ColumnName="Shift_Name" />
-                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
-                <ScalarProperty Name="transVehcile_num" ColumnName="transVehcile_num" />
+              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_display_Result">
                 <ScalarProperty Name="transVehcile_driver_name" ColumnName="transVehcile_driver_name" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="productName" ColumnName="productName" />
-                <ScalarProperty Name="weight_net" ColumnName="weight_net" />
-                <ScalarProperty Name="barcode_serialNumber" ColumnName="barcode_serialNumber" />
+                <ScalarProperty Name="transVehcile_num" ColumnName="transVehcile_num" />
+                <ScalarProperty Name="transVehcile_model" ColumnName="transVehcile_model" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3428,6 +3541,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_Trans_vin_Update" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Trans_vin_Update" />
+          <FunctionImportMapping FunctionImportName="SP_Update_Product_Price" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Update_Product_Price" />
           <FunctionImportMapping FunctionImportName="SP_User_Add_New" FunctionName="DB_A67616_makahighfeedModel.Store.SP_User_Add_New" />
           <FunctionImportMapping FunctionImportName="SP_User_To_DataGrid" FunctionName="DB_A67616_makahighfeedModel.Store.SP_User_To_DataGrid">
             <ResultMapping>
@@ -3517,47 +3631,26 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_Sales_Order_Trans_Vin_display" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Sales_Order_Trans_Vin_display">
+          <FunctionImportMapping FunctionImportName="SP_Sales_BarCode_Check" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Sales_BarCode_Check">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Sales_Order_Trans_Vin_display_Result">
-                <ScalarProperty Name="transVehcile_driver_name" ColumnName="transVehcile_driver_name" />
+              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Sales_BarCode_Check_Result">
+                <ScalarProperty Name="store_store_id" ColumnName="store_store_id" />
+                <ScalarProperty Name="store_has_productDate" ColumnName="store_has_productDate" />
+                <ScalarProperty Name="shiftName" ColumnName="shiftName" />
+                <ScalarProperty Name="Shift_admin_Name" ColumnName="Shift_admin_Name" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
                 <ScalarProperty Name="transVehcile_num" ColumnName="transVehcile_num" />
-                <ScalarProperty Name="transVehcile_model" ColumnName="transVehcile_model" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="products">
-            <EntityTypeMapping TypeName="DB_A67616_makahighfeedModel.product">
-              <MappingFragment StoreEntitySet="product">
-                <ScalarProperty Name="PriceUpdateTime" ColumnName="PriceUpdateTime" />
-                <ScalarProperty Name="TodayPrice" ColumnName="TodayPrice" />
+                <ScalarProperty Name="transVehcile_driver_name" ColumnName="transVehcile_driver_name" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="product_has_weight" TypeName="DB_A67616_makahighfeedModel.product_has_weight" StoreEntitySet="product_has_weight">
-            <EndProperty Name="weight">
-              <ScalarProperty Name="weight_id" ColumnName="weight_weight_id" />
-            </EndProperty>
-            <EndProperty Name="product">
-              <ScalarProperty Name="product_id" ColumnName="product_product_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="SP_Product_Add_New" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_Add_New" />
-          <FunctionImportMapping FunctionImportName="SP_Product_Search" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Product_Search">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_A67616_makahighfeedModel.SP_Product_Search_Result">
-                <ScalarProperty Name="رقم_المنتج" ColumnName="رقم المنتج" />
-                <ScalarProperty Name="اسم_المنتج" ColumnName="اسم المنتج" />
-                <ScalarProperty Name="السعر" ColumnName="السعر" />
-                <ScalarProperty Name="اخر_تحديث_للسعر" ColumnName="اخر تحديث للسعر" />
+                <ScalarProperty Name="weight_net" ColumnName="weight_net" />
+                <ScalarProperty Name="barcode_serialNumber" ColumnName="barcode_serialNumber" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="measre_name" ColumnName="measre_name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_Update_Product_Price" FunctionName="DB_A67616_makahighfeedModel.Store.SP_Update_Product_Price" />
-        
+          
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

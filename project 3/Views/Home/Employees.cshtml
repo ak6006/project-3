@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Employees";
+}
+<link href="~/Content/style.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/459f34aff4.js" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<section class="iq-features page-container">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-3 col-md-12"></div>
+            <div class="col-lg-6 col-md-12">
+                <div class="holderCircle">
+                    <div class="round"></div>
+                    <div class="dotCircle">
+
+                        <a  class="itemDot itemDot6" data-tab="6" >
+                            <img src="~/Content/imgs/HUD - Copy.png" class="rounded-circle img-fluid">
+                            <span class="forActive"></span>
+                        </a>
+
+                        <span class="itemDot itemDot7" data-tab="7" >
+                            <img src="~/Content/imgs/HUD - Copy.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot8" data-tab="8" >
+                            <img src="~/Content/imgs/HUD - Copy.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <span class="itemDot itemDot3" data-tab="3" >
+                            <img src="~/Content/imgs/HUD - Copy.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </span>
+                        <a href="@Url.Action("Index","Shifts")" class="itemDot itemDot2" data-tab="2" >
+                            <img src="~/Content/imgs/الورديات.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </a>
+                        <a href="@Url.Action("Index","ShiftAdmins")" class="itemDot itemDot1" data-tab="1" >
+                            <img src="~/Content/imgs/مديري الورديات.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </a>
+                        <a href="@Url.Action("Index","ShiftWorker")" class="itemDot itemDot5" data-tab="5">
+                            <img src="~/Content/imgs/عمال الورديات.png" class="rounded-circle img-fluid">
+                            <!-- <i class="fa fa-briefcase"></i> -->
+                            <span class="forActive"></span>
+                        </a>
+                        <a href="@Url.Action("Index","Workers")" class="itemDot itemDot4" data-tab="4" >
+                            <img src="~/Content/imgs/العمال.png" class="rounded-circle img-fluid">
+                            <span class="forActive"></span>
+                        </a>
+
+
+                    </div>
+                    <div class="contentCircle">
+                        <div class="CirItem title-box active CirItem1">
+                            <img src="~/Content/imgs/04.png" class="rounded-circle img-fluid" style="width: 90%;" alt="">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+
+            </div>
+        </div>
+    </div>
+  
+</section>
+
+
+
+<script type="text/javascript">
+
+
+    let i = 2;
+
+
+    $(document).ready(function () {
+        $("#Exit").click(function () {
+            window.close();
+        });
+        var radius = 200;
+        var fields = $('.itemDot');
+        var container = $('.dotCircle');
+        var width = container.width();
+        radius = width / 2.5;
+
+        var height = container.height();
+        var angle = 0, step = (2 * Math.PI) / fields.length;
+        fields.each(function () {
+            var x = Math.round(width / 2 + radius * Math.cos(angle) - $(this).width() / 2);
+            var y = Math.round(height / 2 + radius * Math.sin(angle) - $(this).height() / 2);
+            if (window.console) {
+                console.log($(this).text(), x, y);
+            }
+
+            $(this).css({
+                left: x + 'px',
+                top: y + 'px'
+            });
+            angle += step;
+        });
+    });
+
+
+
+</script>
