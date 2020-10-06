@@ -45,6 +45,15 @@
           <Property Name="Customers_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="address_add_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="gift">
+          <Key>
+            <PropertyRef Name="giftid" />
+          </Key>
+          <Property Name="giftid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="giftname" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="giftBagsCount" Type="int" Nullable="false" />
+          <Property Name="giftimg" Type="image" />
+        </EntityType>
         <EntityType Name="measurement">
           <Key>
             <PropertyRef Name="measure_id" />
@@ -1056,6 +1065,7 @@
           <EntitySet Name="addresstype" EntityType="Self.addresstype" Schema="makahighfeed.v.0" store:Type="Tables" />
           <EntitySet Name="barcode" EntityType="Self.barcode" Schema="makahighfeed.v.0" store:Type="Tables" />
           <EntitySet Name="customers" EntityType="Self.customers" Schema="makahighfeed.v.0" store:Type="Tables" />
+          <EntitySet Name="gift" EntityType="Self.gift" Schema="makahighfeed.v.0" store:Type="Tables" />
           <EntitySet Name="measurement" EntityType="Self.measurement" Schema="makahighfeed.v.0" store:Type="Tables" />
           <EntitySet Name="order" EntityType="Self.order" Schema="makahighfeed.v.0" store:Type="Tables" />
           <EntitySet Name="order_has_product" EntityType="Self.order_has_product" Schema="makahighfeed.v.0" store:Type="Tables" />
@@ -2256,6 +2266,7 @@
             <Parameter Name="Barcode" Mode="In" Type="String" />
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="gifts" EntityType="DB_A67616_makahighfeedModel.gift" />
         
         </EntityContainer>
         <ComplexType Name="SP_Customer_ID_Result">
@@ -2698,6 +2709,15 @@
           <Property Type="String" Name="Quantity" Nullable="true" MaxLength="45" />
           <Property Type="String" Name="measre_name" Nullable="false" MaxLength="45" />
         </ComplexType>
+        <EntityType Name="gift">
+          <Key>
+            <PropertyRef Name="giftid" />
+          </Key>
+          <Property Name="giftid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="giftname" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="giftBagsCount" Type="Int32" Nullable="false" />
+          <Property Name="giftimg" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         
       </Schema>
     </edmx:ConceptualModels>
@@ -3650,6 +3670,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="gifts">
+            <EntityTypeMapping TypeName="DB_A67616_makahighfeedModel.gift">
+              <MappingFragment StoreEntitySet="gift">
+                <ScalarProperty Name="giftimg" ColumnName="giftimg" />
+                <ScalarProperty Name="giftBagsCount" ColumnName="giftBagsCount" />
+                <ScalarProperty Name="giftname" ColumnName="giftname" />
+                <ScalarProperty Name="giftid" ColumnName="giftid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           
         </EntityContainerMapping>
       </Mapping>

@@ -1,0 +1,42 @@
+﻿@model project_3.Models.gift
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>gift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.giftname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giftname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giftBagsCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giftBagsCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giftimg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giftimg)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.giftid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

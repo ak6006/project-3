@@ -45,6 +45,7 @@ namespace project_3.Models
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<weight> weights { get; set; }
         public virtual DbSet<worker> workers { get; set; }
+        public virtual DbSet<gift> gifts { get; set; }
     
         [DbFunction("Entities", "SplitList")]
         public virtual IQueryable<SplitList_Result> SplitList(string list, string separator)

@@ -40,6 +40,16 @@
                         الرئيسيه
                     </a>
                 </li>
+                <li class="nav-item active ">
+                    @if (Request.UrlReferrer != null)
+                    {
+                    <a class="btns p-2 ml-2 rounded" onclick="history.go(-1); return false;" href="#">
+                        <i class="fas fa-arrow-alt-circle-right"></i>
+                        رجوع
+                    </a>
+                        <br />
+                    }
+                </li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

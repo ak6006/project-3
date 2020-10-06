@@ -1,0 +1,149 @@
+﻿@model project_3.Models.gift
+
+@{
+    ViewBag.Title = "Create";
+}
+    <div class="page-container">
+        @if (TempData["Msg"] != null)
+        {
+
+
+            <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+                <div class="col-md-3">
+
+                </div>
+                <h3>
+                    @TempData["Msg"]
+                </h3>
+            </div>
+
+
+        }
+
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 class="text-light">
+                اضافة جائزة جديدة
+            </h1>
+        </div>
+
+
+        @using (Html.BeginForm("Create","gifts",FormMethod.Post,new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    <input required type="text" class="col-md-9 form-control" name="giftname" id="" />
+
+                    <span class="col-md-3 text-light">
+                        اسم الجائزة
+                    </span>
+                </div>
+
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    <input required type="number" class="col-md-9 form-control" name="giftBagsCount" id="" />
+
+                    <span class="col-md-3 text-light">
+                        عدد شكاير الجائزة
+                    </span>
+                </div>
+
+            </div>
+            <div class="d-flex flex-row-reverse mb-2">
+                <div class="d-flex col-md-5">
+                    <input required type="file" name="Image" class="form-control col-sm-9" />
+                    <span class="col-md-3 text-light">
+                        الصورة
+                    </span>
+                </div>
+
+            </div>
+
+
+
+            <div class="d-flex flex-row-reverse ml-0">
+
+                <div class=" col-md-1">
+                </div>
+                <div class=" col-md-2">
+                    <button type="submit" class="col-md-11 text-light btn-success btn form-control">
+                        <span><i class="fas fa-user-plus fa-lg"></i></span>
+                        &nbsp;&nbsp;&nbsp;
+                        اضافه
+                    </button>
+                </div>
+
+
+                <div class="col-md-2">
+                    <a href="@Url.Action("Index","gifts")" class="col-md-11 text-light btn-primary btn form-control">
+                        <i class="fas fa-undo"></i>
+                        &nbsp;&nbsp;&nbsp;
+                        رجوع للقائمه
+                    </a>
+
+                    @*@Html.ActionLink("رجوع للقائمه", "Index", null, new { @class = "text-light btn-primary btn form-control" })*@
+                </div>
+
+
+            </div>
+
+        }
+
+
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+</script>
+
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>gift</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.giftname, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.giftname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.giftname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.giftBagsCount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.giftBagsCount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.giftBagsCount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.giftimg, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.giftimg, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.giftimg, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

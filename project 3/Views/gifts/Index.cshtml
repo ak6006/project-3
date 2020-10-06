@@ -1,0 +1,163 @@
+﻿@model IEnumerable<project_3.Models.gift>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (TempData["Msg"] != null)
+{
+    if (TempData["Color"].ToString() == "Green")
+    {
+        <div id="msg" style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-success">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+    }
+    else if (TempData["Color"].ToString() == "Red")
+    {
+        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+    }
+
+}
+
+
+
+@using (Html.BeginForm("Search", "measurements", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container mb-5">
+        <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+            <h1 style='font-family:"BeInNormal"' class="text-light ">
+                بيانات الجوائز
+            </h1>
+        </div>
+        <div class="d-flex flex-row-reverse mr-2">
+            @*<h1 class="text-light">
+                بحث
+            </h1>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="Key" />
+            </div>
+            <div>
+                <input type="submit" value="<<" class="bg-primary text-dark form-control">
+
+            </div>*@
+
+            <div class="mr-auto">
+                <a class="btn p-2 btn-success form-control text-light" href="@Url.Action("Create", "gifts")">
+                    <span><i class="fas fa-user-plus fa-lg"></i></span>
+                    اضافة جائزة جديدة
+                </a>
+            </div>
+        </div>
+
+
+
+        <table class="text-center table table-hover border-bottom border-light border-5">
+            <tr class=" text-light">
+                <th>حذف</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>الصورة</th>
+                <th>عدد شكاير الجائزة </th>
+                <th>اسم الجائزة</th>
+                <th>رقم الجائزة </th>
+
+
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class=" text-light">
+                    <td>
+                        <a class="text-light col-md-8 btn-danger btn form-control" href="@Url.Action("Delete", "gifts",new { id = @item.giftid})">
+                            <span>
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            حذف
+                        </a>
+
+                    </td>
+                  
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <img  style="max-height:100px; width:50px;"  src="data:image/*;base64,@(Convert.ToBase64String(item.giftimg))" class="img-fluid" />
+                    </td>
+                    <td>@item.giftBagsCount</td>
+                    <td>@item.giftname</td>
+                    <td>@item.giftid</td>
+
+
+                </tr>
+            }
+        </table>
+
+
+
+
+
+    </div>
+}
+
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+</script>
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.giftname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.giftBagsCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.giftimg)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.giftname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.giftBagsCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.giftimg)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.giftid }) |
+                @Html.ActionLink("Details", "Details", new { id=item.giftid }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.giftid })
+            </td>
+        </tr>
+    }
+
+    </table>*@
