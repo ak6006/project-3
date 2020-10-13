@@ -34,7 +34,6 @@ namespace project_3.Models
         public virtual DbSet<measurement> measurements { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<order_has_product> order_has_product { get; set; }
-        public virtual DbSet<product> products { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<shift> shifts { get; set; }
         public virtual DbSet<shiftadmin> shiftadmins { get; set; }
@@ -46,6 +45,7 @@ namespace project_3.Models
         public virtual DbSet<weight> weights { get; set; }
         public virtual DbSet<worker> workers { get; set; }
         public virtual DbSet<gift> gifts { get; set; }
+        public virtual DbSet<product> products { get; set; }
     
         [DbFunction("Entities", "SplitList")]
         public virtual IQueryable<SplitList_Result> SplitList(string list, string separator)
@@ -707,32 +707,6 @@ namespace project_3.Models
                 new ObjectParameter("ProductName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Product_Update", productIdParameter, productNameParameter, rec_found);
-        }
-    
-        public virtual ObjectResult<string> SP_Sales_BarCode(string barcode, string orderId, string prodductId, string weightId, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
-        {
-            var barcodeParameter = barcode != null ?
-                new ObjectParameter("Barcode", barcode) :
-                new ObjectParameter("Barcode", typeof(string));
-    
-            var orderIdParameter = orderId != null ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(string));
-    
-            var prodductIdParameter = prodductId != null ?
-                new ObjectParameter("ProdductId", prodductId) :
-                new ObjectParameter("ProdductId", typeof(string));
-    
-            var weightIdParameter = weightId != null ?
-                new ObjectParameter("weightId", weightId) :
-                new ObjectParameter("weightId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Sales_BarCode", barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, serial_found, rec_found, netCounter);
-        }
-    
-        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_display_Result> SP_Sales_Order_Trans_Vin_display()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_display_Result>("SP_Sales_Order_Trans_Vin_display");
         }
     
         public virtual ObjectResult<SP_Sales_Order_Trans_Vin_Load_Result> SP_Sales_Order_Trans_Vin_Load(string transVehcileSerial)
@@ -1443,6 +1417,36 @@ namespace project_3.Models
                 new ObjectParameter("Barcode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_BarCode_Check_Result>("SP_Sales_BarCode_Check", barcodeParameter, rec_found);
+        }
+    
+        public virtual ObjectResult<string> SP_Sales_BarCode(string barcode, string orderId, string prodductId, string weightId, Nullable<int> v_id, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
+        {
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            var orderIdParameter = orderId != null ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(string));
+    
+            var prodductIdParameter = prodductId != null ?
+                new ObjectParameter("ProdductId", prodductId) :
+                new ObjectParameter("ProdductId", typeof(string));
+    
+            var weightIdParameter = weightId != null ?
+                new ObjectParameter("weightId", weightId) :
+                new ObjectParameter("weightId", typeof(string));
+    
+            var v_idParameter = v_id.HasValue ?
+                new ObjectParameter("v_id", v_id) :
+                new ObjectParameter("v_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Sales_BarCode", barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, v_idParameter, serial_found, rec_found, netCounter);
+        }
+    
+        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_display_Result> SP_Sales_Order_Trans_Vin_display()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_display_Result>("SP_Sales_Order_Trans_Vin_display");
         }
     }
 }

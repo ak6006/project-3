@@ -204,6 +204,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\FullOrderController.cs" />
     <Compile Include="Controllers\giftsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\measurementsController.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Models\customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerOrderViewModel.cs" />
     <Compile Include="Models\gift.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -814,6 +816,8 @@
     <Content Include="Views\gifts\Details.cshtml" />
     <Content Include="Views\gifts\Edit.cshtml" />
     <Content Include="Views\gifts\Index.cshtml" />
+    <Content Include="Views\FullOrder\Create.cshtml" />
+    <Content Include="Views\FullOrder\GetCars.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

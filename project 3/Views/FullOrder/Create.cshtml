@@ -1,0 +1,77 @@
+﻿@model project_3.Models.CustomerOrderViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<div class="page-container">
+    @if (TempData["Msg"] != null)
+    {
+        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+            <div class="col-md-3">
+
+            </div>
+            <h3>
+                @TempData["Msg"]
+            </h3>
+        </div>
+    }
+
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            اضافة طلبيه جديده
+        </h1>
+    </div>
+
+    <div class="d-flex flex-row-reverse mb-0">
+        <div class="d-flex col-md-5">
+            @Html.DropDownListFor(m => m.CustomerId, ViewBag.Customers_id as IEnumerable<SelectListItem>, htmlAttributes: new { onchange = "updateCars();", @class = "pb-0 col-md-9 form-control" })
+            <span class="col-md-3 text-light">
+                اسم الوكيل
+            </span>
+        </div>
+
+       
+    </div>
+
+    <div id="Result">
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#msg').remove();
+    }, 5000);
+
+    function getId() {
+        var e = document.getElementById("CustomerId");
+        var CustId = e.options[e.selectedIndex].value;
+        return CustId;
+    }
+
+    $(document).ready(function () {
+        updateCars();
+        @*$('#CustomerId').change(function () {
+            $("#Result").load("@Url.Action("GetCars", "FullOrder")", { 'CustId': getId()  },
+                    function (response, status, xhr) {
+                        if (status == "error") {
+                            //alert("An error occurred while loading the results.");
+                            $("#Result").text = "An error occurred while loading the results.";
+                        }
+                    });
+            })*@;
+    });
+
+    function updateCars() {
+        $("#Result").load("@Url.Action("GetCars", "FullOrder")", { 'CustId': getId()  },
+                    function (response, status, xhr) {
+                        if (status == "error") {
+                            //alert("An error occurred while loading the results.");
+                            $("#Result").text = "An error occurred while loading the results.";
+                        }
+                    });
+    }
+</script>

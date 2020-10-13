@@ -59,13 +59,14 @@ namespace project_3.Controllers
         {
             if (ModelState.IsValid)
             {
+                var VID = db.transvehciles.Where(v => v.transVehcile_driver_name == record.DName).FirstOrDefault().v_id;
                 ObjectParameter SerialFound = new ObjectParameter("Serial_found", typeof(int));
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NtCounter = new ObjectParameter("NetCounter", typeof(int));
                 try
                 {
                     db.SP_Sales_BarCode(record.BarCode, record.OId.ToString(), record.PId.ToString(),
-                        record.WId.ToString(), SerialFound, RecFound, NtCounter).ToList();
+                        record.WId.ToString(),VID, SerialFound, RecFound, NtCounter).ToList();
                 }
                 catch
                 {

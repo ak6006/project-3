@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "GetCars";
+    var RowCounter = 0;
 }
 
 <div class="page-container mb-5">
@@ -12,19 +13,49 @@
     </div>
     <table class="text-center table table-hover border-bottom border-light border-5">
         <tr class=" text-light">
+            <th>دخول المصنع الان</th>
             <th>اسم السائق</th>
             <th>رقم العربية</th>
-            <th>موديل العربية</th>
+            <th>التاريخ</th>
             <th>اسم الوكيل</th>
+
         </tr>
+
         @foreach (var item in Model)
         {
             <tr class=" text-light">
+                <td>
+                    <i id="@RowCounter-f" class="fa-3x fas fa-circle"></i>
+                    <i id="@RowCounter-s" class="fa-3x fas fa-circle"></i>
+                    @if (RowCounter > 1)
+                    {
+                        <i id="@RowCounter-t" class="fa-3x text-danger fas fa-circle"></i>
+                    }
+                    else
+                    {
+                        <i id="@RowCounter-t" class="fa-3x fas fa-circle"></i>
+                    }
+
+
+                </td>
                 <td>@item.transVehcile_driver_name</td>
                 <td>@item.transVehcile_num</td>
-                <td>@item.transVehcile_model</td>
+                <td>@item.date.ToString()</td>
                 <td>@item.firstName</td>
+
             </tr>
+            RowCounter++;
         }
     </table>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#0-t").removeClass("text-danger");
+        $("#1-t").removeClass("text-danger");
+        $("#0-f").addClass("text-success");
+        $("#1-s").addClass("text-warning");
+        
+    })
+    
+</script>
