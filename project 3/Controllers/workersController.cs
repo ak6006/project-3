@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -64,14 +64,16 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(SP_Workers_To_DataGrid_Result worker)
+        public async Task<ActionResult> Create(SP_Worker_ID_Result worker)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Worker_Add_New(worker.الاسم, worker.دولة, worker.المحافظة, worker.المدينة,
-                    worker.تلفون, worker.فاكس, worker.بريد_الكتروني, worker.عنوان, NewIdentity, RecFound).ToList();
+                    worker.تلفون, worker.فاكس, worker.بريد_الكتروني, worker.عنوان, worker.id_card_number,
+                    worker.relative_name_person_A, worker.relative_phone_person_A, worker.relative_name_person_B,
+                    worker.relative_phone_person_B, NewIdentity, RecFound).ToList();
 
 
                 if ((int)RecFound.Value == 0)
@@ -116,7 +118,7 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(SP_Workers_To_DataGrid_Result worker)
+        public async Task<ActionResult> Edit(SP_Worker_ID_Result worker)
         {
             if (ModelState.IsValid)
             {
@@ -124,7 +126,8 @@ namespace project_3.Controllers
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Worker_Update(worker.معرف, worker.الاسم, worker.دولة, worker.المحافظة,
                     worker.المدينة, worker.تلفون, worker.فاكس, worker.بريد_الكتروني, worker.عنوان,
-                    NewIdentity, RecFound);
+                    worker.id_card_number,worker.relative_name_person_A,worker.relative_phone_person_A,
+                    worker.relative_name_person_B,worker.relative_phone_person_B,NewIdentity, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

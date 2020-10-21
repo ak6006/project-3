@@ -1,0 +1,39 @@
+﻿@model IEnumerable<project_3.Models.SP_Sales_BarCode_Check_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+    <div class="page-container">
+
+
+        <div class="d-flex flex-row-reverse mb-5 mt-5 mr-2 ">
+            <h1 class="text-light">
+                تحديث بيانات السرفر
+            </h1>
+        </div>
+        <br /><br /><br />
+        <div class="container  d-flex flex-row-reverse justify-content-between mt-5 mr-2 ">
+            <div class="container">
+                <a href="@Url.Action("Upload","SyncDatabase")" class=" btn btn-primary">
+                    رفع على السرفر
+                </a>
+            </div>
+            <div  class="container">
+                <a href="@Url.Action("Download","SyncDatabase")" class="btn btn-primary">
+                     تحميل من السرفر
+                </a>
+            </div>
+            <div class="container">
+                <a href="@Url.Action("BackUp","SyncDatabase")" class="btn btn-primary">
+                 نسخه احتياطيه
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

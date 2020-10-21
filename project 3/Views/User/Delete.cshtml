@@ -1,0 +1,71 @@
+﻿@model  Microsoft.AspNet.Identity.EntityFramework.IdentityUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="page-container">
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 class="text-light">
+            حذف مستخدم
+        </h1>
+    </div>
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h3 class="text-light">
+            هل انت متأكد انك تريد الحذف نهائيا
+        </h3>
+    </div>
+
+    <div class=" mb-5 mt-2 mr-2 text-light">
+
+        <hr />
+
+       
+
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.UserName)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.UserName)
+            </div>
+        </div>
+
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                <b>@Html.DisplayNameFor(model => model.PhoneNumber)</b>
+            </div>
+
+            <div class="col-md-2 d-flex flex-row-reverse">
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </div>
+        </div>
+
+
+        <br />
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color d-flex flex-row-reverse">
+                <button type="submit" class="col-md-2 btn btn-danger">
+                    <i class="fas fa-user-times"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    حذف
+                </button>
+                &nbsp; | &nbsp;
+                <a href="@Url.Action("Index","User")" class="col-md-2 text-light btn-primary btn form-control">
+                    <i class="fas fa-undo"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    رجوع للقائمه
+                </a>
+            </div>
+        }
+    </div>
+
+</div>

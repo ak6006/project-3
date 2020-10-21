@@ -17,7 +17,7 @@ namespace project_3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public store_has_product()
         {
-            this.orders = new HashSet<order>();
+            this.store_has_product_has_order = new HashSet<store_has_product_has_order>();
         }
     
         public int store_store_id { get; set; }
@@ -29,11 +29,11 @@ namespace project_3.Models
         public Nullable<int> store_has_product_state { get; set; }
     
         public virtual barcode barcode { get; set; }
+        public virtual product product { get; set; }
         public virtual shift shift { get; set; }
         public virtual store store { get; set; }
         public virtual weight weight { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> orders { get; set; }
-        public virtual product product { get; set; }
+        public virtual ICollection<store_has_product_has_order> store_has_product_has_order { get; set; }
     }
 }

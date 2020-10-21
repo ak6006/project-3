@@ -63,14 +63,16 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(SP_Shift_Admin_To_DataGrid_Result shiftadmin)
+        public async Task<ActionResult> Create(SP_Shift_Admin_ID_Result shiftadmin)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Shift_Admin_Add_New(shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة, shiftadmin.المدينة,
-                    shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان, NewIdentity, RecFound).ToList();
+                    shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
+                    shiftadmin.id_card_number,shiftadmin.relative_name_person_A,shiftadmin.relative_phone_person_A,
+                    shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B, NewIdentity, RecFound).ToList();
 
 
                 if ((int)RecFound.Value == 0)
@@ -115,7 +117,7 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(SP_Shift_Admin_To_DataGrid_Result shiftadmin)
+        public async Task<ActionResult> Edit(SP_Shift_Admin_ID_Result shiftadmin)
         {
             if (ModelState.IsValid)
             {
@@ -123,7 +125,8 @@ namespace project_3.Controllers
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Shift_Admin_Update(shiftadmin.معرف, shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة,
                     shiftadmin.المدينة, shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
-                    NewIdentity, RecFound);
+                    shiftadmin.id_card_number,shiftadmin.relative_name_person_A,shiftadmin.relative_phone_person_A,
+                    shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B,NewIdentity, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

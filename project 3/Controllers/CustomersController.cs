@@ -18,10 +18,10 @@ namespace project_3.Controllers
         private Entities db = new Entities();
 
         // GET: customers
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var customers = db.Database.SqlQuery<CustomerViewModel>("SP_Customer_To_DataGrid");
-            return View(await customers.ToListAsync());
+            var customers = db.SP_Customer_To_DataGrid();
+            return View( customers.ToList());
         }
 
         public ActionResult Search(string Key)
@@ -65,17 +65,19 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create( CustomerViewModel customer)
+        public async Task<ActionResult> Create( SP_Customer_ID_Result customer)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));              
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Customer_Add_New(customer.الاسم, customer.دولة, customer.المحافظة, customer.المدينة,
-                    customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان, NewIdentity, RecFound).ToList();
+                    customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان,
+                    customer.id_card_number,customer.relative_name_person_A,customer.relative_phone_person_A,
+                    customer.relative_name_person_B,customer.relative_phone_person_B, NewIdentity, RecFound).ToList();
 
                               
-                if((int)RecFound.Value==0)
+                if((int)RecFound.Value==0 || true)
                 {
                     TempData["Msg"] = "تمت الاضافه بنجاح";
                     TempData["Color"] ="Green";
@@ -117,15 +119,16 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit( CustomerViewModel customer)
+        public async Task<ActionResult> Edit( SP_Customer_ID_Result customer)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Customer_Update(customer.معرف, customer.الاسم, customer.دولة, customer.المحافظة,
-                    customer.المدينة, customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان,
-                    NewIdentity, RecFound);
+                    customer.المدينة, customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان
+                    ,customer.id_card_number,customer.relative_name_person_A,customer.relative_phone_person_A,
+                    customer.relative_name_person_B,customer.relative_phone_person_B,NewIdentity, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

@@ -31,37 +31,24 @@ namespace project_3.Models
         public virtual DbSet<addresstype> addresstypes { get; set; }
         public virtual DbSet<barcode> barcodes { get; set; }
         public virtual DbSet<customer> customers { get; set; }
+        public virtual DbSet<gift> gifts { get; set; }
         public virtual DbSet<measurement> measurements { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<order_has_product> order_has_product { get; set; }
+        public virtual DbSet<product> products { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<shift> shifts { get; set; }
         public virtual DbSet<shiftadmin> shiftadmins { get; set; }
         public virtual DbSet<store> stores { get; set; }
         public virtual DbSet<store_has_product> store_has_product { get; set; }
+        public virtual DbSet<store_has_product_has_order> store_has_product_has_order { get; set; }
         public virtual DbSet<transvehcile> transvehciles { get; set; }
         public virtual DbSet<transvehcile_has_order> transvehcile_has_order { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<weight> weights { get; set; }
         public virtual DbSet<worker> workers { get; set; }
-        public virtual DbSet<gift> gifts { get; set; }
-        public virtual DbSet<product> products { get; set; }
     
-        [DbFunction("Entities", "SplitList")]
-        public virtual IQueryable<SplitList_Result> SplitList(string list, string separator)
-        {
-            var listParameter = list != null ?
-                new ObjectParameter("list", list) :
-                new ObjectParameter("list", typeof(string));
-    
-            var separatorParameter = separator != null ?
-                new ObjectParameter("separator", separator) :
-                new ObjectParameter("separator", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<SplitList_Result>("[Entities].[SplitList](@list, @separator)", listParameter, separatorParameter);
-        }
-    
-        public virtual ObjectResult<string> SP_Customer_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Customer_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var a_NameParameter = a_Name != null ?
                 new ObjectParameter("A_Name", a_Name) :
@@ -95,7 +82,27 @@ namespace project_3.Models
                 new ObjectParameter("ADRESS", aDRESS) :
                 new ObjectParameter("ADRESS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Customer_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, new_identity, rec_found);
+            var id_card_numberParameter = id_card_number != null ?
+                new ObjectParameter("id_card_number", id_card_number) :
+                new ObjectParameter("id_card_number", typeof(string));
+    
+            var relative_name_person_AParameter = relative_name_person_A != null ?
+                new ObjectParameter("relative_name_person_A", relative_name_person_A) :
+                new ObjectParameter("relative_name_person_A", typeof(string));
+    
+            var relative_phone_person_AParameter = relative_phone_person_A != null ?
+                new ObjectParameter("relative_phone_person_A", relative_phone_person_A) :
+                new ObjectParameter("relative_phone_person_A", typeof(string));
+    
+            var relative_name_person_BParameter = relative_name_person_B != null ?
+                new ObjectParameter("relative_name_person_B", relative_name_person_B) :
+                new ObjectParameter("relative_name_person_B", typeof(string));
+    
+            var relative_phone_person_BParameter = relative_phone_person_B != null ?
+                new ObjectParameter("relative_phone_person_B", relative_phone_person_B) :
+                new ObjectParameter("relative_phone_person_B", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Customer_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, new_identity, rec_found);
         }
     
         public virtual int SP_Customer_Delete(Nullable<int> cUSTOMER_ID, Nullable<int> aDD_ID)
@@ -139,7 +146,7 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Customer_To_DataGrid_Result>("SP_Customer_To_DataGrid");
         }
     
-        public virtual int SP_Customer_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual int SP_Customer_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var aDD_IDParameter = aDD_ID.HasValue ?
                 new ObjectParameter("ADD_ID", aDD_ID) :
@@ -177,7 +184,27 @@ namespace project_3.Models
                 new ObjectParameter("ADRESS", aDRESS) :
                 new ObjectParameter("ADRESS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Customer_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, new_identity, rec_found);
+            var id_card_numberParameter = id_card_number != null ?
+                new ObjectParameter("id_card_number", id_card_number) :
+                new ObjectParameter("id_card_number", typeof(string));
+    
+            var relative_name_person_AParameter = relative_name_person_A != null ?
+                new ObjectParameter("relative_name_person_A", relative_name_person_A) :
+                new ObjectParameter("relative_name_person_A", typeof(string));
+    
+            var relative_phone_person_AParameter = relative_phone_person_A != null ?
+                new ObjectParameter("relative_phone_person_A", relative_phone_person_A) :
+                new ObjectParameter("relative_phone_person_A", typeof(string));
+    
+            var relative_name_person_BParameter = relative_name_person_B != null ?
+                new ObjectParameter("relative_name_person_B", relative_name_person_B) :
+                new ObjectParameter("relative_name_person_B", typeof(string));
+    
+            var relative_phone_person_BParameter = relative_phone_person_B != null ?
+                new ObjectParameter("relative_phone_person_B", relative_phone_person_B) :
+                new ObjectParameter("relative_phone_person_B", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Customer_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, new_identity, rec_found);
         }
     
         public virtual ObjectResult<SP_flutter_Customer_Orders_Query_Result> SP_flutter_Customer_Orders_Query(string custmerPhone)
@@ -265,6 +292,19 @@ namespace project_3.Models
                 new ObjectParameter("listOfvan", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Flutter_Order_van_Update", orderIdParameter, orderHasProductIdParameter, orderDateParameter, productIdParameter, wieghtIdParameter, measureIdParameter, quantityParameter, listOfvanParameter);
+        }
+    
+        public virtual ObjectResult<SP_Flutter_product_prouction_Result> SP_Flutter_product_prouction(Nullable<System.DateTime> beginDate, Nullable<System.DateTime> endDate)
+        {
+            var beginDateParameter = beginDate.HasValue ?
+                new ObjectParameter("BeginDate", beginDate) :
+                new ObjectParameter("BeginDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Flutter_product_prouction_Result>("SP_Flutter_product_prouction", beginDateParameter, endDateParameter);
         }
     
         public virtual ObjectResult<SP_flutter_Query_Trans_Result> SP_flutter_Query_Trans(string custmerPhone)
@@ -709,6 +749,50 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Product_Update", productIdParameter, productNameParameter, rec_found);
         }
     
+        public virtual ObjectResult<string> SP_Sales_BarCode(string barcode, string orderId, string prodductId, string weightId, Nullable<int> v_id, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
+        {
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            var orderIdParameter = orderId != null ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(string));
+    
+            var prodductIdParameter = prodductId != null ?
+                new ObjectParameter("ProdductId", prodductId) :
+                new ObjectParameter("ProdductId", typeof(string));
+    
+            var weightIdParameter = weightId != null ?
+                new ObjectParameter("weightId", weightId) :
+                new ObjectParameter("weightId", typeof(string));
+    
+            var v_idParameter = v_id.HasValue ?
+                new ObjectParameter("v_id", v_id) :
+                new ObjectParameter("v_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Sales_BarCode", barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, v_idParameter, serial_found, rec_found, netCounter);
+        }
+    
+        public virtual ObjectResult<SP_Sales_BarCode_Check_Result> SP_Sales_BarCode_Check(string barcode, ObjectParameter rec_found)
+        {
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_BarCode_Check_Result>("SP_Sales_BarCode_Check", barcodeParameter, rec_found);
+        }
+    
+        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_display_Result> SP_Sales_Order_Trans_Vin_display()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_display_Result>("SP_Sales_Order_Trans_Vin_display");
+        }
+    
+        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_display_update_Result> SP_Sales_Order_Trans_Vin_display_update()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_display_update_Result>("SP_Sales_Order_Trans_Vin_display_update");
+        }
+    
         public virtual ObjectResult<SP_Sales_Order_Trans_Vin_Load_Result> SP_Sales_Order_Trans_Vin_Load(string transVehcileSerial)
         {
             var transVehcileSerialParameter = transVehcileSerial != null ?
@@ -718,7 +802,7 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_Load_Result>("SP_Sales_Order_Trans_Vin_Load", transVehcileSerialParameter);
         }
     
-        public virtual ObjectResult<string> SP_Shift_Admin_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Shift_Admin_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var a_NameParameter = a_Name != null ?
                 new ObjectParameter("A_Name", a_Name) :
@@ -752,7 +836,27 @@ namespace project_3.Models
                 new ObjectParameter("ADRESS", aDRESS) :
                 new ObjectParameter("ADRESS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Shift_Admin_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, new_identity, rec_found);
+            var id_card_numberParameter = id_card_number != null ?
+                new ObjectParameter("id_card_number", id_card_number) :
+                new ObjectParameter("id_card_number", typeof(string));
+    
+            var relative_name_person_AParameter = relative_name_person_A != null ?
+                new ObjectParameter("relative_name_person_A", relative_name_person_A) :
+                new ObjectParameter("relative_name_person_A", typeof(string));
+    
+            var relative_phone_person_AParameter = relative_phone_person_A != null ?
+                new ObjectParameter("relative_phone_person_A", relative_phone_person_A) :
+                new ObjectParameter("relative_phone_person_A", typeof(string));
+    
+            var relative_name_person_BParameter = relative_name_person_B != null ?
+                new ObjectParameter("relative_name_person_B", relative_name_person_B) :
+                new ObjectParameter("relative_name_person_B", typeof(string));
+    
+            var relative_phone_person_BParameter = relative_phone_person_B != null ?
+                new ObjectParameter("relative_phone_person_B", relative_phone_person_B) :
+                new ObjectParameter("relative_phone_person_B", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Shift_Admin_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, new_identity, rec_found);
         }
     
         public virtual int SP_Shift_Admin_DELETE(Nullable<int> shiftAdminID, Nullable<int> aDD_ID)
@@ -796,7 +900,7 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Admin_To_DataGrid_Result>("SP_Shift_Admin_To_DataGrid");
         }
     
-        public virtual int SP_Shift_Admin_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual int SP_Shift_Admin_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var aDD_IDParameter = aDD_ID.HasValue ?
                 new ObjectParameter("ADD_ID", aDD_ID) :
@@ -834,7 +938,27 @@ namespace project_3.Models
                 new ObjectParameter("ADRESS", aDRESS) :
                 new ObjectParameter("ADRESS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Admin_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, new_identity, rec_found);
+            var id_card_numberParameter = id_card_number != null ?
+                new ObjectParameter("id_card_number", id_card_number) :
+                new ObjectParameter("id_card_number", typeof(string));
+    
+            var relative_name_person_AParameter = relative_name_person_A != null ?
+                new ObjectParameter("relative_name_person_A", relative_name_person_A) :
+                new ObjectParameter("relative_name_person_A", typeof(string));
+    
+            var relative_phone_person_AParameter = relative_phone_person_A != null ?
+                new ObjectParameter("relative_phone_person_A", relative_phone_person_A) :
+                new ObjectParameter("relative_phone_person_A", typeof(string));
+    
+            var relative_name_person_BParameter = relative_name_person_B != null ?
+                new ObjectParameter("relative_name_person_B", relative_name_person_B) :
+                new ObjectParameter("relative_name_person_B", typeof(string));
+    
+            var relative_phone_person_BParameter = relative_phone_person_B != null ?
+                new ObjectParameter("relative_phone_person_B", relative_phone_person_B) :
+                new ObjectParameter("relative_phone_person_B", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Admin_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, new_identity, rec_found);
         }
     
         public virtual ObjectResult<string> SP_Shift_Main_Add_New(string shiftName, Nullable<int> shiftAdminId, ObjectParameter new_identity, ObjectParameter rec_found)
@@ -1291,7 +1415,7 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_weight_To_ComboBox_Result>("SP_weight_To_ComboBox");
         }
     
-        public virtual ObjectResult<string> SP_Worker_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Worker_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var a_NameParameter = a_Name != null ?
                 new ObjectParameter("A_Name", a_Name) :
@@ -1325,7 +1449,27 @@ namespace project_3.Models
                 new ObjectParameter("ADRESS", aDRESS) :
                 new ObjectParameter("ADRESS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Worker_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, new_identity, rec_found);
+            var id_card_numberParameter = id_card_number != null ?
+                new ObjectParameter("id_card_number", id_card_number) :
+                new ObjectParameter("id_card_number", typeof(string));
+    
+            var relative_name_person_AParameter = relative_name_person_A != null ?
+                new ObjectParameter("relative_name_person_A", relative_name_person_A) :
+                new ObjectParameter("relative_name_person_A", typeof(string));
+    
+            var relative_phone_person_AParameter = relative_phone_person_A != null ?
+                new ObjectParameter("relative_phone_person_A", relative_phone_person_A) :
+                new ObjectParameter("relative_phone_person_A", typeof(string));
+    
+            var relative_name_person_BParameter = relative_name_person_B != null ?
+                new ObjectParameter("relative_name_person_B", relative_name_person_B) :
+                new ObjectParameter("relative_name_person_B", typeof(string));
+    
+            var relative_phone_person_BParameter = relative_phone_person_B != null ?
+                new ObjectParameter("relative_phone_person_B", relative_phone_person_B) :
+                new ObjectParameter("relative_phone_person_B", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Worker_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, new_identity, rec_found);
         }
     
         public virtual int SP_Worker_DELETE(Nullable<int> workerID, Nullable<int> aDD_ID)
@@ -1364,7 +1508,7 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Worker_To_ComboBox_Result>("SP_Worker_To_ComboBox");
         }
     
-        public virtual int SP_Worker_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual int SP_Worker_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, ObjectParameter new_identity, ObjectParameter rec_found)
         {
             var aDD_IDParameter = aDD_ID.HasValue ?
                 new ObjectParameter("ADD_ID", aDD_ID) :
@@ -1402,51 +1546,32 @@ namespace project_3.Models
                 new ObjectParameter("ADRESS", aDRESS) :
                 new ObjectParameter("ADRESS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Worker_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, new_identity, rec_found);
+            var id_card_numberParameter = id_card_number != null ?
+                new ObjectParameter("id_card_number", id_card_number) :
+                new ObjectParameter("id_card_number", typeof(string));
+    
+            var relative_name_person_AParameter = relative_name_person_A != null ?
+                new ObjectParameter("relative_name_person_A", relative_name_person_A) :
+                new ObjectParameter("relative_name_person_A", typeof(string));
+    
+            var relative_phone_person_AParameter = relative_phone_person_A != null ?
+                new ObjectParameter("relative_phone_person_A", relative_phone_person_A) :
+                new ObjectParameter("relative_phone_person_A", typeof(string));
+    
+            var relative_name_person_BParameter = relative_name_person_B != null ?
+                new ObjectParameter("relative_name_person_B", relative_name_person_B) :
+                new ObjectParameter("relative_name_person_B", typeof(string));
+    
+            var relative_phone_person_BParameter = relative_phone_person_B != null ?
+                new ObjectParameter("relative_phone_person_B", relative_phone_person_B) :
+                new ObjectParameter("relative_phone_person_B", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Worker_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, new_identity, rec_found);
         }
     
         public virtual ObjectResult<SP_Workers_To_DataGrid_Result> SP_Workers_To_DataGrid()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Workers_To_DataGrid_Result>("SP_Workers_To_DataGrid");
-        }
-    
-        public virtual ObjectResult<SP_Sales_BarCode_Check_Result> SP_Sales_BarCode_Check(string barcode, ObjectParameter rec_found)
-        {
-            var barcodeParameter = barcode != null ?
-                new ObjectParameter("Barcode", barcode) :
-                new ObjectParameter("Barcode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_BarCode_Check_Result>("SP_Sales_BarCode_Check", barcodeParameter, rec_found);
-        }
-    
-        public virtual ObjectResult<string> SP_Sales_BarCode(string barcode, string orderId, string prodductId, string weightId, Nullable<int> v_id, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
-        {
-            var barcodeParameter = barcode != null ?
-                new ObjectParameter("Barcode", barcode) :
-                new ObjectParameter("Barcode", typeof(string));
-    
-            var orderIdParameter = orderId != null ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(string));
-    
-            var prodductIdParameter = prodductId != null ?
-                new ObjectParameter("ProdductId", prodductId) :
-                new ObjectParameter("ProdductId", typeof(string));
-    
-            var weightIdParameter = weightId != null ?
-                new ObjectParameter("weightId", weightId) :
-                new ObjectParameter("weightId", typeof(string));
-    
-            var v_idParameter = v_id.HasValue ?
-                new ObjectParameter("v_id", v_id) :
-                new ObjectParameter("v_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Sales_BarCode", barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, v_idParameter, serial_found, rec_found, netCounter);
-        }
-    
-        public virtual ObjectResult<SP_Sales_Order_Trans_Vin_display_Result> SP_Sales_Order_Trans_Vin_display()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_display_Result>("SP_Sales_Order_Trans_Vin_display");
         }
     }
 }
