@@ -18,6 +18,8 @@ namespace project_3.Controllers
 {
     public class TransOrderController : Controller
     {
+        public static Queue<OrderVehicleViewModel> MyList = new Queue<OrderVehicleViewModel>();
+        public static Queue<VQueueResultViewModel> MyResList = new Queue<VQueueResultViewModel>();
         private Entities db = new Entities();
 
         // GET: transvehcile_has_order
@@ -54,23 +56,136 @@ namespace project_3.Controllers
             return View(result);
         }
 
+        //[HttpPost]
+        //public ActionResult Transport2(OrderVehicleViewModel record)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var VID = db.transvehciles.Where(v => v.transVehcile_driver_name == record.DName).FirstOrDefault().v_id;
+        //        ObjectParameter SerialFound = new ObjectParameter("Serial_found", typeof(int));
+        //        ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
+        //        ObjectParameter NtCounter = new ObjectParameter("NetCounter", typeof(int));
+        //        try
+        //        {
+        //            db.SP_Sales_BarCode(record.BarCode, record.OId.ToString(), record.PId.ToString(),
+        //                record.WId.ToString(),VID, SerialFound, RecFound, NtCounter).ToList();
+        //        }
+        //        catch
+        //        {
+        //            return RedirectToAction("Transport", record);
+        //        }
+        //        //for api notification 
+        //        var customerPhone = db.addresses.Where(c => c.firstName == record.CName).FirstOrDefault().phone;
+        //        var CarNumber = db.transvehciles.Where(n => n.transVehcile_driver_name == record.DName).FirstOrDefault().transVehcile_num;
+        //        var msg = "";
+        //        //
+        //        int num;
+        //        if (int.TryParse(NtCounter.Value.ToString(), out num))
+        //        {
+        //            if ((int)NtCounter.Value == 0)
+        //            {
+        //                //send notification that car has left
+        //                msg = "العربيه رقم" + CarNumber + "انتهت من التحميل";
+        //                var input = new NotificationViewModel()
+        //                {
+        //                    Title = "اشعار جديد",
+        //                    Msg = msg,
+        //                    CustomerPhone = customerPhone
+        //                };
+        //                var client = new HttpClient();
+        //                client.BaseAddress = new Uri("http://teamiegypt-001-site1.atempurl.com/api/noti/");
+        //                client.PostAsJsonAsync<NotificationViewModel>("Data", input);
+        //                //
+        //                TempData["Msg"] = "تم انتهاء التحميل بالفعل";
+        //                TempData["Color"] = "Red";
+        //                record.Counter = (int)NtCounter.Value;
+        //                record.Remaining = (int)NtCounter.Value;
+        //                return RedirectToAction("Transport", record);
+        //            }
+        //        }
+        //        if ((int)RecFound.Value == 0)
+        //        {
+        //            TempData["Msg"] = "السريال غير صحيح";
+        //            TempData["Color"] = "Red";
+        //            return RedirectToAction("Transport", record);
+        //        }
+        //        if ((int)SerialFound.Value > 0)
+        //        {
+        //            TempData["Msg"] = "تم بيع الشكارة بالفعل";
+        //            TempData["Color"] = "Red";
+        //            return RedirectToAction("Transport", record);
+        //        }
+        //        else
+        //        {
+        //            record.Remaining = (int)NtCounter.Value;
+        //            record.Counter = (int)NtCounter.Value;
+        //            //send notification that car has entered 
+        //            if (record.All-record.Remaining==1)
+        //            {
+        //                msg = "العربيه رقم" + CarNumber + "بدات التحميل";
+        //                var input = new NotificationViewModel()
+        //                {
+        //                    Title = "اشعار جديد",
+        //                    Msg = msg,
+        //                    CustomerPhone = customerPhone
+        //                };
+        //                var client = new HttpClient();
+        //                client.BaseAddress = new Uri("http://teamiegypt-001-site1.atempurl.com/api/noti/");
+        //                client.PostAsJsonAsync<NotificationViewModel>("Data", input);
+        //            }
+        //            //
+        //            TempData["Msg"] = "تمت الاضافه بنجاح";
+        //            TempData["Color"] = "Green";
+        //            db.SaveChangesAsync();
+        //            return RedirectToAction("Transport", record);
+        //        }
+        //    }
+        //    return RedirectToAction("Transport", record);
+        //}
+
+
         [HttpPost]
         public ActionResult Transport2(OrderVehicleViewModel record)
         {
             if (ModelState.IsValid)
             {
+                MyList.Enqueue(record);
+            }
+            return RedirectToAction("Transport", record);
+        }
+
+        public ActionResult SaveToDB()
+        {
+
+            QueueResultViewModel Res2 = new QueueResultViewModel()
+            {
+                Serial = "1",
+                Result = "nothing"
+            };
+            try
+            {
+                var record = MyList.Peek();
+                MyList.Dequeue();
+
                 var VID = db.transvehciles.Where(v => v.transVehcile_driver_name == record.DName).FirstOrDefault().v_id;
                 ObjectParameter SerialFound = new ObjectParameter("Serial_found", typeof(int));
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NtCounter = new ObjectParameter("NetCounter", typeof(int));
+
+                VQueueResultViewModel Res = new VQueueResultViewModel()
+                {
+                    Serial = record.BarCode
+                };
+
+
                 try
                 {
                     db.SP_Sales_BarCode(record.BarCode, record.OId.ToString(), record.PId.ToString(),
-                        record.WId.ToString(),VID, SerialFound, RecFound, NtCounter).ToList();
+                        record.WId.ToString(), VID, SerialFound, RecFound, NtCounter).ToList();
                 }
                 catch
                 {
-                    return RedirectToAction("Transport", record);
+                    return View(Res);
                 }
                 //for api notification 
                 var customerPhone = db.addresses.Where(c => c.firstName == record.CName).FirstOrDefault().phone;
@@ -83,60 +198,115 @@ namespace project_3.Controllers
                     if ((int)NtCounter.Value == 0)
                     {
                         //send notification that car has left
-                        msg = "العربيه رقم" + CarNumber + "غادرت المصنع";
+                        msg = "العربيه رقم" + CarNumber + "انتهت من التحميل";
                         var input = new NotificationViewModel()
                         {
+                            Title = "اشعار جديد",
                             Msg = msg,
                             CustomerPhone = customerPhone
                         };
                         var client = new HttpClient();
-                        client.BaseAddress = new Uri("http://ak772000842-001-site1.etempurl.com/api/noti/");
+                        client.BaseAddress = new Uri("http://teamiegypt-001-site1.atempurl.com/api/noti/");
                         client.PostAsJsonAsync<NotificationViewModel>("Data", input);
                         //
                         TempData["Msg"] = "تم انتهاء التحميل بالفعل";
                         TempData["Color"] = "Red";
                         record.Counter = (int)NtCounter.Value;
                         record.Remaining = (int)NtCounter.Value;
-                        return RedirectToAction("Transport", record);
+
+                        Res.Result = "تم انتهاء التحميل بالفعل";
+                        Res.Counter = (int)NtCounter.Value;
+                        MyResList.Enqueue(Res);
+
+
+                        return View(Res);
                     }
                 }
                 if ((int)RecFound.Value == 0)
                 {
                     TempData["Msg"] = "السريال غير صحيح";
                     TempData["Color"] = "Red";
-                    return RedirectToAction("Transport", record);
+
+                    Res.Result = "السريال غير صحيح";
+                    Res.Counter = (int)NtCounter.Value;
+                    MyResList.Enqueue(Res);
+
+                    return View(Res);
                 }
                 if ((int)SerialFound.Value > 0)
                 {
                     TempData["Msg"] = "تم بيع الشكارة بالفعل";
                     TempData["Color"] = "Red";
-                    return RedirectToAction("Transport", record);
+
+                    Res.Result = "تم بيع الشكارة بالفعل";
+                    Res.Counter = (int)NtCounter.Value;
+                    MyResList.Enqueue(Res);
+                    return View(Res);
                 }
                 else
                 {
                     record.Remaining = (int)NtCounter.Value;
                     record.Counter = (int)NtCounter.Value;
                     //send notification that car has entered 
-                    if (record.All-record.Remaining==1)
+                    if (record.All - record.Remaining == 1)
                     {
-                        msg = "العربيه رقم" + CarNumber + "وصلت المصنع";
+                        msg = "العربيه رقم" + CarNumber + "بدات التحميل";
                         var input = new NotificationViewModel()
                         {
+                            Title = "اشعار جديد",
                             Msg = msg,
                             CustomerPhone = customerPhone
                         };
                         var client = new HttpClient();
-                        client.BaseAddress = new Uri("http://ak772000842-001-site1.etempurl.com/api/noti/");
+                        client.BaseAddress = new Uri("http://teamiegypt-001-site1.atempurl.com/api/noti/");
                         client.PostAsJsonAsync<NotificationViewModel>("Data", input);
                     }
                     //
                     TempData["Msg"] = "تمت الاضافه بنجاح";
                     TempData["Color"] = "Green";
+
+                    Res.Result = "تمت الاضافه بنجاح";
+                    Res.Counter = (int)NtCounter.Value;
+                    MyResList.Enqueue(Res);
                     db.SaveChangesAsync();
-                    return RedirectToAction("Transport", record);
+                    return View(Res);
                 }
             }
-            return RedirectToAction("Transport", record);
+            catch
+            {
+
+            }
+
+            return View(Res2);
+        }
+
+        public ActionResult FillTable(VQueueResultViewModel record)
+        {
+            //db.remain_bags(record.OId,record.)
+            return View(MyList.Peek());
+        }
+
+        public ActionResult QueueResults()
+        {
+            Queue<VQueueResultViewModel> Items = new Queue<VQueueResultViewModel>();
+
+            if (MyResList.Count > 3)
+            {
+                MyResList.Dequeue();
+                Items.Dequeue();
+            }
+            if (MyResList.Count > 0)
+            {
+                foreach (var item in MyResList)
+                {
+                    Items.Enqueue(item);
+                }
+                return View(Items);
+            }
+            else
+            {
+                return View(Items);
+            }
         }
 
 

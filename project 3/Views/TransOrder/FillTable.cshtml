@@ -1,0 +1,33 @@
+﻿@model project_3.Models.OrderVehicleViewModel
+@{
+    Layout = null;
+}
+
+@if (Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <table class="table table-hover border-bottom border-light border-5">
+            <tr class=" text-light">
+
+                <th>عدد الشكاير المتبقيه</th>
+                <th>عدد الشكاير</th>
+                <th>اسم السائق</th>
+                <th>اسم الوكيل</th>
+                <th>رقم الطلبيه</th>
+
+            </tr>
+
+            <tr class=" text-light">
+                <td>@item.Remaining</td>
+                <td>@item.All</td>
+                <td>@item.DName</td>
+                <td>@item.CName</td>
+                <td>@item.OId</td>
+
+            </tr>
+        </table>
+
+    }
+}
+

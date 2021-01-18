@@ -22,6 +22,7 @@ namespace project_3.Models
         }
     
         public string serialNumber { get; set; }
+        public Nullable<int> historyId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<store_has_product> store_has_product { get; set; }

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<project_3.Models.SP_Sales_Order_Trans_Vin_display_update_Result>
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<div class="page-container mb-5">
+    <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
+        <h1 style='font-family:"BeInNormal"' class=" text-light ">
+            ترتيب انتظار العربيات
+        </h1>
+        <h2 class="text-light col-md-5">
+            التاريخ @DateTime.Now.ToString("dd/MM/yyyy")
+        </h2>
+        <h2 class="text-light col-md-4">
+            الساعة
+            <span id="TimeDiv">
+
+            </span>
+        </h2>
+    </div>
+    <table class="text-center table table-hover border-bottom border-light border-5">
+        <tr class=" text-light">
+            <th>تعديل</th>
+            <th>الكميه  </th>
+            <th>الوزن </th>
+            <th>وحدة القياس </th>
+            <th>المنتج </th>
+            <th>التاريخ </th>
+            <th> الوكيل </th>
+            <th>موديل العربيه</th>
+            <th>رقم العربية</th>
+            <th>اسم السائق</th>
+            <th> رقم الطلبيه</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm("Edit", "WaitingCars", FormMethod.Post))
+            {
+                <tr class=" text-light">
+                    <td>
+                        <button type="submit" class="text-light btn-warning btn form-control">
+                            <span>
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            تعديل
+                        </button>
+                    </td>
+                    <td>@item.Quantity</td>
+                    <td>@item.weight_net</td>
+                    <td>@item.measre_name</td>
+                    <td>@item.productName</td>
+                    <td>
+                        <input type="datetime-local" class="form-control datepicker" name="date" value="@item.date.Value.ToString("yyyy-MM-ddTHH:mm")" />
+                    </td>
+                    <td>@item.firstName</td>
+                    <td>@item.transVehcile_model</td>
+                    <td>@item.transVehcile_num</td>
+                    <td>@item.transVehcile_driver_name</td>
+                    <td>
+                        <input type="hidden" name="order_id" value="@item.order_id" />
+                        @item.order_id
+                    </td>
+                    
+
+                </tr>
+            }
+        }
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+
+            var d = new Date();
+            if (d.toLocaleTimeString().includes("PM")) {
+                document.getElementById("TimeDiv").innerHTML = d.toLocaleTimeString().replace("PM", "م");
+            }
+            else {
+                document.getElementById("TimeDiv").innerHTML = d.toLocaleTimeString().replace("AM", "ص");
+            }
+        }, 1000);
+    });
+</script>
+

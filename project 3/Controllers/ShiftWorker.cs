@@ -145,6 +145,19 @@ namespace project_3.Controllers
             return View(shift);
         }
 
+
+        public ActionResult DeleteAll(int? shift_id)
+        {
+            db.SP_Shift_Worker_DELETE_ALL(shift_id);
+            var shifts = db.SP_Shift_Main_To_ComboBox();
+            ViewBag.shift_id = new SelectList(shifts, "shift_id", "shiftName");
+            var id = db.shifts.FirstOrDefault().shift_id;
+            var ShiftWorkers = db.SP_Shift_Worker_To_DataGrid_All();
+            return View("index", ShiftWorkers);
+        }
+
+
+
         // GET: ShiftWorker/Delete/5
         public ActionResult Delete(int? shift_id, int? worker_id)
         {
@@ -159,6 +172,7 @@ namespace project_3.Controllers
             }
             return View(shiftWorker);
         }
+
 
         // POST: ShiftWorker/Delete/5
         [HttpPost, ActionName("Delete")]

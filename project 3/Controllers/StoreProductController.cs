@@ -13,10 +13,14 @@ using project_3.Models;
 
 namespace project_3.Controllers
 {
+
+
+
     public class StoreProductController : Controller
     {
         private Entities db = new Entities();
-
+        public static Queue<store_has_product> MyList = new Queue<store_has_product>();
+        public static Queue<QueueResultViewModel> MyResList = new Queue<QueueResultViewModel>();
         // GET: StoreProduct
         public ActionResult Index()
         {
@@ -30,9 +34,9 @@ namespace project_3.Controllers
             ViewBag.ShiftId = new SelectList(Shifts, "shift_id", "shiftName");
             return View();
         }
-        
-        
-        
+
+
+
         public ActionResult Index2(store_has_product SProd)
         {
             var Products = db.SP_Product_To_ComboBox();
@@ -98,11 +102,67 @@ namespace project_3.Controllers
         // POST: StoreProduct/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Create(store_has_product SProd)
+        //{
+        //    if(SProd!=null)
+        //    {
+        //        ViewBag.SelectedShiftId = SProd.shift_shift_id;
+        //        ViewBag.SelectedProdId = SProd.product_product_id;
+        //        ViewBag.SelectedWieghtId = SProd.weight_weight_id;
+        //        ViewBag.SelectedStoreId = SProd.store_store_id;
+        //        ViewBag.Selecteddate = SProd.store_has_productDate;
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
+        //        ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
+        //        try
+        //        {
+        //            db.SP_Store_Product_Add_New(SProd.shift_shift_id, SProd.product_product_id,
+        //                SProd.store_store_id, SProd.weight_weight_id, SProd.store_has_productDate,
+        //                SProd.barcode_serialNumber, NewIdentity,RecFound).ToList();
+
+
+        //            if((int)RecFound.Value > 0)
+        //            {
+        //                TempData["Msg"] = "هذه الشكاره تمت تعبئتها من قبل";
+        //                return RedirectToAction("Index2",SProd);
+        //            }
+        //            else if ((int)NewIdentity.Value == 0)
+        //            {
+        //                TempData["Msg"] = "هذا السريال غير صحيح";
+        //                return RedirectToAction("Index2",SProd);
+        //            }
+        //            else
+        //            {
+        //                TempData["Msg"] = "تمت الاضافه بنجاح";
+        //                await db.SaveChangesAsync();
+        //                return RedirectToAction("Index2",SProd);
+        //            }
+        //        }
+        //        catch
+        //        {
+        //            return RedirectToAction("Index2",SProd);
+        //        }
+
+        //    }
+
+        //    ViewBag.barcode_serialNumber = new SelectList(db.barcodes, "serialNumber", "serialNumber");
+        //    ViewBag.product_product_id = new SelectList(db.products, "product_id", "productName");
+        //    ViewBag.shift_shift_id = new SelectList(db.shifts, "shift_id", "shiftName");
+        //    ViewBag.store_store_id = new SelectList(db.stores, "store_id", "storeName");
+        //    ViewBag.weight_weight_id = new SelectList(db.weights, "weight_id", "weight_id");
+        //    return View("Index",SProd);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(store_has_product SProd)
+        public ActionResult Create(store_has_product SProd)
         {
-            if(SProd!=null)
+            if (SProd != null)
             {
                 ViewBag.SelectedShiftId = SProd.shift_shift_id;
                 ViewBag.SelectedProdId = SProd.product_product_id;
@@ -110,41 +170,10 @@ namespace project_3.Controllers
                 ViewBag.SelectedStoreId = SProd.store_store_id;
                 ViewBag.Selecteddate = SProd.store_has_productDate;
             }
-            
+
             if (ModelState.IsValid)
             {
-
-                ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-                ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                try
-                {
-                    db.SP_Store_Product_Add_New(SProd.shift_shift_id, SProd.product_product_id,
-                        SProd.store_store_id, SProd.weight_weight_id, SProd.store_has_productDate,
-                        SProd.barcode_serialNumber, NewIdentity,RecFound).ToList();
-                    
-                    
-                    if((int)RecFound.Value > 0)
-                    {
-                        TempData["Msg"] = "هذه الشكاره تمت تعبئتها من قبل";
-                        return RedirectToAction("Index2",SProd);
-                    }
-                    else if ((int)NewIdentity.Value == 0)
-                    {
-                        TempData["Msg"] = "هذا السريال غير صحيح";
-                        return RedirectToAction("Index2",SProd);
-                    }
-                    else
-                    {
-                        TempData["Msg"] = "تمت الاضافه بنجاح";
-                        await db.SaveChangesAsync();
-                        return RedirectToAction("Index2",SProd);
-                    }
-                }
-                catch
-                {
-                    return RedirectToAction("Index2",SProd);
-                }
-                
+                MyList.Enqueue(SProd);
             }
 
             ViewBag.barcode_serialNumber = new SelectList(db.barcodes, "serialNumber", "serialNumber");
@@ -152,8 +181,85 @@ namespace project_3.Controllers
             ViewBag.shift_shift_id = new SelectList(db.shifts, "shift_id", "shiftName");
             ViewBag.store_store_id = new SelectList(db.stores, "store_id", "storeName");
             ViewBag.weight_weight_id = new SelectList(db.weights, "weight_id", "weight_id");
-            return View("Index",SProd);
+            return View("Index", SProd);
         }
+
+        public ActionResult QueueResults ()
+        {
+            Queue<QueueResultViewModel> Items = new Queue<QueueResultViewModel>();
+
+            if (MyResList.Count>3)
+            {
+                MyResList.Dequeue();
+                Items.Dequeue();
+            }
+            if (MyResList.Count>0)
+            {
+                foreach (var item in MyResList)
+                {
+                    Items.Enqueue(item);
+                }
+                return View(Items);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult SaveToDB()
+        {
+            QueueResultViewModel Res2 = new QueueResultViewModel()
+            {
+                Serial = "1",
+                Result = "nothing"
+            };
+
+            try
+            {
+                var item = MyList.Peek();
+                MyList.Dequeue();
+                ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
+                ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
+                db.SP_Store_Product_Add_New(item.shift_shift_id, item.product_product_id,
+                      item.store_store_id, item.weight_weight_id, item.store_has_productDate,
+                      item.barcode_serialNumber, NewIdentity, RecFound).ToList();
+
+               QueueResultViewModel Res = new QueueResultViewModel()
+                {
+                    Serial = item.barcode_serialNumber
+                };
+
+                if ((int)RecFound.Value > 0)
+                {
+                    //TempData["Msg"] = "هذه الشكاره تمت تعبئتها من قبل";
+                    Res.Result = "هذه الشكاره تمت تعبئتها من قبل";
+                    MyResList.Enqueue(Res);
+                    return View(Res);
+                }
+                else if ((int)NewIdentity.Value == 0)
+                {
+                    //TempData["Msg"] = "هذا السريال غير صحيح";
+                    Res.Result = "هذا السريال غير صحيح";
+                    MyResList.Enqueue(Res);
+                    return View(Res);
+                }
+                else
+                {
+                    //TempData["Msg"] = "تمت الاضافه بنجاح";
+                    Res.Result = "تمت الاضافه بنجاح";
+                    MyResList.Enqueue(Res);
+                    return View(Res);
+                }
+                
+            }
+            catch
+            {
+                return View(Res2);
+            }
+
+        }
+
 
         // GET: StoreProduct/Edit/5
         public async Task<ActionResult> Edit(int? id)

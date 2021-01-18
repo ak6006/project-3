@@ -43,6 +43,10 @@ namespace project_3.Controllers
             return View();
         }
 
+        public ActionResult Sales2()
+        {
+            return View();
+        }
         public ActionResult Resources()
         {
             return View();

@@ -74,7 +74,7 @@ namespace project_3.Controllers
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
                 db.SP_Trans_Vin_Add_New(transvehcile.اسم_السائق, transvehcile.رقم_العربية, transvehcile.الموديل,
-                    transvehcile.هاتف, transvehcile.رقم_الوكيل , transvehcile.العنوان, transvehcile.سريال_العربية,
+                    transvehcile.هاتف, transvehcile.رقم_الوكيل , transvehcile.العنوان, transvehcile.رقم_العربية,
                     NewIdentity, RecFound).ToList();
                 if ((int)RecFound.Value == 0)
                 {
@@ -125,7 +125,7 @@ namespace project_3.Controllers
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 db.SP_Trans_vin_Update(transvehcile.الرقم,transvehcile.اسم_السائق,transvehcile.رقم_العربية,
                     transvehcile.الموديل,transvehcile.هاتف,transvehcile.رقم_الوكيل,transvehcile.العنوان,
-                    transvehcile.سريال_العربية,RecFound);
+                    transvehcile.رقم_العربية,RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

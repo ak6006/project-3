@@ -1,0 +1,40 @@
+﻿@model Queue<project_3.Models.VQueueResultViewModel>
+
+@{
+    Layout = null;
+}
+<div>
+
+
+    @if (Model.Count > 0)
+    {
+        foreach (var item in Model.Reverse())
+        {
+            if (item.Result == "تمت الاضافه بنجاح")
+            {
+                <table style="text-align:center; background-color:lightgreen" class="col-md-5  rounded offset-3 p-2 text-dark">
+                    <td>
+                        @item.Serial @item.Result
+                    </td>
+                    <td>
+                        المتبقي  @item.Counter
+                    </td>
+
+                </table>
+            }
+            else
+            {
+                <table style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
+                    <td>
+                        @item.Serial @item.Result
+
+                    </td>
+                    <td>
+                        المتبقي  @item.Counter
+                    </td>
+                </table>
+            }
+
+        }
+    }
+</div>

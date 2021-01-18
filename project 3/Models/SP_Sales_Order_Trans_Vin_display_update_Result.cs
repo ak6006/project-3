@@ -22,6 +22,6 @@ namespace project_3.Models
         public string productName { get; set; }
         public string measre_name { get; set; }
         public Nullable<int> weight_net { get; set; }
-        public string Quantity { get; set; }
+        public Nullable<double> Quantity { get; set; }
     }
 }

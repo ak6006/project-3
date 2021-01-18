@@ -72,7 +72,8 @@ namespace project_3.Controllers
                 db.SP_Shift_Admin_Add_New(shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة, shiftadmin.المدينة,
                     shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
                     shiftadmin.id_card_number,shiftadmin.relative_name_person_A,shiftadmin.relative_phone_person_A,
-                    shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B, NewIdentity, RecFound).ToList();
+                    shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B,shiftadmin.relative_casen_person_A
+                    ,shiftadmin.relative_casen_person_B,shiftadmin.job_titel, NewIdentity, RecFound).ToList();
 
 
                 if ((int)RecFound.Value == 0)
@@ -126,7 +127,8 @@ namespace project_3.Controllers
                 db.SP_Shift_Admin_Update(shiftadmin.معرف, shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة,
                     shiftadmin.المدينة, shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
                     shiftadmin.id_card_number,shiftadmin.relative_name_person_A,shiftadmin.relative_phone_person_A,
-                    shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B,NewIdentity, RecFound);
+                    shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B,shiftadmin.relative_casen_person_A
+                    ,shiftadmin.relative_casen_person_B,shiftadmin.job_titel,NewIdentity, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

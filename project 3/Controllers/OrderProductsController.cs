@@ -100,7 +100,7 @@ namespace project_3.Controllers
             {
                 try
                 {
-                    db.SP_Order_Items_Add_New(order.رقم_الطلبية, order.product_id, order.measure_id, order.weight_id, int.Parse(order.الكمية));
+                    db.SP_Order_Items_Add_New(order.رقم_الطلبية, order.product_id, order.measure_id, order.weight_id, order.الكمية);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -162,7 +162,7 @@ namespace project_3.Controllers
                 {
                     db.SP_Order_Items_Update(int.Parse(TempData["OId"].ToString()), int.Parse(TempData["PId"].ToString())
                         , int.Parse(TempData["MId"].ToString()), int.Parse(TempData["WId"].ToString()),
-                         order.product_id, order.measure_id, order.weight_id,int.Parse(order.الكمية));
+                         order.product_id, order.measure_id, order.weight_id,order.الكمية);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }

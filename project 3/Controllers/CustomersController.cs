@@ -74,7 +74,8 @@ namespace project_3.Controllers
                 db.SP_Customer_Add_New(customer.الاسم, customer.دولة, customer.المحافظة, customer.المدينة,
                     customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان,
                     customer.id_card_number,customer.relative_name_person_A,customer.relative_phone_person_A,
-                    customer.relative_name_person_B,customer.relative_phone_person_B, NewIdentity, RecFound).ToList();
+                    customer.relative_name_person_B,customer.relative_phone_person_B,customer.relative_casen_person_A
+                    ,customer.relative_casen_person_B,customer.job_titel, NewIdentity, RecFound).ToList();
 
                               
                 if((int)RecFound.Value==0 || true)
@@ -128,7 +129,9 @@ namespace project_3.Controllers
                 db.SP_Customer_Update(customer.معرف, customer.الاسم, customer.دولة, customer.المحافظة,
                     customer.المدينة, customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان
                     ,customer.id_card_number,customer.relative_name_person_A,customer.relative_phone_person_A,
-                    customer.relative_name_person_B,customer.relative_phone_person_B,NewIdentity, RecFound);
+                    customer.relative_name_person_B,customer.relative_phone_person_B,
+                    customer.relative_casen_person_A,customer.relative_casen_person_B,customer.job_titel
+                    , NewIdentity, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
