@@ -1,4 +1,5 @@
-﻿using project_3.Models;
+﻿using Microsoft.AspNet.Identity;
+using project_3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace project_3.Controllers
         {
             try
             {
-                db.SP_Flutter_Order_Add_New(order.CustomerId, order.StoreId, order.OrderDate, order.Notes,
+                db.SP_Flutter_Order_Add_New(User.Identity.GetUserId(),order.CustomerId, order.StoreId, order.OrderDate, order.Notes,
                     order.ProductId, order.MeasureId, order.WieghtId,int.Parse(order.quantity), order.CarId.ToString());
 
                 return RedirectToAction("Index","orders");

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3.Models;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.Objects;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -71,7 +72,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));              
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Customer_Add_New(customer.الاسم, customer.دولة, customer.المحافظة, customer.المدينة,
+                db.SP_Customer_Add_New(User.Identity.GetUserId(), customer.الاسم, customer.دولة, customer.المحافظة, customer.المدينة,
                     customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان,
                     customer.id_card_number,customer.relative_name_person_A,customer.relative_phone_person_A,
                     customer.relative_name_person_B,customer.relative_phone_person_B,customer.relative_casen_person_A
@@ -126,7 +127,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Customer_Update(customer.معرف, customer.الاسم, customer.دولة, customer.المحافظة,
+                db.SP_Customer_Update(User.Identity.GetUserId(),customer.معرف, customer.الاسم, customer.دولة, customer.المحافظة,
                     customer.المدينة, customer.تلفون, customer.فاكس, customer.بريد_الكتروني, customer.عنوان
                     ,customer.id_card_number,customer.relative_name_person_A,customer.relative_phone_person_A,
                     customer.relative_name_person_B,customer.relative_phone_person_B,
@@ -164,7 +165,7 @@ namespace project_3.Controllers
             var customer = db.SP_Customer_ID(id).FirstOrDefault();
             try
             {
-                db.SP_Customer_Delete(customer.رقم_الوكيل, customer.معرف);
+                db.SP_Customer_Delete(User.Identity.GetUserId(),customer.رقم_الوكيل, customer.معرف);
                 await db.SaveChangesAsync();
             }
             catch

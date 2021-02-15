@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using project_3.Models;
 using System.Data.Entity.Core.Objects;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -70,7 +71,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter new_identity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Product_Add_New(product.productName,product.TodayPrice, new_identity, rec_found).ToList();
+                db.SP_Product_Add_New(User.Identity.GetUserId(),product.productName,product.TodayPrice, new_identity, rec_found).ToList();
 
                 if ((int)rec_found.Value == 0)
                 {
@@ -115,7 +116,7 @@ namespace project_3.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
-                db.SP_Update_Product_Price(product.product_id, product.productName,product.TodayPrice);
+                db.SP_Update_Product_Price(User.Identity.GetUserId(),product.product_id, product.productName,product.TodayPrice);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -145,7 +146,7 @@ namespace project_3.Controllers
             var product = db.SP_Product_ID(id).FirstOrDefault();
             try
             {
-                db.SP_Product_DELETE(product.رقم_المنتج);
+                db.SP_Product_DELETE(User.Identity.GetUserId(),product.رقم_المنتج);
                 await db.SaveChangesAsync();
             }
             catch 

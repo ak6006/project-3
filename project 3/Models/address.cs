@@ -46,6 +46,9 @@ namespace project_3.Models
         public string relative_casen_person_B { get; set; }
         public string job_titel { get; set; }
         public string addresscol { get; set; }
+        public string userid { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         public virtual addresstype addresstype { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

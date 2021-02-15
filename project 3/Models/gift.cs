@@ -18,5 +18,8 @@ namespace project_3.Models
         public string giftname { get; set; }
         public int giftBagsCount { get; set; }
         public byte[] giftimg { get; set; }
+        public string userid { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     }
 }

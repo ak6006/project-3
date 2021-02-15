@@ -22,6 +22,9 @@ namespace project_3.Models
         public string transVehcile_serial { get; set; }
         public string transVehcile_phone { get; set; }
         public string transVehcile_add { get; set; }
+        public string userid { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         public virtual customer customer { get; set; }
     }

@@ -17,5 +17,6 @@ namespace project_3.Models
         public string storeName { get; set; }
         public string storeAdminName { get; set; }
         public string storeLocation { get; set; }
+        public string userid { get; set; }
     }
 }

@@ -30,6 +30,9 @@ namespace project_3.Models
         public string notic { get; set; }
         public int store_store_id { get; set; }
         public Nullable<int> order_state { get; set; }
+        public string userid { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         public virtual customer customer { get; set; }
         public virtual store store { get; set; }

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using project_3;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -77,7 +78,7 @@ namespace project_3.Controllers
 
             if (ModelState.IsValid)
             {
-                db.SP_Order_Add_New(order.رقم_الوكيل, order.رقم_المخزن, s, order.ملاحظة);
+                db.SP_Order_Add_New(User.Identity.GetUserId(),order.رقم_الوكيل, order.رقم_المخزن, s, order.ملاحظة);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -120,7 +121,7 @@ namespace project_3.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.SP_Order_Update(order.order_id, order.customers_Customers_id, order.store_store_id, order.date, order.notic);
+                db.SP_Order_Update(User.Identity.GetUserId(),order.order_id, order.customers_Customers_id, order.store_store_id, order.date, order.notic);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -156,7 +157,7 @@ namespace project_3.Controllers
             var order = db.SP_Order_ID(id).FirstOrDefault();
             try
             {
-                db.SP_Order_DELETE(order.order_id);
+                db.SP_Order_DELETE(User.Identity.GetUserId(),order.order_id);
                 await db.SaveChangesAsync();
             }
             catch

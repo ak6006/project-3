@@ -25,6 +25,9 @@ namespace project_3.Models
         public string storeName { get; set; }
         public string storeAdminName { get; set; }
         public string storeLocation { get; set; }
+        public string userid { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }

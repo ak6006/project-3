@@ -214,7 +214,6 @@ namespace project_3.Controllers
                 Serial = "1",
                 Result = "nothing"
             };
-
             try
             {
                 var item = MyList.Peek();

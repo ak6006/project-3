@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -73,7 +74,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Main_Add_New( shift.اسم_الوردية, shift.رقم_مدير_الوردية,
+                db.SP_Shift_Main_Add_New(User.Identity.GetUserId(), shift.اسم_الوردية, shift.رقم_مدير_الوردية,
                     NewIdentity, RecFound).ToList();
                 if ((int)RecFound.Value == 0)
                 {
@@ -122,7 +123,7 @@ namespace project_3.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-                db.SP_Shift_Main_Update(shift.رقم_الوردية,shift.رقم_مدير_الوردية,shift.اسم_الوردية, RecFound);
+                db.SP_Shift_Main_Update(User.Identity.GetUserId(),shift.رقم_الوردية,shift.رقم_مدير_الوردية,shift.اسم_الوردية, RecFound);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -156,7 +157,7 @@ namespace project_3.Controllers
             //db.transvehciles.Remove(transvehcile);
             try
             {
-                db.SP_Shift_Main_DELETE(shift.رقم_الوردية);
+                db.SP_Shift_Main_DELETE(User.Identity.GetUserId(),shift.رقم_الوردية);
                 await db.SaveChangesAsync();
             }
             catch

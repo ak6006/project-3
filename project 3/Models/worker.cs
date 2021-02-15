@@ -17,14 +17,17 @@ namespace project_3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public worker()
         {
-            this.shifts = new HashSet<shift>();
+            this.shift_has_workers = new HashSet<shift_has_workers>();
         }
     
         public int worker_id { get; set; }
         public int address_add_id { get; set; }
+        public string userid { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         public virtual address address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<shift> shifts { get; set; }
+        public virtual ICollection<shift_has_workers> shift_has_workers { get; set; }
     }
 }

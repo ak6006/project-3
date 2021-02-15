@@ -21,6 +21,8 @@ namespace project_3.Models
         public int store_has_product_weight_weight_id { get; set; }
         public int order_order_id { get; set; }
         public Nullable<int> v_id { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         public virtual order order { get; set; }
         public virtual store_has_product store_has_product { get; set; }

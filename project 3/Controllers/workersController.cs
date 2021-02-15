@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -70,7 +71,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Worker_Add_New(worker.الاسم, worker.دولة, worker.المحافظة, worker.المدينة,
+                db.SP_Worker_Add_New(User.Identity.GetUserId(),worker.الاسم, worker.دولة, worker.المحافظة, worker.المدينة,
                     worker.تلفون, worker.فاكس, worker.بريد_الكتروني, worker.عنوان, worker.id_card_number,
                     worker.relative_name_person_A, worker.relative_phone_person_A, worker.relative_name_person_B,
                     worker.relative_phone_person_B,worker.relative_casen_person_A,worker.relative_casen_person_B
@@ -125,7 +126,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Worker_Update(worker.معرف, worker.الاسم, worker.دولة, worker.المحافظة,
+                db.SP_Worker_Update(User.Identity.GetUserId(),worker.معرف, worker.الاسم, worker.دولة, worker.المحافظة,
                     worker.المدينة, worker.تلفون, worker.فاكس, worker.بريد_الكتروني, worker.عنوان,
                     worker.id_card_number,worker.relative_name_person_A,worker.relative_phone_person_A,
                     worker.relative_name_person_B,worker.relative_phone_person_B,worker.relative_casen_person_A
@@ -161,7 +162,7 @@ namespace project_3.Controllers
             var worker = db.SP_Worker_ID(id).FirstOrDefault();
             try
             {
-                db.SP_Worker_DELETE(worker.رقم_العامل, worker.معرف);
+                db.SP_Worker_DELETE(User.Identity.GetUserId(), worker.رقم_العامل, worker.معرف);
                 await db.SaveChangesAsync();
             }
             catch

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -67,7 +68,7 @@ namespace project_3.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
-                db.SP_Store_Add_New(store.storeName," ",store.storeAdminName,store.storeLocation, rec_found).ToList();
+                db.SP_Store_Add_New(User.Identity.GetUserId(),store.storeName," ",store.storeAdminName,store.storeLocation, rec_found).ToList();
 
                 if ((int)rec_found.Value == 0)
                 {
@@ -111,7 +112,7 @@ namespace project_3.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.SP_Store_Update(store.store_id, store.storeName," ",store.storeAdminName , store.storeLocation);
+                db.SP_Store_Update(User.Identity.GetUserId(),store.store_id, store.storeName," ",store.storeAdminName , store.storeLocation);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -141,7 +142,7 @@ namespace project_3.Controllers
             var store = db.SP_Store_Search(id.ToString()).FirstOrDefault();
             try
             {
-                db.SP_Store_Delete(store.store_id);
+                db.SP_Store_Delete(User.Identity.GetUserId(),store.store_id);
                 await db.SaveChangesAsync();
             }
             catch

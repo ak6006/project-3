@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -68,7 +69,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter new_identity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Measurement_Add_New(measurement.اسم_وحدة_القياس,measurement.measurement_Count_per_unit, new_identity, rec_found).ToList();
+                db.SP_Measurement_Add_New(User.Identity.GetUserId(),measurement.اسم_وحدة_القياس,measurement.measurement_Count_per_unit, new_identity, rec_found).ToList();
 
                 if ((int)rec_found.Value == 0)
                 {
@@ -113,7 +114,7 @@ namespace project_3.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter rec_found = new ObjectParameter("rec_found", typeof(int));
-                db.SP_Measurement_Update(measurement.رقم_الوحدة, measurement.اسم_وحدة_القياس, measurement.measurement_Count_per_unit, rec_found);
+                db.SP_Measurement_Update(User.Identity.GetUserId(),measurement.رقم_الوحدة, measurement.اسم_وحدة_القياس, measurement.measurement_Count_per_unit, rec_found);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -143,7 +144,7 @@ namespace project_3.Controllers
             var measurement =  db.SP_Measurement_ID(id).FirstOrDefault();
             try
             {
-                db.SP_Measurement_DELETE(measurement.رقم_الوحدة);
+                db.SP_Measurement_DELETE(User.Identity.GetUserId(),measurement.رقم_الوحدة);
                 await db.SaveChangesAsync();
             }
             catch

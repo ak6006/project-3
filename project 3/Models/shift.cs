@@ -17,18 +17,21 @@ namespace project_3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public shift()
         {
+            this.shift_has_workers = new HashSet<shift_has_workers>();
             this.store_has_product = new HashSet<store_has_product>();
-            this.workers = new HashSet<worker>();
         }
     
         public int shift_id { get; set; }
         public string shiftName { get; set; }
         public int shiftAdmin_shiftAdmin_id { get; set; }
+        public string userid { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         public virtual shiftadmin shiftadmin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<store_has_product> store_has_product { get; set; }
+        public virtual ICollection<shift_has_workers> shift_has_workers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<worker> workers { get; set; }
+        public virtual ICollection<store_has_product> store_has_product { get; set; }
     }
 }

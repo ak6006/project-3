@@ -30,6 +30,7 @@ namespace project_3.Models
         public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<addresstype> addresstypes { get; set; }
         public virtual DbSet<barcode> barcodes { get; set; }
+        public virtual DbSet<barcodehistory> barcodehistories { get; set; }
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<gift> gifts { get; set; }
         public virtual DbSet<measurement> measurements { get; set; }
@@ -39,6 +40,7 @@ namespace project_3.Models
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<shift> shifts { get; set; }
+        public virtual DbSet<shift_has_workers> shift_has_workers { get; set; }
         public virtual DbSet<shiftadmin> shiftadmins { get; set; }
         public virtual DbSet<store> stores { get; set; }
         public virtual DbSet<store_has_product> store_has_product { get; set; }
@@ -48,9 +50,75 @@ namespace project_3.Models
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<weight> weights { get; set; }
         public virtual DbSet<worker> workers { get; set; }
+        public virtual DbSet<address_History> address_History { get; set; }
+        public virtual DbSet<barcodehistory_History> barcodehistory_History { get; set; }
+        public virtual DbSet<customers_History> customers_History { get; set; }
+        public virtual DbSet<gift_History> gift_History { get; set; }
+        public virtual DbSet<measurement_History> measurement_History { get; set; }
+        public virtual DbSet<order_has_product_History> order_has_product_History { get; set; }
+        public virtual DbSet<order_History> order_History { get; set; }
+        public virtual DbSet<product_History> product_History { get; set; }
+        public virtual DbSet<shift_has_workers_History> shift_has_workers_History { get; set; }
+        public virtual DbSet<shift_History> shift_History { get; set; }
+        public virtual DbSet<shiftadmin_History> shiftadmin_History { get; set; }
+        public virtual DbSet<store_has_product_has_order_History> store_has_product_has_order_History { get; set; }
+        public virtual DbSet<store_has_product_History> store_has_product_History { get; set; }
+        public virtual DbSet<store_History> store_History { get; set; }
+        public virtual DbSet<transvehcile_has_order_History> transvehcile_has_order_History { get; set; }
+        public virtual DbSet<transvehcile_History> transvehcile_History { get; set; }
+        public virtual DbSet<weight_History> weight_History { get; set; }
+        public virtual DbSet<workers_History> workers_History { get; set; }
     
-        public virtual ObjectResult<string> SP_Customer_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
+        [DbFunction("Entities", "SplitList")]
+        public virtual IQueryable<SplitList_Result> SplitList(string list, string separator)
         {
+            var listParameter = list != null ?
+                new ObjectParameter("list", list) :
+                new ObjectParameter("list", typeof(string));
+    
+            var separatorParameter = separator != null ?
+                new ObjectParameter("separator", separator) :
+                new ObjectParameter("separator", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<SplitList_Result>("[Entities].[SplitList](@list, @separator)", listParameter, separatorParameter);
+        }
+    
+        public virtual int remain_bags(string orderId, Nullable<int> v_id, ObjectParameter netCounter)
+        {
+            var orderIdParameter = orderId != null ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(string));
+    
+            var v_idParameter = v_id.HasValue ?
+                new ObjectParameter("v_id", v_id) :
+                new ObjectParameter("v_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("remain_bags", orderIdParameter, v_idParameter, netCounter);
+        }
+    
+        public virtual ObjectResult<string> SP_barcode_generate_temp(Nullable<int> productid, Nullable<int> countbages, string userid)
+        {
+            var productidParameter = productid.HasValue ?
+                new ObjectParameter("productid", productid) :
+                new ObjectParameter("productid", typeof(int));
+    
+            var countbagesParameter = countbages.HasValue ?
+                new ObjectParameter("countbages", countbages) :
+                new ObjectParameter("countbages", typeof(int));
+    
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_barcode_generate_temp", productidParameter, countbagesParameter, useridParameter);
+        }
+    
+        public virtual ObjectResult<string> SP_Customer_Add_New(string userid, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var a_NameParameter = a_Name != null ?
                 new ObjectParameter("A_Name", a_Name) :
                 new ObjectParameter("A_Name", typeof(string));
@@ -115,11 +183,15 @@ namespace project_3.Models
                 new ObjectParameter("job_titel", job_titel) :
                 new ObjectParameter("job_titel", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Customer_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Customer_Add_New", useridParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Customer_Delete(Nullable<int> cUSTOMER_ID, Nullable<int> aDD_ID)
+        public virtual int SP_Customer_Delete(string userid, Nullable<int> cUSTOMER_ID, Nullable<int> aDD_ID)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var cUSTOMER_IDParameter = cUSTOMER_ID.HasValue ?
                 new ObjectParameter("CUSTOMER_ID", cUSTOMER_ID) :
                 new ObjectParameter("CUSTOMER_ID", typeof(int));
@@ -128,7 +200,7 @@ namespace project_3.Models
                 new ObjectParameter("ADD_ID", aDD_ID) :
                 new ObjectParameter("ADD_ID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Customer_Delete", cUSTOMER_IDParameter, aDD_IDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Customer_Delete", useridParameter, cUSTOMER_IDParameter, aDD_IDParameter);
         }
     
         public virtual ObjectResult<SP_Customer_ID_Result> SP_Customer_ID(Nullable<int> iD)
@@ -159,8 +231,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Customer_To_DataGrid_Result>("SP_Customer_To_DataGrid");
         }
     
-        public virtual int SP_Customer_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual int SP_Customer_Update(string userid, Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var aDD_IDParameter = aDD_ID.HasValue ?
                 new ObjectParameter("ADD_ID", aDD_ID) :
                 new ObjectParameter("ADD_ID", typeof(int));
@@ -229,7 +305,7 @@ namespace project_3.Models
                 new ObjectParameter("job_titel", job_titel) :
                 new ObjectParameter("job_titel", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Customer_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Customer_Update", useridParameter, aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
         }
     
         public virtual ObjectResult<SP_flutter_Customer_Orders_Query_Result> SP_flutter_Customer_Orders_Query(string custmerPhone)
@@ -241,8 +317,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_flutter_Customer_Orders_Query_Result>("SP_flutter_Customer_Orders_Query", custmerPhoneParameter);
         }
     
-        public virtual int SP_Flutter_Order_Add_New(Nullable<int> customerId, Nullable<int> storeId, Nullable<System.DateTime> orderDate, string orderNote, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId, Nullable<double> quantity, string listOfvan)
+        public virtual int SP_Flutter_Order_Add_New(string userid, Nullable<int> customerId, Nullable<int> storeId, Nullable<System.DateTime> orderDate, string orderNote, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId, Nullable<double> quantity, string listOfvan)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var customerIdParameter = customerId.HasValue ?
                 new ObjectParameter("CustomerId", customerId) :
                 new ObjectParameter("CustomerId", typeof(int));
@@ -279,11 +359,15 @@ namespace project_3.Models
                 new ObjectParameter("listOfvan", listOfvan) :
                 new ObjectParameter("listOfvan", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Flutter_Order_Add_New", customerIdParameter, storeIdParameter, orderDateParameter, orderNoteParameter, productIdParameter, measureIdParameter, weightIdParameter, quantityParameter, listOfvanParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Flutter_Order_Add_New", useridParameter, customerIdParameter, storeIdParameter, orderDateParameter, orderNoteParameter, productIdParameter, measureIdParameter, weightIdParameter, quantityParameter, listOfvanParameter);
         }
     
-        public virtual int SP_Flutter_Order_van_Update(Nullable<int> orderId, Nullable<int> orderHasProductId, Nullable<System.DateTime> orderDate, Nullable<int> productId, Nullable<int> wieghtId, Nullable<int> measureId, Nullable<double> quantity, string listOfvan)
+        public virtual int SP_Flutter_Order_van_Update(string userid, Nullable<int> orderId, Nullable<int> orderHasProductId, Nullable<System.DateTime> orderDate, Nullable<int> productId, Nullable<int> wieghtId, Nullable<int> measureId, Nullable<double> quantity, string listOfvan)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -316,7 +400,7 @@ namespace project_3.Models
                 new ObjectParameter("listOfvan", listOfvan) :
                 new ObjectParameter("listOfvan", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Flutter_Order_van_Update", orderIdParameter, orderHasProductIdParameter, orderDateParameter, productIdParameter, wieghtIdParameter, measureIdParameter, quantityParameter, listOfvanParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Flutter_Order_van_Update", useridParameter, orderIdParameter, orderHasProductIdParameter, orderDateParameter, productIdParameter, wieghtIdParameter, measureIdParameter, quantityParameter, listOfvanParameter);
         }
     
         public virtual ObjectResult<SP_Flutter_product_prouction_Result> SP_Flutter_product_prouction(Nullable<System.DateTime> beginDate, Nullable<System.DateTime> endDate)
@@ -358,8 +442,38 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_flutter_SumQuantity_Orders_Query_Result>("SP_flutter_SumQuantity_Orders_Query", custmerPhoneParameter, beginDateParameter, endDateParameter);
         }
     
-        public virtual ObjectResult<string> SP_Measurement_Add_New(string measurementName, Nullable<int> measurementKiloGram, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<SP_LOGINSELECT_Result> SP_LOGINSELECT(string username, string password, ObjectParameter rec_found, ObjectParameter rolesName)
         {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LOGINSELECT_Result>("SP_LOGINSELECT", usernameParameter, passwordParameter, rec_found, rolesName);
+        }
+    
+        public virtual ObjectResult<SP_LOGINSELECT_tmp_Result> SP_LOGINSELECT_tmp(string username, string password, ObjectParameter rec_found, ObjectParameter rolesName)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LOGINSELECT_tmp_Result>("SP_LOGINSELECT_tmp", usernameParameter, passwordParameter, rec_found, rolesName);
+        }
+    
+        public virtual ObjectResult<string> SP_Measurement_Add_New(string userid, string measurementName, Nullable<int> measurementKiloGram, ObjectParameter new_identity, ObjectParameter rec_found)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var measurementNameParameter = measurementName != null ?
                 new ObjectParameter("MeasurementName", measurementName) :
                 new ObjectParameter("MeasurementName", typeof(string));
@@ -368,16 +482,20 @@ namespace project_3.Models
                 new ObjectParameter("MeasurementKiloGram", measurementKiloGram) :
                 new ObjectParameter("MeasurementKiloGram", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Measurement_Add_New", measurementNameParameter, measurementKiloGramParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Measurement_Add_New", useridParameter, measurementNameParameter, measurementKiloGramParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Measurement_DELETE(Nullable<int> measurementId)
+        public virtual int SP_Measurement_DELETE(string userid, Nullable<int> measurementId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var measurementIdParameter = measurementId.HasValue ?
                 new ObjectParameter("MeasurementId", measurementId) :
                 new ObjectParameter("MeasurementId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Measurement_DELETE", measurementIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Measurement_DELETE", useridParameter, measurementIdParameter);
         }
     
         public virtual ObjectResult<SP_Measurement_ID_Result> SP_Measurement_ID(Nullable<int> iD)
@@ -408,8 +526,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Measurement_To_DataGrid_Result>("SP_Measurement_To_DataGrid");
         }
     
-        public virtual int SP_Measurement_Update(Nullable<int> measurementId, string measurementName, Nullable<int> measurementKiloGram, ObjectParameter rec_found)
+        public virtual int SP_Measurement_Update(string userid, Nullable<int> measurementId, string measurementName, Nullable<int> measurementKiloGram, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var measurementIdParameter = measurementId.HasValue ?
                 new ObjectParameter("MeasurementId", measurementId) :
                 new ObjectParameter("MeasurementId", typeof(int));
@@ -422,11 +544,15 @@ namespace project_3.Models
                 new ObjectParameter("MeasurementKiloGram", measurementKiloGram) :
                 new ObjectParameter("MeasurementKiloGram", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Measurement_Update", measurementIdParameter, measurementNameParameter, measurementKiloGramParameter, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Measurement_Update", useridParameter, measurementIdParameter, measurementNameParameter, measurementKiloGramParameter, rec_found);
         }
     
-        public virtual int SP_Order_Add_New(Nullable<int> customerId, Nullable<int> storeId, Nullable<System.DateTime> orderDate, string orderNote)
+        public virtual int SP_Order_Add_New(string userid, Nullable<int> customerId, Nullable<int> storeId, Nullable<System.DateTime> orderDate, string orderNote)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var customerIdParameter = customerId.HasValue ?
                 new ObjectParameter("CustomerId", customerId) :
                 new ObjectParameter("CustomerId", typeof(int));
@@ -443,16 +569,20 @@ namespace project_3.Models
                 new ObjectParameter("OrderNote", orderNote) :
                 new ObjectParameter("OrderNote", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Add_New", customerIdParameter, storeIdParameter, orderDateParameter, orderNoteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Add_New", useridParameter, customerIdParameter, storeIdParameter, orderDateParameter, orderNoteParameter);
         }
     
-        public virtual int SP_Order_DELETE(Nullable<int> orderId)
+        public virtual int SP_Order_DELETE(string userid, Nullable<int> orderId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_DELETE", orderIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_DELETE", useridParameter, orderIdParameter);
         }
     
         public virtual ObjectResult<SP_Order_ID_Result> SP_Order_ID(Nullable<int> iD)
@@ -464,8 +594,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Order_ID_Result>("SP_Order_ID", iDParameter);
         }
     
-        public virtual int SP_Order_Items_Add_New(Nullable<int> orderId, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId, Nullable<double> quantity)
+        public virtual int SP_Order_Items_Add_New(string userid, Nullable<int> orderId, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId, Nullable<double> quantity)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -486,11 +620,15 @@ namespace project_3.Models
                 new ObjectParameter("Quantity", quantity) :
                 new ObjectParameter("Quantity", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Items_Add_New", orderIdParameter, productIdParameter, measureIdParameter, weightIdParameter, quantityParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Items_Add_New", useridParameter, orderIdParameter, productIdParameter, measureIdParameter, weightIdParameter, quantityParameter);
         }
     
-        public virtual int SP_Order_Items_DELETE(Nullable<int> orderId, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId)
+        public virtual int SP_Order_Items_DELETE(string userid, Nullable<int> orderId, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -507,7 +645,7 @@ namespace project_3.Models
                 new ObjectParameter("weightId", weightId) :
                 new ObjectParameter("weightId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Items_DELETE", orderIdParameter, productIdParameter, measureIdParameter, weightIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Items_DELETE", useridParameter, orderIdParameter, productIdParameter, measureIdParameter, weightIdParameter);
         }
     
         public virtual ObjectResult<SP_Order_Items_ID_Result> SP_Order_Items_ID(Nullable<int> orderId, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId)
@@ -540,8 +678,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Order_Items_To_DataGrid_Result>("SP_Order_Items_To_DataGrid", orderIdParameter);
         }
     
-        public virtual int SP_Order_Items_Update(Nullable<int> orderId, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId, Nullable<int> newProductId, Nullable<int> newmeasureId, Nullable<int> newweightId, Nullable<double> newQuantity)
+        public virtual int SP_Order_Items_Update(string userid, Nullable<int> orderId, Nullable<int> productId, Nullable<int> measureId, Nullable<int> weightId, Nullable<int> newProductId, Nullable<int> newmeasureId, Nullable<int> newweightId, Nullable<double> newQuantity)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -574,7 +716,7 @@ namespace project_3.Models
                 new ObjectParameter("NewQuantity", newQuantity) :
                 new ObjectParameter("NewQuantity", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Items_Update", orderIdParameter, productIdParameter, measureIdParameter, weightIdParameter, newProductIdParameter, newmeasureIdParameter, newweightIdParameter, newQuantityParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Items_Update", useridParameter, orderIdParameter, productIdParameter, measureIdParameter, weightIdParameter, newProductIdParameter, newmeasureIdParameter, newweightIdParameter, newQuantityParameter);
         }
     
         public virtual ObjectResult<SP_Order_Search_Result> SP_Order_Search(string sEARCH)
@@ -591,8 +733,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Order_To_DataGrid_Result>("SP_Order_To_DataGrid");
         }
     
-        public virtual int SP_Order_Trans_Vin_Add_New(Nullable<int> orderId, Nullable<int> transVinId)
+        public virtual int SP_Order_Trans_Vin_Add_New(string userid, Nullable<int> orderId, Nullable<int> transVinId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -601,11 +747,15 @@ namespace project_3.Models
                 new ObjectParameter("TransVinId", transVinId) :
                 new ObjectParameter("TransVinId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Trans_Vin_Add_New", orderIdParameter, transVinIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Trans_Vin_Add_New", useridParameter, orderIdParameter, transVinIdParameter);
         }
     
-        public virtual int SP_Order_Trans_Vin_DELETE(Nullable<int> orderId, Nullable<int> transId)
+        public virtual int SP_Order_Trans_Vin_DELETE(string userid, Nullable<int> orderId, Nullable<int> transId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -614,7 +764,7 @@ namespace project_3.Models
                 new ObjectParameter("TransId", transId) :
                 new ObjectParameter("TransId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Trans_Vin_DELETE", orderIdParameter, transIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Trans_Vin_DELETE", useridParameter, orderIdParameter, transIdParameter);
         }
     
         public virtual ObjectResult<SP_Order_Trans_Vin_ID_Result> SP_Order_Trans_Vin_ID(Nullable<int> orderId, Nullable<int> transvehcileID)
@@ -639,8 +789,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Order_Trans_Vin_To_DataGrid_Result>("SP_Order_Trans_Vin_To_DataGrid", orderIdParameter);
         }
     
-        public virtual int SP_Order_Trans_Vin_Update(Nullable<int> orderId, Nullable<int> transId, Nullable<int> newOrderId, Nullable<int> newTransId)
+        public virtual int SP_Order_Trans_Vin_Update(string userid, Nullable<int> orderId, Nullable<int> transId, Nullable<int> newOrderId, Nullable<int> newTransId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -657,11 +811,15 @@ namespace project_3.Models
                 new ObjectParameter("NewTransId", newTransId) :
                 new ObjectParameter("NewTransId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Trans_Vin_Update", orderIdParameter, transIdParameter, newOrderIdParameter, newTransIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Trans_Vin_Update", useridParameter, orderIdParameter, transIdParameter, newOrderIdParameter, newTransIdParameter);
         }
     
-        public virtual int SP_Order_Update(Nullable<int> orderId, Nullable<int> customerId, Nullable<int> storeId, Nullable<System.DateTime> orderDate, string orderNote)
+        public virtual int SP_Order_Update(string userid, Nullable<int> orderId, Nullable<int> customerId, Nullable<int> storeId, Nullable<System.DateTime> orderDate, string orderNote)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var orderIdParameter = orderId.HasValue ?
                 new ObjectParameter("OrderId", orderId) :
                 new ObjectParameter("OrderId", typeof(int));
@@ -682,11 +840,15 @@ namespace project_3.Models
                 new ObjectParameter("OrderNote", orderNote) :
                 new ObjectParameter("OrderNote", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Update", orderIdParameter, customerIdParameter, storeIdParameter, orderDateParameter, orderNoteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_Update", useridParameter, orderIdParameter, customerIdParameter, storeIdParameter, orderDateParameter, orderNoteParameter);
         }
     
-        public virtual ObjectResult<string> SP_Product_Add_New(string productName, Nullable<double> productPrice, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Product_Add_New(string userid, string productName, Nullable<double> productPrice, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var productNameParameter = productName != null ?
                 new ObjectParameter("ProductName", productName) :
                 new ObjectParameter("ProductName", typeof(string));
@@ -695,16 +857,20 @@ namespace project_3.Models
                 new ObjectParameter("ProductPrice", productPrice) :
                 new ObjectParameter("ProductPrice", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Product_Add_New", productNameParameter, productPriceParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Product_Add_New", useridParameter, productNameParameter, productPriceParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Product_DELETE(Nullable<int> productId)
+        public virtual int SP_Product_DELETE(string userid, Nullable<int> productId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var productIdParameter = productId.HasValue ?
                 new ObjectParameter("ProductId", productId) :
                 new ObjectParameter("ProductId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Product_DELETE", productIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Product_DELETE", useridParameter, productIdParameter);
         }
     
         public virtual ObjectResult<SP_Product_ID_Result> SP_Product_ID(Nullable<int> iD)
@@ -735,8 +901,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Product_To_DataGrid_Result>("SP_Product_To_DataGrid");
         }
     
-        public virtual int SP_Product_Update(Nullable<int> productId, string productName, ObjectParameter rec_found)
+        public virtual int SP_Product_Update(string userid, Nullable<int> productId, string productName, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var productIdParameter = productId.HasValue ?
                 new ObjectParameter("ProductId", productId) :
                 new ObjectParameter("ProductId", typeof(int));
@@ -745,7 +915,36 @@ namespace project_3.Models
                 new ObjectParameter("ProductName", productName) :
                 new ObjectParameter("ProductName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Product_Update", productIdParameter, productNameParameter, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Product_Update", useridParameter, productIdParameter, productNameParameter, rec_found);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Sales_BarCode(string userid, string barcode, string orderId, string prodductId, string weightId, Nullable<int> v_id, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            var orderIdParameter = orderId != null ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(string));
+    
+            var prodductIdParameter = prodductId != null ?
+                new ObjectParameter("ProdductId", prodductId) :
+                new ObjectParameter("ProdductId", typeof(string));
+    
+            var weightIdParameter = weightId != null ?
+                new ObjectParameter("weightId", weightId) :
+                new ObjectParameter("weightId", typeof(string));
+    
+            var v_idParameter = v_id.HasValue ?
+                new ObjectParameter("v_id", v_id) :
+                new ObjectParameter("v_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Sales_BarCode", useridParameter, barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, v_idParameter, serial_found, rec_found, netCounter);
         }
     
         public virtual ObjectResult<SP_Sales_BarCode_Check_Result> SP_Sales_BarCode_Check(string barcode, ObjectParameter rec_found)
@@ -776,8 +975,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Sales_Order_Trans_Vin_Load_Result>("SP_Sales_Order_Trans_Vin_Load", transVehcileSerialParameter);
         }
     
-        public virtual ObjectResult<string> SP_Shift_Admin_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Shift_Admin_Add_New(string userid, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var a_NameParameter = a_Name != null ?
                 new ObjectParameter("A_Name", a_Name) :
                 new ObjectParameter("A_Name", typeof(string));
@@ -842,11 +1045,15 @@ namespace project_3.Models
                 new ObjectParameter("job_titel", job_titel) :
                 new ObjectParameter("job_titel", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Shift_Admin_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Shift_Admin_Add_New", useridParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Shift_Admin_DELETE(Nullable<int> shiftAdminID, Nullable<int> aDD_ID)
+        public virtual int SP_Shift_Admin_DELETE(string userid, Nullable<int> shiftAdminID, Nullable<int> aDD_ID)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var shiftAdminIDParameter = shiftAdminID.HasValue ?
                 new ObjectParameter("ShiftAdminID", shiftAdminID) :
                 new ObjectParameter("ShiftAdminID", typeof(int));
@@ -855,7 +1062,7 @@ namespace project_3.Models
                 new ObjectParameter("ADD_ID", aDD_ID) :
                 new ObjectParameter("ADD_ID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Admin_DELETE", shiftAdminIDParameter, aDD_IDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Admin_DELETE", useridParameter, shiftAdminIDParameter, aDD_IDParameter);
         }
     
         public virtual ObjectResult<SP_Shift_Admin_ID_Result> SP_Shift_Admin_ID(string iD)
@@ -886,8 +1093,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Admin_To_DataGrid_Result>("SP_Shift_Admin_To_DataGrid");
         }
     
-        public virtual int SP_Shift_Admin_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual int SP_Shift_Admin_Update(string userid, Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var aDD_IDParameter = aDD_ID.HasValue ?
                 new ObjectParameter("ADD_ID", aDD_ID) :
                 new ObjectParameter("ADD_ID", typeof(int));
@@ -956,11 +1167,15 @@ namespace project_3.Models
                 new ObjectParameter("job_titel", job_titel) :
                 new ObjectParameter("job_titel", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Admin_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Admin_Update", useridParameter, aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
         }
     
-        public virtual ObjectResult<string> SP_Shift_Main_Add_New(string shiftName, Nullable<int> shiftAdminId, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Shift_Main_Add_New(string userid, string shiftName, Nullable<int> shiftAdminId, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var shiftNameParameter = shiftName != null ?
                 new ObjectParameter("ShiftName", shiftName) :
                 new ObjectParameter("ShiftName", typeof(string));
@@ -969,16 +1184,20 @@ namespace project_3.Models
                 new ObjectParameter("ShiftAdminId", shiftAdminId) :
                 new ObjectParameter("ShiftAdminId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Shift_Main_Add_New", shiftNameParameter, shiftAdminIdParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Shift_Main_Add_New", useridParameter, shiftNameParameter, shiftAdminIdParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Shift_Main_DELETE(Nullable<int> shiftId)
+        public virtual int SP_Shift_Main_DELETE(string userid, Nullable<int> shiftId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
                 new ObjectParameter("ShiftId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Main_DELETE", shiftIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Main_DELETE", useridParameter, shiftIdParameter);
         }
     
         public virtual ObjectResult<SP_Shift_Main_ID_Result> SP_Shift_Main_ID(string iD)
@@ -1009,8 +1228,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Main_To_DataGrid_Result>("SP_Shift_Main_To_DataGrid");
         }
     
-        public virtual int SP_Shift_Main_Update(Nullable<int> shiftId, Nullable<int> shiftAdminId, string shiftName, ObjectParameter rec_found)
+        public virtual int SP_Shift_Main_Update(string userid, Nullable<int> shiftId, Nullable<int> shiftAdminId, string shiftName, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
                 new ObjectParameter("ShiftId", typeof(int));
@@ -1023,11 +1246,15 @@ namespace project_3.Models
                 new ObjectParameter("ShiftName", shiftName) :
                 new ObjectParameter("ShiftName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Main_Update", shiftIdParameter, shiftAdminIdParameter, shiftNameParameter, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Main_Update", useridParameter, shiftIdParameter, shiftAdminIdParameter, shiftNameParameter, rec_found);
         }
     
-        public virtual ObjectResult<Nullable<int>> SP_Shift_Worker_Add_New(Nullable<int> shiftId, Nullable<int> workerId, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<Nullable<int>> SP_Shift_Worker_Add_New(string userid, Nullable<int> shiftId, Nullable<int> workerId, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
                 new ObjectParameter("ShiftId", typeof(int));
@@ -1036,11 +1263,15 @@ namespace project_3.Models
                 new ObjectParameter("WorkerId", workerId) :
                 new ObjectParameter("WorkerId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Shift_Worker_Add_New", shiftIdParameter, workerIdParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Shift_Worker_Add_New", useridParameter, shiftIdParameter, workerIdParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Shift_Worker_DELETE(Nullable<int> shiftId, Nullable<int> workerId)
+        public virtual int SP_Shift_Worker_DELETE(string userid, Nullable<int> shiftId, Nullable<int> workerId)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
                 new ObjectParameter("ShiftId", typeof(int));
@@ -1049,7 +1280,20 @@ namespace project_3.Models
                 new ObjectParameter("WorkerId", workerId) :
                 new ObjectParameter("WorkerId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Worker_DELETE", shiftIdParameter, workerIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Worker_DELETE", useridParameter, shiftIdParameter, workerIdParameter);
+        }
+    
+        public virtual int SP_Shift_Worker_DELETE_ALL(string userid, Nullable<int> shiftId)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            var shiftIdParameter = shiftId.HasValue ?
+                new ObjectParameter("ShiftId", shiftId) :
+                new ObjectParameter("ShiftId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Worker_DELETE_ALL", useridParameter, shiftIdParameter);
         }
     
         public virtual ObjectResult<SP_Shift_Worker_ID_Result> SP_Shift_Worker_ID(Nullable<int> shiftId, Nullable<int> workerId)
@@ -1092,8 +1336,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Shift_Worker_To_DataGrid_All_Result>("SP_Shift_Worker_To_DataGrid_All");
         }
     
-        public virtual int SP_Shift_Worker_Update(Nullable<int> shiftId, Nullable<int> workerId, Nullable<int> workerId_Updated, ObjectParameter rec_found)
+        public virtual int SP_Shift_Worker_Update(string userid, Nullable<int> shiftId, Nullable<int> workerId, Nullable<int> workerId_Updated, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
                 new ObjectParameter("ShiftId", typeof(int));
@@ -1106,11 +1354,15 @@ namespace project_3.Models
                 new ObjectParameter("WorkerId_Updated", workerId_Updated) :
                 new ObjectParameter("WorkerId_Updated", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Worker_Update", shiftIdParameter, workerIdParameter, workerId_UpdatedParameter, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Worker_Update", useridParameter, shiftIdParameter, workerIdParameter, workerId_UpdatedParameter, rec_found);
         }
     
-        public virtual ObjectResult<SP_Store_Add_New_Result> SP_Store_Add_New(string store_Name, string a_Country, string store_Admin, string store_Location, ObjectParameter rec_found)
+        public virtual ObjectResult<SP_Store_Add_New_Result> SP_Store_Add_New(string userid, string store_Name, string a_Country, string store_Admin, string store_Location, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var store_NameParameter = store_Name != null ?
                 new ObjectParameter("Store_Name", store_Name) :
                 new ObjectParameter("Store_Name", typeof(string));
@@ -1127,16 +1379,20 @@ namespace project_3.Models
                 new ObjectParameter("Store_Location", store_Location) :
                 new ObjectParameter("Store_Location", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Store_Add_New_Result>("SP_Store_Add_New", store_NameParameter, a_CountryParameter, store_AdminParameter, store_LocationParameter, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Store_Add_New_Result>("SP_Store_Add_New", useridParameter, store_NameParameter, a_CountryParameter, store_AdminParameter, store_LocationParameter, rec_found);
         }
     
-        public virtual int SP_Store_Delete(Nullable<int> store_ID)
+        public virtual int SP_Store_Delete(string userid, Nullable<int> store_ID)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var store_IDParameter = store_ID.HasValue ?
                 new ObjectParameter("Store_ID", store_ID) :
                 new ObjectParameter("Store_ID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Store_Delete", store_IDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Store_Delete", useridParameter, store_IDParameter);
         }
     
         public virtual ObjectResult<SP_Store_ID_Result> SP_Store_ID(Nullable<int> iD)
@@ -1201,8 +1457,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Store_To_DataGrid_tmp_Result>("SP_Store_To_DataGrid_tmp");
         }
     
-        public virtual int SP_Store_Update(Nullable<int> store_ID, string store_Name, string a_Country, string store_Admin, string store_Location)
+        public virtual int SP_Store_Update(string userid, Nullable<int> store_ID, string store_Name, string a_Country, string store_Admin, string store_Location)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var store_IDParameter = store_ID.HasValue ?
                 new ObjectParameter("Store_ID", store_ID) :
                 new ObjectParameter("Store_ID", typeof(int));
@@ -1223,11 +1483,15 @@ namespace project_3.Models
                 new ObjectParameter("Store_Location", store_Location) :
                 new ObjectParameter("Store_Location", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Store_Update", store_IDParameter, store_NameParameter, a_CountryParameter, store_AdminParameter, store_LocationParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Store_Update", useridParameter, store_IDParameter, store_NameParameter, a_CountryParameter, store_AdminParameter, store_LocationParameter);
         }
     
-        public virtual ObjectResult<string> SP_Trans_Vin_Add_New(string txtDivername, string txtVinNum, string txtModel, string txtPhone, Nullable<int> txtCustomerId, string txtAddress, string txtSerial, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Trans_Vin_Add_New(string userid, string txtDivername, string txtVinNum, string txtModel, string txtPhone, Nullable<int> txtCustomerId, string txtAddress, string txtSerial, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var txtDivernameParameter = txtDivername != null ?
                 new ObjectParameter("TxtDivername", txtDivername) :
                 new ObjectParameter("TxtDivername", typeof(string));
@@ -1256,16 +1520,20 @@ namespace project_3.Models
                 new ObjectParameter("TxtSerial", txtSerial) :
                 new ObjectParameter("TxtSerial", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Trans_Vin_Add_New", txtDivernameParameter, txtVinNumParameter, txtModelParameter, txtPhoneParameter, txtCustomerIdParameter, txtAddressParameter, txtSerialParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Trans_Vin_Add_New", useridParameter, txtDivernameParameter, txtVinNumParameter, txtModelParameter, txtPhoneParameter, txtCustomerIdParameter, txtAddressParameter, txtSerialParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Trans_Vin_DELETE(Nullable<int> vinNo)
+        public virtual int SP_Trans_Vin_DELETE(string userid, Nullable<int> vinNo)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var vinNoParameter = vinNo.HasValue ?
                 new ObjectParameter("VinNo", vinNo) :
                 new ObjectParameter("VinNo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Trans_Vin_DELETE", vinNoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Trans_Vin_DELETE", useridParameter, vinNoParameter);
         }
     
         public virtual ObjectResult<SP_Trans_Vin_ID_Result> SP_Trans_Vin_ID(Nullable<int> iD)
@@ -1300,8 +1568,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Trans_Vin_To_DataGrid_Result>("SP_Trans_Vin_To_DataGrid");
         }
     
-        public virtual int SP_Trans_vin_Update(Nullable<int> vinNo, string txtDivername, string txtVinNum, string txtModel, string txtPhone, Nullable<int> txtCustomerId, string txtAddress, string txtSerial, ObjectParameter rec_found)
+        public virtual int SP_Trans_vin_Update(string userid, Nullable<int> vinNo, string txtDivername, string txtVinNum, string txtModel, string txtPhone, Nullable<int> txtCustomerId, string txtAddress, string txtSerial, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var vinNoParameter = vinNo.HasValue ?
                 new ObjectParameter("VinNo", vinNo) :
                 new ObjectParameter("VinNo", typeof(int));
@@ -1334,11 +1606,15 @@ namespace project_3.Models
                 new ObjectParameter("TxtSerial", txtSerial) :
                 new ObjectParameter("TxtSerial", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Trans_vin_Update", vinNoParameter, txtDivernameParameter, txtVinNumParameter, txtModelParameter, txtPhoneParameter, txtCustomerIdParameter, txtAddressParameter, txtSerialParameter, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Trans_vin_Update", useridParameter, vinNoParameter, txtDivernameParameter, txtVinNumParameter, txtModelParameter, txtPhoneParameter, txtCustomerIdParameter, txtAddressParameter, txtSerialParameter, rec_found);
         }
     
-        public virtual int SP_Update_Product_Price(Nullable<int> productId, string productName, Nullable<double> productPrice)
+        public virtual int SP_Update_Product_Price(string userid, Nullable<int> productId, string productName, Nullable<double> productPrice)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var productIdParameter = productId.HasValue ?
                 new ObjectParameter("ProductId", productId) :
                 new ObjectParameter("ProductId", typeof(int));
@@ -1351,7 +1627,7 @@ namespace project_3.Models
                 new ObjectParameter("ProductPrice", productPrice) :
                 new ObjectParameter("ProductPrice", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Update_Product_Price", productIdParameter, productNameParameter, productPriceParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Update_Product_Price", useridParameter, productIdParameter, productNameParameter, productPriceParameter);
         }
     
         public virtual ObjectResult<string> SP_User_Add_New(string userName, string userPassword, Nullable<int> userRole, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, ObjectParameter rec_found)
@@ -1413,8 +1689,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_weight_To_ComboBox_Result>("SP_weight_To_ComboBox");
         }
     
-        public virtual ObjectResult<string> SP_Worker_Add_New(string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual ObjectResult<string> SP_Worker_Add_New(string userid, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var a_NameParameter = a_Name != null ?
                 new ObjectParameter("A_Name", a_Name) :
                 new ObjectParameter("A_Name", typeof(string));
@@ -1479,11 +1759,15 @@ namespace project_3.Models
                 new ObjectParameter("job_titel", job_titel) :
                 new ObjectParameter("job_titel", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Worker_Add_New", a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Worker_Add_New", useridParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
         }
     
-        public virtual int SP_Worker_DELETE(Nullable<int> workerID, Nullable<int> aDD_ID)
+        public virtual int SP_Worker_DELETE(string userid, Nullable<int> workerID, Nullable<int> aDD_ID)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var workerIDParameter = workerID.HasValue ?
                 new ObjectParameter("WorkerID", workerID) :
                 new ObjectParameter("WorkerID", typeof(int));
@@ -1492,7 +1776,7 @@ namespace project_3.Models
                 new ObjectParameter("ADD_ID", aDD_ID) :
                 new ObjectParameter("ADD_ID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Worker_DELETE", workerIDParameter, aDD_IDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Worker_DELETE", useridParameter, workerIDParameter, aDD_IDParameter);
         }
     
         public virtual ObjectResult<SP_Worker_ID_Result> SP_Worker_ID(Nullable<int> iD)
@@ -1518,8 +1802,12 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Worker_To_ComboBox_Result>("SP_Worker_To_ComboBox");
         }
     
-        public virtual int SP_Worker_Update(Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
+        public virtual int SP_Worker_Update(string userid, Nullable<int> aDD_ID, string a_Name, string a_Country, string a_City, string a_State, string a_Phone, string a_Fax, string a_Email, string aDRESS, string id_card_number, string relative_name_person_A, string relative_phone_person_A, string relative_name_person_B, string relative_phone_person_B, string relative_casen_person_A, string relative_casen_person_B, string job_titel, ObjectParameter new_identity, ObjectParameter rec_found)
         {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
             var aDD_IDParameter = aDD_ID.HasValue ?
                 new ObjectParameter("ADD_ID", aDD_ID) :
                 new ObjectParameter("ADD_ID", typeof(int));
@@ -1588,7 +1876,7 @@ namespace project_3.Models
                 new ObjectParameter("job_titel", job_titel) :
                 new ObjectParameter("job_titel", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Worker_Update", aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Worker_Update", useridParameter, aDD_IDParameter, a_NameParameter, a_CountryParameter, a_CityParameter, a_StateParameter, a_PhoneParameter, a_FaxParameter, a_EmailParameter, aDRESSParameter, id_card_numberParameter, relative_name_person_AParameter, relative_phone_person_AParameter, relative_name_person_BParameter, relative_phone_person_BParameter, relative_casen_person_AParameter, relative_casen_person_BParameter, job_titelParameter, new_identity, rec_found);
         }
     
         public virtual ObjectResult<SP_Workers_To_DataGrid_Result> SP_Workers_To_DataGrid()
@@ -1596,51 +1884,33 @@ namespace project_3.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Workers_To_DataGrid_Result>("SP_Workers_To_DataGrid");
         }
     
-        public virtual int SP_Shift_Worker_DELETE_ALL(Nullable<int> shiftId)
+        public virtual int Store_Product_Add_New(Nullable<int> shiftId, Nullable<int> productId, Nullable<int> storeId, Nullable<int> weight, Nullable<System.DateTime> date1, string serialNumber, ObjectParameter new_identity, ObjectParameter rec_found, ObjectParameter start, ObjectParameter end)
         {
             var shiftIdParameter = shiftId.HasValue ?
                 new ObjectParameter("ShiftId", shiftId) :
                 new ObjectParameter("ShiftId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Shift_Worker_DELETE_ALL", shiftIdParameter);
-        }
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
     
-        public virtual int remain_bags(string orderId, Nullable<int> v_id, ObjectParameter netCounter)
-        {
-            var orderIdParameter = orderId != null ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(string));
+            var storeIdParameter = storeId.HasValue ?
+                new ObjectParameter("StoreId", storeId) :
+                new ObjectParameter("StoreId", typeof(int));
     
-            var v_idParameter = v_id.HasValue ?
-                new ObjectParameter("v_id", v_id) :
-                new ObjectParameter("v_id", typeof(int));
+            var weightParameter = weight.HasValue ?
+                new ObjectParameter("Weight", weight) :
+                new ObjectParameter("Weight", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("remain_bags", orderIdParameter, v_idParameter, netCounter);
-        }
+            var date1Parameter = date1.HasValue ?
+                new ObjectParameter("date1", date1) :
+                new ObjectParameter("date1", typeof(System.DateTime));
     
-        public virtual ObjectResult<string> SP_Sales_BarCode(string barcode, string orderId, string prodductId, string weightId, Nullable<int> v_id, ObjectParameter serial_found, ObjectParameter rec_found, ObjectParameter netCounter)
-        {
-            var barcodeParameter = barcode != null ?
-                new ObjectParameter("Barcode", barcode) :
-                new ObjectParameter("Barcode", typeof(string));
+            var serialNumberParameter = serialNumber != null ?
+                new ObjectParameter("SerialNumber", serialNumber) :
+                new ObjectParameter("SerialNumber", typeof(string));
     
-            var orderIdParameter = orderId != null ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(string));
-    
-            var prodductIdParameter = prodductId != null ?
-                new ObjectParameter("ProdductId", prodductId) :
-                new ObjectParameter("ProdductId", typeof(string));
-    
-            var weightIdParameter = weightId != null ?
-                new ObjectParameter("weightId", weightId) :
-                new ObjectParameter("weightId", typeof(string));
-    
-            var v_idParameter = v_id.HasValue ?
-                new ObjectParameter("v_id", v_id) :
-                new ObjectParameter("v_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Sales_BarCode", barcodeParameter, orderIdParameter, prodductIdParameter, weightIdParameter, v_idParameter, serial_found, rec_found, netCounter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Store_Product_Add_New", shiftIdParameter, productIdParameter, storeIdParameter, weightParameter, date1Parameter, serialNumberParameter, new_identity, rec_found, start, end);
         }
     }
 }

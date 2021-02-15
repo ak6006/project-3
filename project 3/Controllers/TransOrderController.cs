@@ -13,6 +13,7 @@ using project_3.Models;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Net.Http;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -155,8 +156,7 @@ namespace project_3.Controllers
         }
 
         public ActionResult SaveToDB()
-        {
-
+        { 
             QueueResultViewModel Res2 = new QueueResultViewModel()
             {
                 Serial = "1",
@@ -180,10 +180,10 @@ namespace project_3.Controllers
 
                 try
                 {
-                    db.SP_Sales_BarCode(record.BarCode, record.OId.ToString(), record.PId.ToString(),
+                    db.SP_Sales_BarCode(User.Identity.GetUserId(),record.BarCode, record.OId.ToString(), record.PId.ToString(),
                         record.WId.ToString(), VID, SerialFound, RecFound, NtCounter).ToList();
                 }
-                catch
+                catch (Exception e)
                 {
                     return View(Res);
                 }
@@ -272,7 +272,7 @@ namespace project_3.Controllers
                     return View(Res);
                 }
             }
-            catch
+            catch (Exception e)
             {
 
             }

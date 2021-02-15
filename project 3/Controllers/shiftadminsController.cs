@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -69,7 +70,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Admin_Add_New(shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة, shiftadmin.المدينة,
+                db.SP_Shift_Admin_Add_New(User.Identity.GetUserId(),shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة, shiftadmin.المدينة,
                     shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
                     shiftadmin.id_card_number,shiftadmin.relative_name_person_A,shiftadmin.relative_phone_person_A,
                     shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B,shiftadmin.relative_casen_person_A
@@ -124,7 +125,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Admin_Update(shiftadmin.معرف, shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة,
+                db.SP_Shift_Admin_Update(User.Identity.GetUserId(),shiftadmin.معرف, shiftadmin.الاسم, shiftadmin.دولة, shiftadmin.المحافظة,
                     shiftadmin.المدينة, shiftadmin.تلفون, shiftadmin.فاكس, shiftadmin.بريد_الكتروني, shiftadmin.عنوان,
                     shiftadmin.id_card_number,shiftadmin.relative_name_person_A,shiftadmin.relative_phone_person_A,
                     shiftadmin.relative_name_person_B,shiftadmin.relative_phone_person_B,shiftadmin.relative_casen_person_A
@@ -160,7 +161,7 @@ namespace project_3.Controllers
             var shiftadmin = db.SP_Shift_Admin_ID(id.ToString()).FirstOrDefault();
             try
             {
-                db.SP_Shift_Admin_DELETE(shiftadmin.رقم_المدير, shiftadmin.معرف);
+                db.SP_Shift_Admin_DELETE(User.Identity.GetUserId(),shiftadmin.رقم_المدير, shiftadmin.معرف);
                 await db.SaveChangesAsync();
             }
             catch

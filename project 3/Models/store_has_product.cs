@@ -27,6 +27,8 @@ namespace project_3.Models
         public int weight_weight_id { get; set; }
         public Nullable<System.DateTime> store_has_productDate { get; set; }
         public Nullable<int> store_has_product_state { get; set; }
+        public System.DateTime SysStartTime { get; set; }
+        public System.DateTime SysEndTime { get; set; }
     
         public virtual barcode barcode { get; set; }
         public virtual product product { get; set; }

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using project_3.Models;
 using System.Data.Entity.Core.Objects;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -73,7 +74,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Trans_Vin_Add_New(transvehcile.اسم_السائق, transvehcile.رقم_العربية, transvehcile.الموديل,
+                db.SP_Trans_Vin_Add_New(User.Identity.GetUserId(),transvehcile.اسم_السائق, transvehcile.رقم_العربية, transvehcile.الموديل,
                     transvehcile.هاتف, transvehcile.رقم_الوكيل , transvehcile.العنوان, transvehcile.رقم_العربية,
                     NewIdentity, RecFound).ToList();
                 if ((int)RecFound.Value == 0)
@@ -123,7 +124,7 @@ namespace project_3.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
-                db.SP_Trans_vin_Update(transvehcile.الرقم,transvehcile.اسم_السائق,transvehcile.رقم_العربية,
+                db.SP_Trans_vin_Update(User.Identity.GetUserId(),transvehcile.الرقم,transvehcile.اسم_السائق,transvehcile.رقم_العربية,
                     transvehcile.الموديل,transvehcile.هاتف,transvehcile.رقم_الوكيل,transvehcile.العنوان,
                     transvehcile.رقم_العربية,RecFound);
                 await db.SaveChangesAsync();
@@ -158,7 +159,7 @@ namespace project_3.Controllers
             //db.transvehciles.Remove(transvehcile);
             try
             {
-                db.SP_Trans_Vin_DELETE(transvehcile.الرقم);
+                db.SP_Trans_Vin_DELETE(User.Identity.GetUserId(),transvehcile.الرقم);
                 await db.SaveChangesAsync();
             }
             catch

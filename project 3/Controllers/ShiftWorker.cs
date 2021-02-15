@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using project_3;
 using System.Data.Entity.Core.Objects;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -89,7 +90,7 @@ namespace project_3.Controllers
             {
                 ObjectParameter RecFound = new ObjectParameter("rec_found", typeof(int));
                 ObjectParameter NewIdentity = new ObjectParameter("new_identity", typeof(int));
-                db.SP_Shift_Worker_Add_New(shift.رقم_الوردية, shift.رقم_العامل,
+                db.SP_Shift_Worker_Add_New(User.Identity.GetUserId(),shift.رقم_الوردية, shift.رقم_العامل,
                     NewIdentity, RecFound).ToList();
                 if ((int)RecFound.Value == 0)
                 {
@@ -148,7 +149,7 @@ namespace project_3.Controllers
 
         public ActionResult DeleteAll(int? shift_id)
         {
-            db.SP_Shift_Worker_DELETE_ALL(shift_id);
+            db.SP_Shift_Worker_DELETE_ALL(User.Identity.GetUserId(),shift_id);
             var shifts = db.SP_Shift_Main_To_ComboBox();
             ViewBag.shift_id = new SelectList(shifts, "shift_id", "shiftName");
             var id = db.shifts.FirstOrDefault().shift_id;
@@ -182,7 +183,7 @@ namespace project_3.Controllers
             //var shiftWorker = db.SP_Shift_Worker_ID(id, WorkerId).FirstOrDefault();
             try
             {
-                db.SP_Shift_Worker_DELETE(shiftWorker.shift_shift_id, shiftWorker.workers_worker_id);
+                db.SP_Shift_Worker_DELETE(User.Identity.GetUserId(),shiftWorker.shift_shift_id, shiftWorker.workers_worker_id);
                 await db.SaveChangesAsync();
             }
             catch

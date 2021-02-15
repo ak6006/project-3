@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using project_3;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -100,7 +101,7 @@ namespace project_3.Controllers
             {
                 try
                 {
-                    db.SP_Order_Items_Add_New(order.رقم_الطلبية, order.product_id, order.measure_id, order.weight_id, order.الكمية);
+                    db.SP_Order_Items_Add_New(User.Identity.GetUserId(),order.رقم_الطلبية, order.product_id, order.measure_id, order.weight_id, order.الكمية);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -160,7 +161,7 @@ namespace project_3.Controllers
             {
                 try
                 {
-                    db.SP_Order_Items_Update(int.Parse(TempData["OId"].ToString()), int.Parse(TempData["PId"].ToString())
+                    db.SP_Order_Items_Update(User.Identity.GetUserId(),int.Parse(TempData["OId"].ToString()), int.Parse(TempData["PId"].ToString())
                         , int.Parse(TempData["MId"].ToString()), int.Parse(TempData["WId"].ToString()),
                          order.product_id, order.measure_id, order.weight_id,order.الكمية);
                     await db.SaveChangesAsync();
@@ -204,7 +205,7 @@ namespace project_3.Controllers
         {
             try
             {
-                db.SP_Order_Items_DELETE(order.رقم_الطلبية, order.product_id, order.measure_id, order.weight_id);
+                db.SP_Order_Items_DELETE(User.Identity.GetUserId(),order.رقم_الطلبية, order.product_id, order.measure_id, order.weight_id);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

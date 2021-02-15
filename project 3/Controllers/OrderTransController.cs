@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using project_3;
 using project_3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -96,7 +97,7 @@ namespace project_3.Controllers
             {
                 try
                 {
-                    db.SP_Order_Trans_Vin_Add_New(OrderVehicle.رقم_الطلبية, OrderVehicle.v_id);
+                    db.SP_Order_Trans_Vin_Add_New(User.Identity.GetUserId(),OrderVehicle.رقم_الطلبية, OrderVehicle.v_id);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -161,7 +162,7 @@ namespace project_3.Controllers
         {
             try
             {
-                db.SP_Order_Trans_Vin_DELETE(OrderVehicle.رقم_الطلبية, OrderVehicle.v_id);
+                db.SP_Order_Trans_Vin_DELETE(User.Identity.GetUserId(),OrderVehicle.رقم_الطلبية, OrderVehicle.v_id);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

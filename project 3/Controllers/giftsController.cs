@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using project_3.Models;
 using System.IO;
+using Microsoft.AspNet.Identity;
 
 namespace project_3.Controllers
 {
@@ -61,6 +62,8 @@ namespace project_3.Controllers
                         imageData = binaryReader.ReadBytes(image.ContentLength);
                     }
                     gift.giftimg = imageData;
+                    gift.giftid = 0;
+                    gift.userid = User.Identity.GetUserId();
                 }
                 
                     db.gifts.Add(gift);
@@ -91,7 +94,7 @@ namespace project_3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "giftid,giftname,giftBagsCount,giftimg")] gift gift)
+        public async Task<ActionResult> Edit([Bind(Include = "userid,giftid,giftname,giftBagsCount,giftimg")] gift gift)
         {
             if (ModelState.IsValid)
             {
@@ -123,6 +126,8 @@ namespace project_3.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             gift gift = await db.gifts.FindAsync(id);
+            gift.userid = User.Identity.GetUserId();
+            await db.SaveChangesAsync();
             db.gifts.Remove(gift);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
