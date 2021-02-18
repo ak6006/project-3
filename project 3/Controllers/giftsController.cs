@@ -62,12 +62,11 @@ namespace project_3.Controllers
                         imageData = binaryReader.ReadBytes(image.ContentLength);
                     }
                     gift.giftimg = imageData;
-                    gift.giftid = 0;
-                    gift.userid = User.Identity.GetUserId();
+                    //gift.giftid = 0;
+                    //gift.userid = User.Identity.GetUserId();
+                    db.gift_add(gift.giftname, gift.giftBagsCount.ToString(), gift.giftimg, User.Identity.GetUserId());
                 }
                 
-                    db.gifts.Add(gift);
-                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 

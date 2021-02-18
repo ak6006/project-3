@@ -1912,5 +1912,64 @@ namespace project_3.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Store_Product_Add_New", shiftIdParameter, productIdParameter, storeIdParameter, weightParameter, date1Parameter, serialNumberParameter, new_identity, rec_found, start, end);
         }
+    
+        public virtual int gift_add(string giftName, string bageCount, byte[] image, string userid)
+        {
+            var giftNameParameter = giftName != null ?
+                new ObjectParameter("giftName", giftName) :
+                new ObjectParameter("giftName", typeof(string));
+    
+            var bageCountParameter = bageCount != null ?
+                new ObjectParameter("bageCount", bageCount) :
+                new ObjectParameter("bageCount", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("image", image) :
+                new ObjectParameter("image", typeof(byte[]));
+    
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("gift_add", giftNameParameter, bageCountParameter, imageParameter, useridParameter);
+        }
+    
+        public virtual int gift_delete(Nullable<int> giftId, string userid)
+        {
+            var giftIdParameter = giftId.HasValue ?
+                new ObjectParameter("giftId", giftId) :
+                new ObjectParameter("giftId", typeof(int));
+    
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("gift_delete", giftIdParameter, useridParameter);
+        }
+    
+        public virtual int gift_update(Nullable<int> giftId, string giftName, string bageCount, byte[] image, string userid)
+        {
+            var giftIdParameter = giftId.HasValue ?
+                new ObjectParameter("giftId", giftId) :
+                new ObjectParameter("giftId", typeof(int));
+    
+            var giftNameParameter = giftName != null ?
+                new ObjectParameter("giftName", giftName) :
+                new ObjectParameter("giftName", typeof(string));
+    
+            var bageCountParameter = bageCount != null ?
+                new ObjectParameter("bageCount", bageCount) :
+                new ObjectParameter("bageCount", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("image", image) :
+                new ObjectParameter("image", typeof(byte[]));
+    
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("gift_update", giftIdParameter, giftNameParameter, bageCountParameter, imageParameter, useridParameter);
+        }
     }
 }

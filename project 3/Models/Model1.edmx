@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_A6A5AC_teamiegyptModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_A6A5AC_teamiegyptModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="address">
           <Key>
             <PropertyRef Name="add_id" />
@@ -1040,6 +1040,23 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="gift_add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="giftName" Type="nvarchar" Mode="In" />
+          <Parameter Name="bageCount" Type="nvarchar" Mode="In" />
+          <Parameter Name="image" Type="image" Mode="In" />
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="gift_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="giftId" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="gift_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="giftId" Type="int" Mode="In" />
+          <Parameter Name="giftName" Type="nvarchar" Mode="In" />
+          <Parameter Name="bageCount" Type="nvarchar" Mode="In" />
+          <Parameter Name="image" Type="image" Mode="In" />
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="remain_bags" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OrderId" Type="nvarchar" Mode="In" />
           <Parameter Name="v_id" Type="int" Mode="In" />
@@ -1980,8 +1997,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <End Role="workers" EntitySet="workers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_A6A5AC_teamiegyptModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3148,10 +3164,10 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Customer_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_Search" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Customer_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Customer_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Customer_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Customer_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Customer_To_DataGrid_Result)" />
@@ -3178,7 +3194,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_flutter_Customer_Orders_Query" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_flutter_Customer_Orders_Query_Result)">
-            <Parameter Name="CustmerPhone" Mode="In" Type="String" />
+          <Parameter Name="CustmerPhone" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Flutter_Order_Add_New">
             <Parameter Name="userid" Mode="In" Type="String" />
@@ -3208,7 +3224,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="SP_flutter_Query_Trans" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_flutter_Query_Trans_Result)">
-            <Parameter Name="CustmerPhone" Mode="In" Type="String" />
+          <Parameter Name="CustmerPhone" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_flutter_SumQuantity_Orders_Query" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_flutter_SumQuantity_Orders_Query_Result)">
             <Parameter Name="CustmerPhone" Mode="In" Type="String" />
@@ -3239,10 +3255,10 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="MeasurementId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Measurement_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_Search" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Measurement_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Measurement_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Measurement_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Measurement_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Measurement_To_DataGrid_Result)" />
@@ -3265,7 +3281,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Order_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_Add_New">
             <Parameter Name="userid" Mode="In" Type="String" />
@@ -3289,7 +3305,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="weightId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Order_Items_To_DataGrid_Result)">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Items_Update">
             <Parameter Name="userid" Mode="In" Type="String" />
@@ -3303,7 +3319,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="NewQuantity" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Search" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Order_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Order_To_DataGrid_Result)" />
           <FunctionImport Name="SP_Order_Trans_Vin_Add_New">
@@ -3321,7 +3337,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="transvehcileID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Trans_Vin_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Order_Trans_Vin_To_DataGrid_Result)">
-            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          <Parameter Name="OrderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Trans_Vin_Update">
             <Parameter Name="userid" Mode="In" Type="String" />
@@ -3350,10 +3366,10 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Product_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_Search" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Product_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Product_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Product_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Product_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Product_To_DataGrid_Result)" />
@@ -3381,7 +3397,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
           <FunctionImport Name="SP_Sales_Order_Trans_Vin_display" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Sales_Order_Trans_Vin_display_Result)" />
           <FunctionImport Name="SP_Sales_Order_Trans_Vin_display_update" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Sales_Order_Trans_Vin_display_update_Result)" />
           <FunctionImport Name="SP_Sales_Order_Trans_Vin_Load" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Sales_Order_Trans_Vin_Load_Result)">
-            <Parameter Name="transVehcileSerial" Mode="In" Type="String" />
+          <Parameter Name="transVehcileSerial" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_Add_New" ReturnType="Collection(String)">
             <Parameter Name="userid" Mode="In" Type="String" />
@@ -3410,10 +3426,10 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Admin_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="String" />
+          <Parameter Name="ID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_SEARCH" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Admin_SEARCH_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Admin_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Admin_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Shift_Admin_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Admin_To_DataGrid_Result)" />
@@ -3451,10 +3467,10 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Main_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="String" />
+          <Parameter Name="ID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_Search" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Main_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Main_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Main_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Shift_Main_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Main_To_DataGrid_Result)" />
@@ -3490,7 +3506,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Worker_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Worker_To_DataGrid_Result)">
-            <Parameter Name="ShiftId" Mode="In" Type="Int32" />
+          <Parameter Name="ShiftId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Shift_Worker_To_DataGrid_All" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Shift_Worker_To_DataGrid_All_Result)" />
           <FunctionImport Name="SP_Shift_Worker_Update">
@@ -3513,7 +3529,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="Store_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Store_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Product_Add_New" ReturnType="Collection(String)">
             <Parameter Name="ShiftId" Mode="In" Type="Int32" />
@@ -3526,7 +3542,7 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_Search" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Store_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Store_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Store_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Store_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Store_To_DataGrid_Result)" />
@@ -3556,13 +3572,13 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="VinNo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Trans_Vin_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_TRANS_VIN_Search" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_TRANS_VIN_Search_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Trans_Vin_To_ComboBox_Result)">
-            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Trans_Vin_To_DataGrid" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Trans_Vin_To_DataGrid_Result)" />
           <FunctionImport Name="SP_Trans_vin_Update">
@@ -3626,10 +3642,10 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="ADD_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_ID" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Worker_ID_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_SEARCH" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Worker_SEARCH_Result)">
-            <Parameter Name="SEARCH" Mode="In" Type="String" />
+          <Parameter Name="SEARCH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Worker_To_ComboBox" ReturnType="Collection(DB_A6A5AC_teamiegyptModel.SP_Worker_To_ComboBox_Result)" />
           <FunctionImport Name="SP_Worker_Update">
@@ -3666,6 +3682,23 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             <Parameter Name="rec_found" Mode="InOut" Type="Int32" />
             <Parameter Name="start" Mode="InOut" Type="DateTime" />
             <Parameter Name="end" Mode="InOut" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="gift_add">
+            <Parameter Name="giftName" Mode="In" Type="String" />
+            <Parameter Name="bageCount" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="Binary" />
+            <Parameter Name="userid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="gift_delete">
+            <Parameter Name="giftId" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="gift_update">
+            <Parameter Name="giftId" Mode="In" Type="Int32" />
+            <Parameter Name="giftName" Mode="In" Type="String" />
+            <Parameter Name="bageCount" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="Binary" />
+            <Parameter Name="userid" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_Customer_ID_Result">
@@ -5604,6 +5637,9 @@ warning 6002: The table/view 'DB_A6A5AC_teamiegypt.makahighfeed.v.0.workers_Hist
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Store_Product_Add_New" FunctionName="DB_A6A5AC_teamiegyptModel.Store.Store_Product_Add_New" />
+          <FunctionImportMapping FunctionImportName="gift_add" FunctionName="DB_A6A5AC_teamiegyptModel.Store.gift_add" />
+          <FunctionImportMapping FunctionImportName="gift_delete" FunctionName="DB_A6A5AC_teamiegyptModel.Store.gift_delete" />
+          <FunctionImportMapping FunctionImportName="gift_update" FunctionName="DB_A6A5AC_teamiegyptModel.Store.gift_update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
