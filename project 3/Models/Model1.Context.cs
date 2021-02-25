@@ -20,6 +20,7 @@ namespace project_3.Models
         public Entities()
             : base("name=Entities")
         {
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 3000;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

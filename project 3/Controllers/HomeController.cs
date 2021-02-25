@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Web.UI;
+using System.Threading.Tasks;
 
 namespace project_3.Controllers
 {
@@ -16,6 +17,8 @@ namespace project_3.Controllers
     public class HomeController : Controller
     {
         private Entities db = new Entities();
+        
+
         public ActionResult Index()
         {
             return View();
@@ -31,7 +34,9 @@ namespace project_3.Controllers
         [HttpPost]
         public ActionResult CSV(CSVModel model)
         {
+            
             var Products = db.SP_Product_To_ComboBox();
+            //db.Database.CommandTimeout = 300;
             ViewBag.ProductId = new SelectList(Products, "product_id", "productName");
             var ProductName = db.products.Find(model.ProductId).productName;
             var File = db.SP_barcode_generate_temp(model.ProductId, model.Number, User.Identity.GetUserId());
