@@ -1,21 +1,7 @@
 ﻿@model project_3.Models.CSVModel
 
 <div class="page-container">
-    @if (TempData["Msg"] != null)
-    {
 
-
-        <div id="msg" style="text-align:center; background-color:lightcoral" class="col-md-5  rounded offset-3 p-2 text-danger">
-            <div class="col-md-3">
-
-            </div>
-            <h3>
-                @TempData["Msg"]
-            </h3>
-        </div>
-
-
-    }
 
     <div class="d-flex flex-row-reverse mb-5 mt-2 mr-2">
         <h1 class="text-light">
@@ -26,12 +12,9 @@
 
     @using (Html.BeginForm())
     {
-        //@Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-
-
-
-        <div class="d-flex flex-row-reverse mb-2">
+        <div class="d-flex flex-row-reverse  mb-2">
             <div class="d-flex col-md-5">
                 @Html.DropDownListFor(m => m.ProductId, ViewBag.ProductId as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "col-md-9 form-control" })
 
@@ -44,10 +27,11 @@
         </div>
         <div class="d-flex flex-row-reverse mb-2">
             <div class="d-flex col-md-5">
-                <input required type="number" class="col-md-9 form-control" name="Number" id="" />
+
+                <input required type="number" max="500000" min="1" class="col-md-9 form-control" name="Number" id="Number" />
 
                 <span class="col-md-3 text-light">
-                     العدد
+                    العدد
                 </span>
             </div>
 
@@ -79,8 +63,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-<script type="text/javascript">
-    setTimeout(function () {
-        $('#msg').remove();
-    }, 5000);
-</script>
