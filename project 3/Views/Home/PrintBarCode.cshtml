@@ -1,0 +1,72 @@
+﻿@model List<string>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintBarCode</title>
+    <script>
+        async function fun() {
+            var canvas = document.createElement('canvas');
+            canvas.id = "canvasId";
+            document.getElementById("div").appendChild(canvas)
+            var h = 1;
+            var table = document.getElementById("mytab1");
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    //var canvas = document.createElement('canvas');
+                    //canvas.id = h;
+
+                    var canvas = document.getElementById("canvasId");
+                    serial = col.textContent.replace(/\s/g, '');
+                    console.log(serial);
+                    document.getElementById("div").appendChild(canvas)
+                    JsBarcode(canvas, serial, { format: "CODE128" });
+                    window.print();
+                    await task(i + j);
+                    //textToBase64Barcode(serial, "canvasId");
+                    //h++;
+                }
+            }
+        }
+
+        async function task(i) { // 3
+            await timer(100);
+            console.log(`Task ${i} done!`);
+        }
+
+        function timer(ms) { return new Promise(res => setTimeout(res, ms)); }
+
+        //function textToBase64Barcode(serial, i) {
+        //    var canvas = document.getElementById(i);
+        /*JsBarcode(canvas, serial, { format: "CODE128" });*/
+        /*window.print();*/
+        //return canvas.toDataURL("image/png");
+
+
+    </script>
+
+</head>
+<body onload="fun();">
+    <table hidden id="mytab1">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item
+                </td>
+            </tr>
+
+        }
+    </table>
+    <div id="div" style="text-align:center">
+
+    </div>
+
+    <script src="~/Scripts/jsbarcode.js"></script>
+</body>
+
+</html>

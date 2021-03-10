@@ -26,6 +26,7 @@ namespace project_3.Controllers
 
         public ActionResult CSV()
         {
+
             var Products = db.SP_Product_To_ComboBox();
             ViewBag.ProductId = new SelectList(Products, "product_id", "productName");
             return View();
@@ -59,6 +60,22 @@ namespace project_3.Controllers
             Response.BinaryWrite(Ep.GetAsByteArray());
             Response.End();
             return View();
+        }
+
+        public ActionResult PrintBarCode(int ProductId ,int Number)
+        {
+
+            var Products = db.SP_Product_To_ComboBox();
+            //db.Database.CommandTimeout = 300;
+            ViewBag.ProductId = new SelectList(Products, "product_id", "productName");
+            var ProductName = db.products.Find(ProductId).productName;
+            var File = db.SP_barcode_generate_temp(ProductId, Number, User.Identity.GetUserId());
+            var Barcodes = new List<string>();
+            foreach (var item in File)
+            {
+                Barcodes.Add(item);
+            }
+            return View(Barcodes);
         }
 
         public ActionResult Accounting()
